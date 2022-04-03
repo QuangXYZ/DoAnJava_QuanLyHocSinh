@@ -1,3 +1,5 @@
+package quanlyhocsinh;
+
 
 public class GiangVien extends Nguoi {
 	

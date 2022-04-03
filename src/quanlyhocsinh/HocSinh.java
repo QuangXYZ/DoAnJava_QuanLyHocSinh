@@ -1,3 +1,5 @@
+package quanlyhocsinh;
+
 
 public class HocSinh extends Nguoi {
 
