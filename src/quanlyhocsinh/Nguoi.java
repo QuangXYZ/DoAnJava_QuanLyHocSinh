@@ -1,21 +1,40 @@
 package quanlyhocsinh;
 
+import java.util.Date;
+
+import javax.xml.crypto.Data;
 
 public class Nguoi {
 
-	public String hoTen;
-	public String gioiTinh;
-	public String queQuan;
+	private String hoTen;
+	private String gioiTinh;
+	private String queQuan;
+	private Date ngaySinh;
 	
 	public Nguoi() {
 		
 	}
 	
-	public Nguoi(String hoTen, String gioiTinh, String queQuan) {
+	
+	public Nguoi(String hoTen, String gioiTinh, String queQuan, Date ngaySinh) {
 		this.hoTen = hoTen;
 		this.gioiTinh = gioiTinh;
 		this.queQuan = queQuan;
+		this.ngaySinh = ngaySinh;
 	}
+	
+
+
+	public Date getNgaySinh() {
+		return ngaySinh;
+	}
+
+
+	public void setNgaySinh(Date ngaySinh) {
+		this.ngaySinh = ngaySinh;
+	}
+
+
 	public String getHoTen() {
 		return hoTen;
 	}

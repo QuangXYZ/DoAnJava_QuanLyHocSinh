@@ -1,10 +1,12 @@
 package quanlyhocsinh;
 
+import java.util.Date;
 
 public class GiangVien extends Nguoi {
 	
-	public String MSGV;
-	public String giangDayMon;
+	private String MSGV;
+	private String giangDayMon;
+	private String img;
 	
 	public GiangVien() {
 		
@@ -12,10 +14,11 @@ public class GiangVien extends Nguoi {
 	
 	
 
-	public GiangVien(String hoTen, String gioiTinh, String queQuan, String MSGV, String giangDayMon) {
-		super(hoTen, gioiTinh, queQuan);
+	public GiangVien(String MSGV,String hoTen,Date ngaySinh, String gioiTinh, String queQuan,  String giangDayMon,String img) {
+		super(hoTen, gioiTinh, queQuan, ngaySinh);
 		this.MSGV = MSGV;
 		this.giangDayMon = giangDayMon;
+		this.img = img;
 	}
 
 
