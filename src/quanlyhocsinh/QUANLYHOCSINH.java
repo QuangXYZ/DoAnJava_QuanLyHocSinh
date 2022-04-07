@@ -5,6 +5,8 @@
  */
 package quanlyhocsinh;
 
+import view.FrLoginForm;
+
 /**
  *
  * @author Tit
@@ -15,9 +17,9 @@ public class QUANLYHOCSINH {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("HELLO");
-        System.out.println("HELLO");
+        FrLoginForm main = new FrLoginForm();
+        main.setVisible(true);
+      
     }
     
 }
