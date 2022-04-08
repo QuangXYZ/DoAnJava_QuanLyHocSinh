@@ -19,6 +19,7 @@ public class QUANLYHOCSINH {
     public static void main(String[] args) {
         FrLoginForm main = new FrLoginForm();
         main.setVisible(true);
+        main.setLocationRelativeTo(null);
       
     }
     
