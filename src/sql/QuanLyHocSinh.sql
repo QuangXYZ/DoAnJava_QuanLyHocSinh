@@ -1,11 +1,11 @@
 create database QLHS;
 use QLHS;
-create table HOCSINH(
-	MAHS nchar(8) not null primary key,
-    HOTEN nvarchar(50)
- );
 
-insert into HOCSINH(MAHS,HOTEN)values ('K25.0005','Thanh Quang');
-insert into HOCSINH(MAHS,HOTEN)values ('K25.0006','Nhu Y');
-insert into HOCSINH(MAHS,HOTEN)values ('K25.0007','Minh Quan');
-
+create table USERS(
+	USERNAME nchar(20) not null primary key,
+    USERPASSWORD nchar(20)
+);
+insert into USERS(USERNAME,USERPASSWORD) values ('Admin','123456');
+insert into USERS(USERNAME,USERPASSWORD) values ('Quang','123456');
+insert into USERS(USERNAME,USERPASSWORD) values ('Quan','123456');
+insert into USERS(USERNAME,USERPASSWORD) values ('Nhu Y','123456');
