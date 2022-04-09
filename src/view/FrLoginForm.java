@@ -6,7 +6,8 @@
 package view;
 
 
-import java.util.ArrayList;
+import java.sql.*;
+
 
 
 import javax.swing.JOptionPane;
@@ -121,14 +122,26 @@ public class FrLoginForm extends javax.swing.JFrame {
         else return true;
     }
     public boolean checkLogin(String Username,String Password){
-        ArrayList<User> ls= new ArrayList<>();
-        ls.add(new User("Admin","123456"));
-        for (User u : ls){
-            if (u.getUserName().equals(Username)&&u.getPassWord().equals(Password)) return true;
-        }
+         try{    
+            String dbUrl ="jdbc:mysql://localhost:3306/qlhs";
+            String username = "root"; String password= "12345678";
+            Connection con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connect success");
+            Statement s=con.createStatement();
+            ResultSet rs =s.executeQuery("SELECT * FROM USERS");
+            while(rs.next()){
+                if (rs.getString(1).equals(Username)&&rs.getString(2).equals(Password)){
+                    con.close();
+                    return true;
+                }
+            }
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
         return false;
 
     }
+    
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here: 
         if (checkValidForm()) {
@@ -136,6 +149,7 @@ public class FrLoginForm extends javax.swing.JFrame {
                 QLHSView qlsv;
                     qlsv = new QLHSView();
                     qlsv.setVisible(true);
+                    qlsv.setLocationRelativeTo(null);
                     this.dispose();
                
                 
