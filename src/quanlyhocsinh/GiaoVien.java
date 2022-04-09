@@ -2,19 +2,19 @@ package quanlyhocsinh;
 
 import java.util.Date;
 
-public class GiangVien extends Nguoi {
+public class GiaoVien extends Nguoi {
 	
 	private String MSGV;
 	private String giangDayMon;
 	private String img;
 	
-	public GiangVien() {
+	public GiaoVien() {
 		
 	}
 	
 	
 
-	public GiangVien(String MSGV,String hoTen,Date ngaySinh, String gioiTinh, String queQuan,  String giangDayMon,String img) {
+	public GiaoVien(String MSGV,String hoTen,Date ngaySinh, String gioiTinh, String queQuan,  String giangDayMon,String img) {
 		super(hoTen, gioiTinh, queQuan, ngaySinh);
 		this.MSGV = MSGV;
 		this.giangDayMon = giangDayMon;
