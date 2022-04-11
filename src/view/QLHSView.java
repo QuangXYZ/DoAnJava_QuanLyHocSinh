@@ -6,13 +6,27 @@
 package view;
 
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import quanlyhocsinh.HocSinh;
+import quanlyhocsinh.HocSinh;
 import quanlyhocsinh.HocSinh;
 
 /**
@@ -24,11 +38,33 @@ public class QLHSView extends javax.swing.JFrame {
     /**
      * Creates new form QLHSView
      */
+    String dbUrl ="jdbc:mysql://localhost:3306/qlhs";
+    String username = "root"; String password= "12345678";
+    String imgURL="none";
+    File directory = new File("");
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
     ArrayList<HocSinh> dshs = new ArrayList<>();
-    public void loadData(){
-        DefaultTableModel model =  (DefaultTableModel)tbDSHS.getModel();
-     
+    static DefaultTableModel model ;
+    public void loadDataSQL(){
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement s=con.createStatement();
+            ResultSet rs =s.executeQuery("SELECT * FROM HOCSINH");
+            while(rs.next()){
+                 dshs.add(new HocSinh(rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
+            }
+           con.close();
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+    }
+           
+
+    public void loadDataTable(){   
+        
+        model = (DefaultTableModel)tbDSHS.getModel();
         model.setRowCount(0);
         for (int i=0;i<dshs.size();i++){
            
@@ -38,20 +74,13 @@ public class QLHSView extends javax.swing.JFrame {
         }
                   
     }
-   
-
     public QLHSView() {
         initComponents();
-        try {
-            dshs.add(new HocSinh("123","Nguyen Thanh Quang",formatDate.parse("30/07/2002"),"Nam","Hà Nội","DCT1206","none"));
-            dshs.add(new HocSinh("124","Dang Huynh Nhu Y",formatDate.parse("1/1/2002"),"Nam","Hà Nội","DCT1206","none"));
-            dshs.add(new HocSinh("125","Tran Minh Quan",formatDate.parse("3/7/2002"),"Nam","Hà Nội","DCT1209","none"));
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        
        
-        loadData();
+       
+        loadDataSQL();
+        loadDataTable();
     }
 
     /**
@@ -68,8 +97,8 @@ public class QLHSView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbNam = new javax.swing.JRadioButton();
+        rbNu = new javax.swing.JRadioButton();
         tfMSHS = new javax.swing.JTextField();
         tfHoTen = new javax.swing.JTextField();
         cbQueQuan = new javax.swing.JComboBox<>();
@@ -82,7 +111,9 @@ public class QLHSView extends javax.swing.JFrame {
         delBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
+        imgLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        tfNgaySinh = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -106,18 +137,18 @@ public class QLHSView extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Giới tính : ");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jRadioButton1.setText("NAM");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rbNam);
+        rbNam.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rbNam.setText("NAM");
+        rbNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rbNamActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jRadioButton2.setText("NỮ");
+        buttonGroup1.add(rbNu);
+        rbNu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rbNu.setText("NỮ");
 
         tfMSHS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +164,7 @@ public class QLHSView extends javax.swing.JFrame {
         });
 
         cbQueQuan.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cbQueQuan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "\t\t\t\t\t\t\tAn Giang", "\t\t\t\t\t\t\tBà Rịa – Vũng Tàu", "\t\t\t\t\t\t\tBạc Liêu", "\t\t\t\t\t\t\tBắc Giang", "\t\t\t\t\t\t\tBắc Kạn", "\t\t\t\t\t\t\tBắc Ninh", "\t\t\t\t\t\t\tBến Tre", "\t\t\t\t\t\t\tBình Dương", "\t\t\t\t\t\t\tBình Định", "\t\t\t\t\t\t\tBình Phước", "\t\t\t\t\t\t\tBình Thuận", "\t\t\t\t\t\t\tCà Mau", "\t\t\t\t\t\t\tCao Bằng", "\t\t\t\t\t\t\tCần Thơ", "\t\t\t\t\t\t\tĐà Nẵng", "\t\t\t\t\t\t\tĐắk Lắk", "\t\t\t\t\t\t\tĐắk Nông", "\t\t\t\t\t\t\tĐiện Biên", "\t\t\t\t\t\t\tĐồng Nai", "\t\t\t\t\t\t\tĐồng Tháp", "\t\t\t\t\t\t\tGia Lai", "\t\t\t\t\t\t\tHà Giang", "\t\t\t\t\t\t\tHà Nam", "\t\t\t\t\t\t\tHà Nội", "\t\t\t\t\t\t\tHà Tĩnh", "\t\t\t\t\t\t\tHải Dương", "\t\t\t\t\t\t\tHải Phòng", "\t\t\t\t\t\t\tHậu Giang", "\t\t\t\t\t\t\tHòa Bình", "\t\t\t\t\t\t\tThành phố Hồ Chí Minh", "\t\t\t\t\t\t\tHưng Yên", "\t\t\t\t\t\t\tKhánh Hòa", "\t\t\t\t\t\t\tKiên Giang", "\t\t\t\t\t\t\tKon Tum", "\t\t\t\t\t\t\tLai Châu", "\t\t\t\t\t\t\tLạng Sơn", "\t\t\t\t\t\t\tLào Cai", "\t\t\t\t\t\t\tLâm Đồng", "\t\t\t\t\t\t\tLong An", "\t\t\t\t\t\t\tNam Định", "\t\t\t\t\t\t\tNghệ An", "\t\t\t\t\t\t\tNinh Bình", "\t\t\t\t\t\t\tNinh Thuận", "\t\t\t\t\t\t\tPhú Thọ", "\t\t\t\t\t\t\tPhú Yên", "\t\t\t\t\t\t\tQuảng Bình", "\t\t\t\t\t\t\tQuảng Nam", "\t\t\t\t\t\t\tQuảng Ngãi", "\t\t\t\t\t\t\tQuảng Ninh", "\t\t\t\t\t\t\tQuảng Trị", "\t\t\t\t\t\t\tSóc Trăng", "\t\t\t\t\t\t\tSơn La", "\t\t\t\t\t\t\tTây Ninh", "\t\t\t\t\t\t\tThái Bình", "\t\t\t\t\t\t\tThái Nguyên", "\t\t\t\t\t\t\tThanh Hóa", "\t\t\t\t\t\t\tThừa Thiên Huế", "\t\t\t\t\t\t\tTiền Giang", "\t\t\t\t\t\t\tTrà Vinh", "\t\t\t\t\t\t\tTuyên Quang", "\t\t\t\t\t\t\tVĩnh Long", "\t\t\t\t\t\t\tVĩnh Phúc", "\t\t\t\t\t\t\tYên Bái" }));
+        cbQueQuan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "An Giang", "Bà Rịa – Vũng Tàu", "Bạc Liêu", "Bắc Giang", "Bắc Kạn", "Bắc Ninh", "Bến Tre", "Bình Dương", "Bình Định", "Bình Phước", "Bình Thuận", "Cà Mau", "Cao Bằng", "Cần Thơ", "Đà Nẵng", "Đắk Lắk", "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam", "Hà Nội", "Hà Tĩnh", "Hải Dương", "Hải Phòng", "Hậu Giang", "Hòa Bình", "Thành phố Hồ Chí Minh", "Hưng Yên", "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lạng Sơn", "Lào Cai", "Lâm Đồng", "Long An", "Nam Định", "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Phú Yên", "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long", "Vĩnh Phúc", "Yên Bái" }));
         cbQueQuan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbQueQuanActionPerformed(evt);
@@ -159,6 +190,11 @@ public class QLHSView extends javax.swing.JFrame {
         ));
         tbDSHS.setSelectionBackground(new java.awt.Color(0, 0, 153));
         tbDSHS.setSelectionForeground(new java.awt.Color(255, 255, 51));
+        tbDSHS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDSHSMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbDSHS);
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -191,12 +227,37 @@ public class QLHSView extends javax.swing.JFrame {
         editBtn.setBackground(new java.awt.Color(204, 255, 255));
         editBtn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         editBtn.setText("SỬA");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
 
         saveBtn.setBackground(new java.awt.Color(204, 255, 255));
         saveBtn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         saveBtn.setText("LƯU");
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBtnActionPerformed(evt);
+            }
+        });
 
-        jLabel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Image"));
+        imgLabel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Image"));
+        imgLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgLabelMouseClicked(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel7.setText("Ngày sinh");
+
+        tfNgaySinh.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tfNgaySinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNgaySinhActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("TOOL");
 
@@ -237,65 +298,73 @@ public class QLHSView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(190, 190, 190))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(190, 190, 190))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51)
                         .addComponent(delBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61)
                         .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
-                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(86, 86, 86))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(92, 92, 92)
-                                .addComponent(tfLop, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(54, 54, 54)
-                                .addComponent(cbQueQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(98, 98, 98)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel2)
-                        .addGap(64, 64, 64)
-                        .addComponent(tfMSHS, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(52, 52, 52)
-                                .addComponent(jRadioButton1)
-                                .addGap(46, 46, 46)
-                                .addComponent(jRadioButton2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(43, 43, 43)
-                                .addComponent(tfHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(47, 47, 47)
+                                    .addComponent(jLabel2)
+                                    .addGap(64, 64, 64)
+                                    .addComponent(tfMSHS, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(46, 46, 46)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addGap(43, 43, 43)
+                                            .addComponent(tfHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(2, 2, 2)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addComponent(jLabel6)
+                                                            .addGap(92, 92, 92)
+                                                            .addComponent(tfLop, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addComponent(jLabel5)
+                                                            .addGap(54, 54, 54)
+                                                            .addComponent(cbQueQuan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel4)
+                                                    .addGap(52, 52, 52)
+                                                    .addComponent(rbNam)
+                                                    .addGap(46, 46, 46)
+                                                    .addComponent(rbNu)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel7)
+                                                .addGap(53, 53, 53)
+                                                .addComponent(tfNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGap(18, 18, 18)
+                            .addComponent(imgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(16, 16, 16))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(21, 21, 21)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
@@ -305,43 +374,47 @@ public class QLHSView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(16, 16, 16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(tfNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addComponent(jLabel4))
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jLabel5))
-                            .addComponent(cbQueQuan, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(rbNam)
+                            .addComponent(rbNu))
+                        .addGap(17, 17, 17))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(imgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel5))
+                    .addComponent(cbQueQuan, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfLop, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(28, 28, 28)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(delBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rbNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNamActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_rbNamActionPerformed
 
     private void cbQueQuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbQueQuanActionPerformed
         // TODO add your handling code here:
@@ -360,14 +433,41 @@ public class QLHSView extends javax.swing.JFrame {
     }//GEN-LAST:event_tfLopActionPerformed
 
     
-    
+    public void resetForm(){
+        tfHoTen.setText("");
+        tfMSHS.setText("");
+        tfLop.setText("");
+        rbNam.setSelected(true);
+        imgLabel.setIcon(null);
+        tfNgaySinh.setText("");
+        cbQueQuan.setSelectedIndex(0);
+        
+    }
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
+        if (tfNgaySinh.getText().equals("")||tfMSHS.getText().equals("")||tfHoTen.getText().equals("")||tfLop.getText().equals("")||(rbNam.isSelected()==false&&rbNu.isSelected()==false)){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+            try {      
+                
+                dshs.add(new HocSinh(tfMSHS.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),tfLop.getText(),imgURL));
+                loadDataTable();
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng ngày sinh");
+            }
+           
+        }    
+        resetForm();
 
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void delBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delBtnActionPerformed
         // TODO add your handling code here:
+        int i = tbDSHS.getSelectedRow();
+        model.removeRow(i);
+        dshs.remove(i);
+        resetForm();
     }//GEN-LAST:event_delBtnActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -381,6 +481,94 @@ public class QLHSView extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void imgLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLabelMouseClicked
+        try {
+            // TODO add your handling code here:
+            JFileChooser jfc = new JFileChooser(directory.getAbsolutePath()+"//src//images");
+            jfc.showOpenDialog(null);
+            File file = jfc.getSelectedFile();
+            imgURL=file.toString().replace(directory.getAbsolutePath(),"");
+            Image img = ImageIO.read(file);
+            int width = imgLabel.getWidth();
+            int height = imgLabel.getHeight();
+            imgLabel.setIcon(new ImageIcon(img.getScaledInstance(width, height-20,  Image.SCALE_SMOOTH)));
+        } catch (IOException ex) {
+            Logger.getLogger(QLHSView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_imgLabelMouseClicked
+
+    private void tfNgaySinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNgaySinhActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNgaySinhActionPerformed
+
+    private void tbDSHSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDSHSMouseClicked
+        // TODO add your handling code here:
+        model = (DefaultTableModel)tbDSHS.getModel();
+        int i = tbDSHS.getSelectedRow();
+        if (i>=0){
+            tfMSHS.setText(model.getValueAt(i,1).toString());
+            tfHoTen.setText(model.getValueAt(i,2).toString());
+            tfNgaySinh.setText(model.getValueAt(i,3).toString());
+            if(model.getValueAt(i,4).toString().equals("Nam"))
+                rbNam.setSelected(true); 
+            else rbNu.setSelected(true);
+            tfLop.setText(model.getValueAt(i,5).toString());
+            cbQueQuan.setSelectedItem(model.getValueAt(i,6).toString());           
+            ImageIcon img = new ImageIcon(directory.getAbsolutePath()+dshs.get(i).getImg());
+            imgLabel.setIcon(new ImageIcon(img.getImage().getScaledInstance(imgLabel.getWidth()-10, imgLabel.getHeight()-20, Image.SCALE_SMOOTH)));
+
+        }
+             
+    }//GEN-LAST:event_tbDSHSMouseClicked
+
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        // TODO add your handling code here:
+        if (tfNgaySinh.getText().equals("")||tfMSHS.getText().equals("")||tfHoTen.getText().equals("")||tfLop.getText().equals("")||(rbNam.isSelected()==false&&rbNu.isSelected()==false)){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+            int i = tbDSHS.getSelectedRow();
+            dshs.get(i).setMSHS(tfMSHS.getText());
+            dshs.get(i).setHoTen(tfHoTen.getText());
+            dshs.get(i).setGioiTinh(rbNam.isSelected()?"Nam":"Nu");
+            try {
+                dshs.get(i).setNgaySinh(formatDate.parse(tfNgaySinh.getText()));
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ");
+            }
+            dshs.get(i).setQueQuan(cbQueQuan.getSelectedItem().toString());
+            dshs.get(i).setLop(tfLop.getText());
+            dshs.get(i).setImg(imgURL);
+            model.setValueAt(dshs.get(i).getMSHS(), i, 1);
+            model.setValueAt(dshs.get(i).getHoTen(), i, 2);
+            model.setValueAt(formatDate.format(dshs.get(i).getNgaySinh()), i, 3);
+            model.setValueAt(dshs.get(i).getGioiTinh(), i, 4);
+            model.setValueAt(dshs.get(i).getLop(), i, 5);
+            model.setValueAt(dshs.get(i).getQueQuan(), i, 6);   
+        }    
+        resetForm();
+    }//GEN-LAST:event_editBtnActionPerformed
+
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        // TODO add your handling code here:
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement s=con.createStatement();
+            s.executeUpdate("DELETE FROM HOCSINH");
+            for (HocSinh h : dshs){
+                String img = h.getImg().replace("\\", "\\\\");
+                s.executeUpdate("INSERT INTO HOCSINH VALUES('"+h.getMSHS()+"','"+h.getHoTen()+"','"+formatDate.format(h.getNgaySinh())+"','"+h.getGioiTinh()+"','"+h.getQueQuan()+"','"+h.getLop()+"','"+img+"')");
+            }       
+           con.close();
+           JOptionPane.showMessageDialog(this, "Lưu thành công ! ");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+    }//GEN-LAST:event_saveBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -411,8 +599,7 @@ public class QLHSView extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            
+            public void run() {           
                     new QLHSView().setVisible(true);
                 
             }
@@ -425,6 +612,7 @@ public class QLHSView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbQueQuan;
     private javax.swing.JButton delBtn;
     private javax.swing.JButton editBtn;
+    private javax.swing.JLabel imgLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -438,13 +626,14 @@ public class QLHSView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton rbNam;
+    private javax.swing.JRadioButton rbNu;
     private javax.swing.JButton saveBtn;
     private javax.swing.JTable tbDSHS;
     private javax.swing.JTextField tfHoTen;
     private javax.swing.JTextField tfLop;
     private javax.swing.JTextField tfMSHS;
+    private javax.swing.JTextField tfNgaySinh;
     // End of variables declaration//GEN-END:variables
 }

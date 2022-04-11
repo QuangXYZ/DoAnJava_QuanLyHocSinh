@@ -9,3 +9,19 @@ insert into USERS(USERNAME,USERPASSWORD) values ('Admin','123456');
 insert into USERS(USERNAME,USERPASSWORD) values ('Quang','123456');
 insert into USERS(USERNAME,USERPASSWORD) values ('Quan','123456');
 insert into USERS(USERNAME,USERPASSWORD) values ('Nhu Y','123456');
+
+create table HOCSINH (
+	MAHS nchar(20) not null primary key,
+    HOTEN nvarchar(40),
+    NGAYSINH nchar(20),
+    GIOITINH nchar(20),
+    QUEQUAN nvarchar(30),
+    LOP nchar(20),
+    IMG nchar(40)
+);
+
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('123','Nguyễn Thanh Quang','30/07/2002','Nam','Hà Nội','DCT1206','\src\images\Quang.jpg');
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('124','Đặng Huỳnh Như Y','30/07/2002','Nam','Hà Nội','DCT1206','\\src\\images\\NhuY.jpg');
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('125','Trần Minh Quân','30/07/2002','Nam','Hà Nội','DCT1206','\\src\\images\\Quan.jpg');
+
+
