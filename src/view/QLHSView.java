@@ -93,6 +93,7 @@ public class QLHSView extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jMenu3 = new javax.swing.JMenu();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -116,10 +117,18 @@ public class QLHSView extends javax.swing.JFrame {
         tfNgaySinh = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        Timkiem = new javax.swing.JMenu();
+        TheoMSSV = new javax.swing.JMenuItem();
+        TheoHoten = new javax.swing.JMenuItem();
+        TheoNgaysinh = new javax.swing.JMenuItem();
+        TheoGioitinh = new javax.swing.JMenuItem();
+        TheoQuequan = new javax.swing.JMenuItem();
+        TheoLop = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+
+        jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("QUAN LY SINH VIEN");
@@ -261,14 +270,6 @@ public class QLHSView extends javax.swing.JFrame {
 
         jMenu1.setText("TOOL");
 
-        jMenuItem1.setText("Tìm kiếm");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
         jMenuItem2.setText("Sắp xếp");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,6 +285,58 @@ public class QLHSView extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem3);
+
+        Timkiem.setText("Tìm kiếm");
+
+        TheoMSSV.setText("Theo MSSV");
+        TheoMSSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TheoMSSVActionPerformed(evt);
+            }
+        });
+        Timkiem.add(TheoMSSV);
+
+        TheoHoten.setText("Theo Họ tên");
+        TheoHoten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TheoHotenActionPerformed(evt);
+            }
+        });
+        Timkiem.add(TheoHoten);
+
+        TheoNgaysinh.setText("Theo Ngày sinh");
+        TheoNgaysinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TheoNgaysinhActionPerformed(evt);
+            }
+        });
+        Timkiem.add(TheoNgaysinh);
+
+        TheoGioitinh.setText("Theo Giới tính");
+        TheoGioitinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TheoGioitinhActionPerformed(evt);
+            }
+        });
+        Timkiem.add(TheoGioitinh);
+
+        TheoQuequan.setText("Theo Quê quán");
+        TheoQuequan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TheoQuequanActionPerformed(evt);
+            }
+        });
+        Timkiem.add(TheoQuequan);
+
+        TheoLop.setText("Theo Lớp");
+        TheoLop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TheoLopActionPerformed(evt);
+            }
+        });
+        Timkiem.add(TheoLop);
+
+        jMenu1.add(Timkiem);
 
         jMenuBar1.add(jMenu1);
 
@@ -470,10 +523,6 @@ public class QLHSView extends javax.swing.JFrame {
         resetForm();
     }//GEN-LAST:event_delBtnActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -570,6 +619,211 @@ public class QLHSView extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_saveBtnActionPerformed
 
+
+    private void TheoQuequanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoQuequanActionPerformed
+        // TODO add your handling code here:
+        JFrame frame= new JFrame("Tìm kiếm theo quê quán");
+        String s = (String)JOptionPane.showInputDialog(frame,
+                "Nhập quê quán cần tìm",
+                "Tìm kiếm theo quê quán",
+                JOptionPane.INFORMATION_MESSAGE);
+        if (s.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement st=con.createStatement();
+            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
+            model = (DefaultTableModel)tbDSHS.getModel();
+            model.setRowCount(0); 
+            int i=0;
+            while(rs.next()){
+                if (rs.getString(5).contains(s)){                      
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    i++;
+                }               
+            }      
+           con.close();
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! Nhấn reload để trờ về danh sách!");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+        }
+    }//GEN-LAST:event_TheoQuequanActionPerformed
+
+    private void TheoMSSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoMSSVActionPerformed
+        // TODO add your handling code here:
+        JFrame frame= new JFrame("Tìm kiếm theo MSSV");
+        String s = (String)JOptionPane.showInputDialog(frame,
+                "Nhập MSSV cần tìm",
+                "Tìm kiếm theo MSSV",
+                JOptionPane.INFORMATION_MESSAGE);
+        if (s.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement st=con.createStatement();
+            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
+            model = (DefaultTableModel)tbDSHS.getModel();
+            model.setRowCount(0); 
+            int i=0;
+            while(rs.next()){               
+                if (rs.getString(1).contains(s)){                      
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    i++;
+                }               
+            }      
+           con.close();
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! Nhấn reload để trờ về danh sách!");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+        }
+    }//GEN-LAST:event_TheoMSSVActionPerformed
+
+    private void TheoHotenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoHotenActionPerformed
+        // TODO add your handling code here:
+                JFrame frame= new JFrame("Tìm kiếm theo họ tên");
+        String s = (String)JOptionPane.showInputDialog(frame,
+                "Nhập họ tên cần tìm",
+                "Tìm kiếm theo họ tên",
+                JOptionPane.INFORMATION_MESSAGE);
+        if (s.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement st=con.createStatement();
+            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
+            model = (DefaultTableModel)tbDSHS.getModel();
+            model.setRowCount(0); 
+            int i=0;
+            while(rs.next()){
+                if (rs.getString(2).contains(s)){                      
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    i++;
+                }               
+            }      
+           con.close();
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! Nhấn reload để trờ về danh sách!");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+        }
+    }//GEN-LAST:event_TheoHotenActionPerformed
+
+    private void TheoNgaysinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoNgaysinhActionPerformed
+        // TODO add your handling code here:
+                JFrame frame= new JFrame("Tìm kiếm theo ngày sinh");
+        String s = (String)JOptionPane.showInputDialog(frame,
+                "Nhập ngày sinh cần tìm",
+                "Tìm kiếm theo ngày sinh",
+                JOptionPane.INFORMATION_MESSAGE);
+        if (s.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement st=con.createStatement();
+            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
+            model = (DefaultTableModel)tbDSHS.getModel();
+            model.setRowCount(0); 
+            int i=0;
+            while(rs.next()){
+                if (rs.getString(3).contains(s)){                      
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    i++;
+                }               
+            }      
+           con.close();
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! Nhấn reload để trờ về danh sách!");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+        }
+    }//GEN-LAST:event_TheoNgaysinhActionPerformed
+
+    private void TheoGioitinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoGioitinhActionPerformed
+        // TODO add your handling code here:
+                JFrame frame= new JFrame("Tìm kiếm theo giới tính");
+        String s = (String)JOptionPane.showInputDialog(frame,
+                "Nhập giới tính cần tìm",
+                "Tìm kiếm theo giới tính",
+                JOptionPane.INFORMATION_MESSAGE);
+        if (s.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement st=con.createStatement();
+            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
+            model = (DefaultTableModel)tbDSHS.getModel();
+            model.setRowCount(0); 
+            int i=0;
+            while(rs.next()){
+                if (rs.getString(4).contains(s)){                      
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    i++;
+                }               
+            }      
+           con.close();
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! Nhấn reload để trờ về danh sách!");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+        }
+    }//GEN-LAST:event_TheoGioitinhActionPerformed
+
+    private void TheoLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoLopActionPerformed
+        // TODO add your handling code here:
+                JFrame frame= new JFrame("Tìm kiếm theo lớp");
+        String s = (String)JOptionPane.showInputDialog(frame,
+                "Nhập lớp cần tìm",
+                "Tìm kiếm theo lớp",
+                JOptionPane.INFORMATION_MESSAGE);
+        if (s.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement st=con.createStatement();
+            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
+            model = (DefaultTableModel)tbDSHS.getModel();
+            model.setRowCount(0); 
+            int i=0;
+            while(rs.next()){
+                if (rs.getString(6).contains(s)){                      
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    i++;
+                }               
+            }      
+           con.close();
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! Nhấn reload để trờ về danh sách!");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+        }
+    }//GEN-LAST:event_TheoLopActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -610,6 +864,13 @@ public class QLHSView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem TheoGioitinh;
+    private javax.swing.JMenuItem TheoHoten;
+    private javax.swing.JMenuItem TheoLop;
+    private javax.swing.JMenuItem TheoMSSV;
+    private javax.swing.JMenuItem TheoNgaysinh;
+    private javax.swing.JMenuItem TheoQuequan;
+    private javax.swing.JMenu Timkiem;
     private javax.swing.JButton addBtn;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbQueQuan;
@@ -625,8 +886,8 @@ public class QLHSView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;

@@ -91,6 +91,9 @@ public class QLGVView extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbDSHS = new javax.swing.JTable();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         tfMSGV = new javax.swing.JTextField();
         tfHoTen = new javax.swing.JTextField();
@@ -114,9 +117,15 @@ public class QLGVView extends javax.swing.JFrame {
         tbDSGV = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        TheoTen = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        TheoMSGV = new javax.swing.JMenuItem();
+        TheoNgaySinh = new javax.swing.JMenuItem();
+        TheoGioiTinh = new javax.swing.JMenuItem();
+        TheoQueQuan = new javax.swing.JMenuItem();
+        TheoLop = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         jMenuItem4.setText("jMenuItem4");
@@ -176,6 +185,12 @@ public class QLGVView extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(tbDSHS);
+
+        jMenuItem7.setText("jMenuItem7");
+
+        jMenuItem9.setText("jMenuItem9");
+
+        jMenuItem11.setText("jMenuItem11");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -298,9 +313,6 @@ public class QLGVView extends javax.swing.JFrame {
 
         jMenu1.setText("TOOL");
 
-        jMenuItem2.setText("Tìm kiếm");
-        jMenu1.add(jMenuItem2);
-
         jMenuItem3.setText("Sắp xếp");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -316,6 +328,38 @@ public class QLGVView extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem5);
+
+        TheoTen.setText("Tìm kiếm");
+
+        jMenuItem1.setText("Theo tên");
+        TheoTen.add(jMenuItem1);
+
+        TheoMSGV.setText("Theo MSGV");
+        TheoMSGV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TheoMSGVActionPerformed(evt);
+            }
+        });
+        TheoTen.add(TheoMSGV);
+
+        TheoNgaySinh.setText("Theo Ngày sinh");
+        TheoTen.add(TheoNgaySinh);
+
+        TheoGioiTinh.setText("Theo giới tính");
+        TheoTen.add(TheoGioiTinh);
+
+        TheoQueQuan.setText("Theo quê quán");
+        TheoTen.add(TheoQueQuan);
+
+        TheoLop.setText("Theo lớp");
+        TheoLop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TheoLopActionPerformed(evt);
+            }
+        });
+        TheoTen.add(TheoLop);
+
+        jMenu1.add(TheoTen);
 
         jMenuBar1.add(jMenu1);
 
@@ -574,6 +618,19 @@ public class QLGVView extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_tbDSGVMouseClicked
+
+    private void TheoLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoLopActionPerformed
+        // TODO add your handling code here:
+        JFrame frame= new JFrame("Tìm kiếm theo lớp");
+        JOptionPane.showInputDialog(frame,
+                "Nhập lớp cần tìm",
+                "Tìm kiếm theo lớp",
+                JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_TheoLopActionPerformed
+
+    private void TheoMSGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoMSGVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TheoMSGVActionPerformed
     public void resetForm(){
         tfHoTen.setText("");
         tfMSGV.setText("");
@@ -623,6 +680,12 @@ public class QLGVView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem TheoGioiTinh;
+    private javax.swing.JMenuItem TheoLop;
+    private javax.swing.JMenuItem TheoMSGV;
+    private javax.swing.JMenuItem TheoNgaySinh;
+    private javax.swing.JMenuItem TheoQueQuan;
+    private javax.swing.JMenu TheoTen;
     private javax.swing.JButton addBtn;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbQueQuan;
@@ -642,10 +705,13 @@ public class QLGVView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
