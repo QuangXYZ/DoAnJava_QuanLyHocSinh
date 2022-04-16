@@ -44,7 +44,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 	 * Create the frame.
 	 */
 	public QuanLiDiemHocSinh() {
-		setTitle("QUAN LÍ ĐIỂM HOC SINH");
+		setTitle("QUAN LÍ ĐIỂM HỌC SINH");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 816, 644);
 		contentPane = new JPanel();
@@ -136,7 +136,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"MSHS", "H\u1ECC V\u00C0 T\u00CAN", "TO\u00C1N", "ANH", "V\u0102N", "SINH", "L\u00CD", "H\u00D3A"
+				"MSHS", "HỌ VÀ TÊN", "TOÁN", "ANH", "VĂN", "SINH", "LÍ", "HÓA"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
