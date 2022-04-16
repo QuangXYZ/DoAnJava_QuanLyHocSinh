@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
@@ -333,7 +334,44 @@ public class QuanLiDiemHocSinh extends JFrame {
 		}
 		
 		private void btnTimKiemActionPerformed(ActionEvent evt) {
-			
+			String MAHS = JOptionPane.showInputDialog(null,"Nhập mã học sinh");
+			try {
+				connection = (Connection) DriverManager.getConnection(url, user, password);
+				String sql = ("select HS.MAHS, HS.HOTEN, TOAN, ANH, VAN, SINH, LI, HOA FROM HOCSINH HS, DIEMHOCSINH DHS WHERE HS.MAHS = DHS.MAHS AND DHS.MAHS = ?");
+				statement = connection.prepareStatement(sql);
+				statement.setString(1, MAHS);
+				rs = statement.executeQuery();
+				
+				ResultSetMetaData stData = (ResultSetMetaData) rs.getMetaData();
+				q = stData.getColumnCount();
+				
+				DefaultTableModel recordTable = (DefaultTableModel)table.getModel();
+				recordTable.setRowCount(0);
+				
+				if(rs.next()) {
+					//System.out.println("TÊN: " + rs.getString(2));
+					Vector<String> columnData = new Vector<String>();
+					for(int i=1; i <= q; i++) {
+						columnData.add(rs.getString(1));
+						columnData.add(rs.getString(2));
+						columnData.add(Float.toString(rs.getFloat(3)));
+						columnData.add(Float.toString(rs.getFloat(4)));
+						columnData.add(Float.toString(rs.getFloat(5)));
+						columnData.add(Float.toString(rs.getFloat(6)));
+						columnData.add(Float.toString(rs.getFloat(7)));
+						columnData.add(Float.toString(rs.getFloat(8)));
+						
+					}
+					recordTable.addRow(columnData);
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "không tồn tại mã học sinh");
+				}
+				System.out.println("kết nối thành công");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		
 		}
 	
 		private void tableMouseClicked(MouseEvent evt) {
