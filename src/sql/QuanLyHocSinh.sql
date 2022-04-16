@@ -38,3 +38,26 @@ insert into GIAOVIEN(MAGV,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('1234
 insert into GIAOVIEN(MAGV,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('1235','Đặng Huỳnh Như Y','30/07/2002','Nam','Hà Nội','DCT1206','\\src\\images\\NhuY.jpg');
 insert into GIAOVIEN(MAGV,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('1236','Trần Minh Quân','30/07/2002','Nam','Hà Nội','DCT1206','\\src\\images\\Quan.jpg');
 
+create table DIEMHOCSINH (
+    MAHS nchar(20),
+    HOTEN nvarchar(40),
+    TOAN FLOAT(4),
+    ANH FLOAT(4),
+    VAN FLOAT(4),
+    SINH FLOAT(4),
+    LI FLOAT(4),
+    HOA FLOAT(4)
+);
+ALTER TABLE DIEMHOCSINH MODIFY MAHS nchar(20) NOT NULL;
+
+insert into DIEMHOCSINH(MAHS,HOTEN,TOAN,ANH,VAN,SINH,LI,HOA) values ('123','Nguyễn Thanh Quang',7,8,9,10,8,9.3);
+insert into DIEMHOCSINH(MAHS,HOTEN,TOAN,ANH,VAN,SINH,LI,HOA) values ('124','Đặng Huỳnh Như Y',7.5,8,9,10,8,9.3);
+insert into DIEMHOCSINH(MAHS,HOTEN,TOAN,ANH,VAN,SINH,LI,HOA) values ('125','Trần Minh Quân',7,8,9.5,10,8,9.3);
+
+
+
+
+
+
+
+
