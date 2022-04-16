@@ -1,13 +1,13 @@
 package quanlyhocsinh;
 
 public class QuanLiDiemHS {
-	private double toan, anh, van, ly, sinh, hoa;
+	private float toan, anh, van, ly, sinh, hoa;
 
 	public QuanLiDiemHS() {
 		
 	}
 
-	public QuanLiDiemHS(double toan, double anh, double van, double ly, double sinh, double hoa) {
+	public QuanLiDiemHS(float toan, float anh, float van, float ly, float sinh, float hoa) {
 		super();
 		this.toan = toan;
 		this.anh = anh;
@@ -21,7 +21,7 @@ public class QuanLiDiemHS {
 		return toan;
 	}
 
-	public void setToan(double toan) {
+	public void setToan(float toan) {
 		this.toan = toan;
 	}
 
@@ -29,7 +29,7 @@ public class QuanLiDiemHS {
 		return anh;
 	}
 
-	public void setAnh(double anh) {
+	public void setAnh(float anh) {
 		this.anh = anh;
 	}
 
@@ -37,7 +37,7 @@ public class QuanLiDiemHS {
 		return van;
 	}
 
-	public void setVan(double van) {
+	public void setVan(float van) {
 		this.van = van;
 	}
 
@@ -45,7 +45,7 @@ public class QuanLiDiemHS {
 		return ly;
 	}
 
-	public void setLy(double ly) {
+	public void setLy(float ly) {
 		this.ly = ly;
 	}
 
@@ -53,7 +53,7 @@ public class QuanLiDiemHS {
 		return sinh;
 	}
 
-	public void setSinh(double sinh) {
+	public void setSinh(float sinh) {
 		this.sinh = sinh;
 	}
 
@@ -61,7 +61,7 @@ public class QuanLiDiemHS {
 		return hoa;
 	}
 
-	public void setHoa(double hoa) {
+	public void setHoa(float hoa) {
 		this.hoa = hoa;
 	}
 	
