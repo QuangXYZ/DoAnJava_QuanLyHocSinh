@@ -40,7 +40,6 @@ insert into GIAOVIEN(MAGV,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('1236
 
 create table DIEMHOCSINH (
     MAHS nchar(20),
-    HOTEN nvarchar(40),
     TOAN FLOAT(4),
     ANH FLOAT(4),
     VAN FLOAT(4),
@@ -50,9 +49,15 @@ create table DIEMHOCSINH (
 );
 ALTER TABLE DIEMHOCSINH MODIFY MAHS nchar(20) NOT NULL;
 
-insert into DIEMHOCSINH(MAHS,HOTEN,TOAN,ANH,VAN,SINH,LI,HOA) values ('123','Nguyễn Thanh Quang',7,8,9,10,8,9.3);
-insert into DIEMHOCSINH(MAHS,HOTEN,TOAN,ANH,VAN,SINH,LI,HOA) values ('124','Đặng Huỳnh Như Y',7.5,8,9,10,8,9.3);
-insert into DIEMHOCSINH(MAHS,HOTEN,TOAN,ANH,VAN,SINH,LI,HOA) values ('125','Trần Minh Quân',7,8,9.5,10,8,9.3);
+ALTER TABLE DIEMHOCSINH
+ADD CONSTRAINT fk_hs_mahs_sanpham
+ FOREIGN KEY (MAHS)
+ REFERENCES HOCSINH (MAHS);
+
+insert into DIEMHOCSINH(MAHS,TOAN,ANH,VAN,SINH,LI,HOA) values ('123',7,8,9,10,8,9.3);
+insert into DIEMHOCSINH(MAHS,TOAN,ANH,VAN,SINH,LI,HOA) values ('124',7.5,8,9,10,8,9.3);
+insert into DIEMHOCSINH(MAHS,TOAN,ANH,VAN,SINH,LI,HOA) values ('125',7,8,9.5,10,8,9.3);
+
 
 
 
