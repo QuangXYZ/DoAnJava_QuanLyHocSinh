@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
 
+
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -25,6 +26,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
@@ -38,8 +40,8 @@ public class QuanLiDiemHocSinh extends JFrame {
 	private JTextField tfHoa;
 	private JTextField tfAnh;
 	private JTextField tfVan;
+	private JTextField tfMSHS;
 	private JTable table = new JTable();
-	private JComboBox<String> comboBox = new JComboBox<String>();
 	String url="jdbc:mysql://Localhost:3306/qlhs";
 	String user="root";
 	String password="12345678";
@@ -48,6 +50,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 	PreparedStatement statement = null;
 	ResultSet rs = null;
 	int q, i;
+	
 	
 
 	/**
@@ -59,7 +62,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 				try {
 					QuanLiDiemHocSinh frame = new QuanLiDiemHocSinh();
 					frame.loadData();
-					frame.doDuLieuComboBox();
+					//frame.doDuLieuComboBox();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -129,32 +132,41 @@ public class QuanLiDiemHocSinh extends JFrame {
 		lblNewLabel_2.setBounds(26, 160, 90, 30);
 		contentPane.add(lblNewLabel_2);
 		
+		JLabel lblNewLabel_3 = new JLabel("Điểm Sinh");
+		lblNewLabel_3.setBounds(450, 26, 90, 30);
+		contentPane.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("Điểm Lí");
+		lblNewLabel_4.setBounds(450, 98, 90, 30);
+		contentPane.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("Điểm Hóa");
+		lblNewLabel_5.setBounds(450, 152, 90, 30);
+		contentPane.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("MAHS");
+		lblNewLabel_6.setBounds(26, 214, 90, 30);
+		contentPane.add(lblNewLabel_6);
+		
 		tfToan = new JTextField();
 		tfToan.setBounds(212, 26, 96, 31);
 		contentPane.add(tfToan);
 		tfToan.setColumns(10);
-		
-		JLabel lblNewLabel_3 = new JLabel("Điểm Sinh");
-		lblNewLabel_3.setBounds(450, 26, 90, 30);
-		contentPane.add(lblNewLabel_3);
 		
 		tfSinh = new JTextField();
 		tfSinh.setBounds(673, 26, 96, 30);
 		contentPane.add(tfSinh);
 		tfSinh.setColumns(10);
 		
-		JLabel lblNewLabel_4 = new JLabel("Điểm Lí");
-		lblNewLabel_4.setBounds(450, 98, 90, 30);
-		contentPane.add(lblNewLabel_4);
-		
 		tfLi = new JTextField();
 		tfLi.setBounds(673, 89, 96, 30);
 		contentPane.add(tfLi);
 		tfLi.setColumns(10);
 		
-		JLabel lblNewLabel_5 = new JLabel("Điểm Hóa");
-		lblNewLabel_5.setBounds(450, 152, 90, 30);
-		contentPane.add(lblNewLabel_5);
+		tfMSHS = new JTextField();
+		tfMSHS.setBounds(212, 214, 96, 31);
+		contentPane.add(tfMSHS);
+		tfMSHS.setColumns(10);
 		
 		tfHoa = new JTextField();
 		tfHoa.setBounds(673, 152, 96, 33);
@@ -216,14 +228,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 			table.getColumnModel().getColumn(7).setPreferredWidth(68);
 			scrollPane.setViewportView(table);
 			
-			JLabel lblNewLabel_6 = new JLabel("MAHS");
-			lblNewLabel_6.setBounds(26, 214, 90, 30);
-			contentPane.add(lblNewLabel_6);
 			
-			
-			
-			comboBox.setBounds(212, 214, 90, 26);
-			contentPane.add(comboBox);		
 		
 			//xử lí sự kiện Click table
 			table.addMouseListener(new MouseAdapter() {
@@ -233,47 +238,15 @@ public class QuanLiDiemHocSinh extends JFrame {
 				}
 			});
 			
-			//xử lí sự kiện cho JcomboBox
-			comboBox.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent evt) {
-					comboBoxActionPerformed(evt);
-				}
-				
-				public void comboBoxActionPerformed(ActionEvent evt) {
-					String MaLoaiSP = (String)comboBox.getSelectedItem().toString();
-				}
-			});
-			
 			
 			//xử lí sự kiện cho button thêm			
 			btnThem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
 					btnThemActionPerformed(evt);
 				}
-
-				private void btnThemActionPerformed(ActionEvent evt) {
-					try {
-					connection = (Connection) DriverManager.getConnection(url, user, password);
-					String sql = ("insert into DIEMHOCSINH (MAHS, TOAN, ANH, VAN, SINH, LI, HOA) value(?, ?, ?, ?, ?, ?, ?)");
-					statement = connection.prepareStatement(sql);
-					
-					statement.setString(1, comboBox.getSelectedItem().toString());
-					statement.setString(2, tfToan.getText());
-					statement.setString(3, tfAnh.getText());
-					statement.setString(4, tfVan.getText());
-					statement.setString(5, tfSinh.getText());
-					statement.setString(6, tfLi.getText());
-					statement.setString(7, tfHoa.getText());
-					
-					statement.executeUpdate();
-					} catch (Exception e) {
-						System.out.println(e);
-					}
-				loadData();
-					
-				}
 			});
 			
+			//xử lí sự kiện cho button xóa
 			btXoa.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
 					btXoaActionPerformed(evt);
@@ -287,6 +260,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 				}
 			});
 			
+			//xử lí sự kiện cho button tìm kiếm
 			btnTimKiem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
 					btnTimKiemActionPerformed(evt);
@@ -294,6 +268,43 @@ public class QuanLiDiemHocSinh extends JFrame {
 			});
 		
 		}
+	
+	private void btnThemActionPerformed(ActionEvent evt) {
+		/*ArrayList<String> dsMSHS = new ArrayList<String>();	
+		dsMSHS = layMSHSTrongBangHOCSINH();*/
+		if (tfToan.getText().equals("")||tfMSHS.getText().equals("")||tfAnh.getText().equals("")||tfVan.getText().equals("")||tfSinh.getText().equals("")||tfLi.getText().equals("")||tfHoa.getText().equals("")){
+			JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        } /*else {
+        	for(String ds: dsMSHS) {
+				if(ds != tfMSHS.getText()) {
+					JOptionPane.showMessageDialog(this, "không tồn tại mã học sinh");
+					break;
+				}
+			}
+		}*/
+			try {
+				connection = (Connection) DriverManager.getConnection(url, user, password);
+				String sql = ("insert into DIEMHOCSINH (MAHS, TOAN, ANH, VAN, SINH, LI, HOA) value(?, ?, ?, ?, ?, ?, ?)");
+				statement = connection.prepareStatement(sql);
+				
+				statement.setString(1, tfMSHS.getText());
+				statement.setString(2, tfToan.getText());
+				statement.setString(3, tfAnh.getText());
+				statement.setString(4, tfVan.getText());
+				statement.setString(5, tfSinh.getText());
+				statement.setString(6, tfLi.getText());
+				statement.setString(7, tfHoa.getText());
+				
+				statement.executeUpdate();
+				connection.close();
+				JOptionPane.showMessageDialog(this, "Thêm thành công ! ");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			loadData();
+	      
+		
+	}
 	
 		private void btXoaActionPerformed(ActionEvent evt) {
 			DefaultTableModel recordTable = (DefaultTableModel) table.getModel();
@@ -306,6 +317,8 @@ public class QuanLiDiemHocSinh extends JFrame {
 				statement.setString(1, recordTable.getValueAt(i, 0).toString());
 				
 					statement.executeUpdate();
+					connection.close();
+					JOptionPane.showMessageDialog(this, "Xóa thành công ! ");
 				} catch (Exception e) {
 					System.out.println(e);
 				}
@@ -313,28 +326,45 @@ public class QuanLiDiemHocSinh extends JFrame {
 		}
 		
 		private void btSuaActionPerformed(ActionEvent evt) {
-			int i=table.getSelectedRow();
-			try {
-				connection = (Connection) DriverManager.getConnection(url, user, password);
-				String sql = ("update DIEMHOCSINH set TOAN = ?, ANH = ?, VAN = ?, SINH = ?, LI = ?, HOA = ?" + "where MAHS = ?");
-				statement = connection.prepareStatement(sql);
-				statement.setString(1, tfToan.getText());
-				statement.setString(2, tfAnh.getText());
-				statement.setString(3, tfVan.getText());
-				statement.setString(4, tfSinh.getText());
-				statement.setString(5, tfLi.getText());
-				statement.setString(6, tfHoa.getText());
-				statement.setString(7, comboBox.getSelectedItem().toString());
-				
-					statement.executeUpdate();
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-			loadData();
+			if (tfToan.getText().equals("")||tfMSHS.getText().equals("")||tfAnh.getText().equals("")||tfVan.getText().equals("")||tfSinh.getText().equals("")||tfLi.getText().equals("")||tfHoa.getText().equals("")){
+	            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+	        }
+		        else {
+				try {
+					connection = (Connection) DriverManager.getConnection(url, user, password);
+					String sql = ("update DIEMHOCSINH set TOAN = ?, ANH = ?, VAN = ?, SINH = ?, LI = ?, HOA = ?" + "where MAHS = ?");
+					statement = connection.prepareStatement(sql);
+					statement.setString(1, tfToan.getText());
+					statement.setString(2, tfAnh.getText());
+					statement.setString(3, tfVan.getText());
+					statement.setString(4, tfSinh.getText());
+					statement.setString(5, tfLi.getText());
+					statement.setString(6, tfHoa.getText());
+					statement.setString(7, tfMSHS.getText());
+					
+						statement.executeUpdate();
+						connection.close();
+						JOptionPane.showMessageDialog(this, "Sửa thành công ! ");
+					} catch (Exception e) {
+						System.out.println(e);
+					}
+				loadData();
+		       }
 		}
 		
 		private void btnTimKiemActionPerformed(ActionEvent evt) {
-			String MAHS = JOptionPane.showInputDialog(null,"Nhập mã học sinh");
+			String MAHS = "";
+            do {
+                MAHS = JOptionPane.showInputDialog(this, "Nhập mã học sinh", "MAHS", JOptionPane.OK_OPTION);
+                if (MAHS.equals("")) {
+                    int confirm = JOptionPane.showConfirmDialog(this, "Xin hãy nhập mã số học sinh", "Mã số trống", JOptionPane.YES_NO_OPTION);
+                    if (confirm != 0) {
+                        break;
+                    }
+                }
+            } while (MAHS.equals(""));
+			ArrayList<String> dsMSHS = new ArrayList<String>();	
+			dsMSHS = layMaHocSinh();
 			try {
 				connection = (Connection) DriverManager.getConnection(url, user, password);
 				String sql = ("select HS.MAHS, HS.HOTEN, TOAN, ANH, VAN, SINH, LI, HOA FROM HOCSINH HS, DIEMHOCSINH DHS WHERE HS.MAHS = DHS.MAHS AND DHS.MAHS = ?");
@@ -347,7 +377,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 				
 				DefaultTableModel recordTable = (DefaultTableModel)table.getModel();
 				recordTable.setRowCount(0);
-				
+								
 				if(rs.next()) {
 					//System.out.println("TÊN: " + rs.getString(2));
 					Vector<String> columnData = new Vector<String>();
@@ -365,8 +395,14 @@ public class QuanLiDiemHocSinh extends JFrame {
 					recordTable.addRow(columnData);
 					
 				} else {
-					JOptionPane.showMessageDialog(null, "không tồn tại mã học sinh");
+					for(String ds: dsMSHS) {
+						if(ds != MAHS ) {
+							JOptionPane.showMessageDialog(this, "không tồn tại mã học sinh");
+							break;
+						}
+					}
 				}
+				connection.close();				
 				System.out.println("kết nối thành công");
 			} catch (Exception e) {
 				System.out.println(e);
@@ -378,7 +414,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 			DefaultTableModel recordTable = (DefaultTableModel) table.getModel();
 			int i=table.getSelectedRow();
 			if (i>=0){
-				comboBox.setSelectedItem(recordTable.getValueAt(i, 0).toString());
+				tfMSHS.setText(recordTable.getValueAt(i, 0).toString());
 				tfToan.setText(recordTable.getValueAt(i, 2).toString());
 				tfAnh.setText(recordTable.getValueAt(i, 3).toString());
 				tfVan.setText(recordTable.getValueAt(i, 4).toString());
@@ -389,30 +425,53 @@ public class QuanLiDiemHocSinh extends JFrame {
 				
 				}
 			}
-	
-		private void doDuLieuComboBox() {
-			try {
+		//lay ma hoc sinh trong bang DIEMHOCSINH sql
+		public  ArrayList<String> layMaHocSinh(){
+			ArrayList<String> listMSHS = new ArrayList<>();						
+				try {
 				
-				String url="jdbc:mysql://Localhost:3306/QLHS";
-				String user="root";
-				String password="12345678";
+				
 				Connection connection=(Connection) DriverManager.getConnection(url, user, password);
 				Statement stmt=connection.createStatement();
-				ResultSet rs = stmt.executeQuery("select MAHS from HOCSINH  ");
-				comboBox.removeAllItems();//xóa tất cả các mục được hiển thị trong comboBox
+				ResultSet rs = stmt.executeQuery("select MAHS from DIEMHOCSINH  ");
 		
 				while(rs.next())
 	            {
-					//đổ dữ liệu vào conboBox
-					comboBox.addItem(rs.getString("MAHS"));
+					String maHocSinh = new String(rs.getString("MAHS"));               
+					listMSHS.add(maHocSinh);
 	            }
-					rs.close();
-					stmt.close();
-					connection.close();
 					
 				} catch (Exception e) {
 					System.out.println(e);
 					System.out.println("Kết nối thất bại");
 				}
+				
+				return listMSHS;
 		}
+		
+		//lay ma so hoc sinh trong bang hoc sinh
+		/*public  ArrayList<String> layMSHSTrongBangHOCSINH(){
+			ArrayList<String> listMSHS = new ArrayList<>();
+			
+			
+				try {
+				
+				
+				Connection connection=(Connection) DriverManager.getConnection(url, user, password);
+				Statement stmt=connection.createStatement();
+				ResultSet rs = stmt.executeQuery("select MAHS from HOCSINH  ");
+		
+				while(rs.next())
+	            {
+					String maHocSinh = new String(rs.getString("MAHS"));               
+					listMSHS.add(maHocSinh);
+	            }
+					
+				} catch (Exception e) {
+					System.out.println(e);
+					System.out.println("Kết nối thất bại");
+				}
+				
+				return listMSHS;
+		}*/
 }
