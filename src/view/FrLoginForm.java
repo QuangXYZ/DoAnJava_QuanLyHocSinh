@@ -146,10 +146,10 @@ public class FrLoginForm extends javax.swing.JFrame {
         // TODO add your handling code here: 
         if (checkValidForm()) {
             if (checkLogin(tfUserName.getText(), new String (tfPassword.getPassword()))){            
-                FrMainForm mainfForm;
-                    mainfForm = new FrMainForm();
-                    mainfForm.setVisible(true);
-                    mainfForm.setLocationRelativeTo(null);
+                QLHSView qlsv;
+                    qlsv = new QLHSView();
+                    qlsv.setVisible(true);
+                    qlsv.setLocationRelativeTo(null);
                     this.dispose();
                
                 

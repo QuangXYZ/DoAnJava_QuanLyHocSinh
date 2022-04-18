@@ -44,7 +44,7 @@ public class QLGVView extends javax.swing.JFrame {
             con = DriverManager.getConnection(dbUrl,username,password);
             System.out.println("Connection successful");
             Statement s=con.createStatement();
-            ResultSet rs =s.executeQuery("SELECT * FROM GIANGVIEN");
+            ResultSet rs =s.executeQuery("SELECT * FROM HOCSINH");
             while(rs.next()){
                  dshs.add(new HocSinh(rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
             }
