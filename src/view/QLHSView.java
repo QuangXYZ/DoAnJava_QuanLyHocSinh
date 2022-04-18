@@ -47,7 +47,8 @@ public class QLHSView extends javax.swing.JFrame {
     static DefaultTableModel model ;
     public void loadDataSQL(){
         Connection con;
-        try{          
+        try{   
+            dshs.clear();
             con = DriverManager.getConnection(dbUrl,username,password);
             System.out.println("Connection successful");
             Statement s=con.createStatement();
@@ -117,6 +118,7 @@ public class QLHSView extends javax.swing.JFrame {
         tfNgaySinh = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        RefreshMenu = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         Timkiem = new javax.swing.JMenu();
@@ -269,6 +271,14 @@ public class QLHSView extends javax.swing.JFrame {
         });
 
         jMenu1.setText("TOOL");
+
+        RefreshMenu.setText("Refresh");
+        RefreshMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(RefreshMenu);
 
         jMenuItem2.setText("Sắp xếp");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -622,8 +632,8 @@ public class QLHSView extends javax.swing.JFrame {
 
     private void TheoQuequanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoQuequanActionPerformed
         // TODO add your handling code here:
-        JFrame frame= new JFrame("Tìm kiếm theo quê quán");
-        String s = (String)JOptionPane.showInputDialog(frame,
+       
+        String s = (String)JOptionPane.showInputDialog(this,
                 "Nhập quê quán cần tìm",
                 "Tìm kiếm theo quê quán",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -642,12 +652,12 @@ public class QLHSView extends javax.swing.JFrame {
             int i=0;
             while(rs.next()){
                 if (rs.getString(5).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
                     i++;
                 }               
             }      
            con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! Nhấn reload để trờ về danh sách!");
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
         } catch(Exception e){
             System.out.println("Connect Error "+e);
         } 
@@ -656,8 +666,7 @@ public class QLHSView extends javax.swing.JFrame {
 
     private void TheoMSSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoMSSVActionPerformed
         // TODO add your handling code here:
-        JFrame frame= new JFrame("Tìm kiếm theo MSSV");
-        String s = (String)JOptionPane.showInputDialog(frame,
+        String s = (String)JOptionPane.showInputDialog(this,
                 "Nhập MSSV cần tìm",
                 "Tìm kiếm theo MSSV",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -676,12 +685,12 @@ public class QLHSView extends javax.swing.JFrame {
             int i=0;
             while(rs.next()){               
                 if (rs.getString(1).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
                     i++;
                 }               
             }      
            con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! Nhấn reload để trờ về danh sách!");
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
         } catch(Exception e){
             System.out.println("Connect Error "+e);
         } 
@@ -690,8 +699,8 @@ public class QLHSView extends javax.swing.JFrame {
 
     private void TheoHotenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoHotenActionPerformed
         // TODO add your handling code here:
-                JFrame frame= new JFrame("Tìm kiếm theo họ tên");
-        String s = (String)JOptionPane.showInputDialog(frame,
+               
+        String s = (String)JOptionPane.showInputDialog(this,
                 "Nhập họ tên cần tìm",
                 "Tìm kiếm theo họ tên",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -710,12 +719,12 @@ public class QLHSView extends javax.swing.JFrame {
             int i=0;
             while(rs.next()){
                 if (rs.getString(2).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
                     i++;
                 }               
             }      
            con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! Nhấn reload để trờ về danh sách!");
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
         } catch(Exception e){
             System.out.println("Connect Error "+e);
         } 
@@ -724,8 +733,8 @@ public class QLHSView extends javax.swing.JFrame {
 
     private void TheoNgaysinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoNgaysinhActionPerformed
         // TODO add your handling code here:
-                JFrame frame= new JFrame("Tìm kiếm theo ngày sinh");
-        String s = (String)JOptionPane.showInputDialog(frame,
+               
+        String s = (String)JOptionPane.showInputDialog(this,
                 "Nhập ngày sinh cần tìm",
                 "Tìm kiếm theo ngày sinh",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -744,12 +753,12 @@ public class QLHSView extends javax.swing.JFrame {
             int i=0;
             while(rs.next()){
                 if (rs.getString(3).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
                     i++;
                 }               
             }      
            con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! Nhấn reload để trờ về danh sách!");
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
         } catch(Exception e){
             System.out.println("Connect Error "+e);
         } 
@@ -758,8 +767,8 @@ public class QLHSView extends javax.swing.JFrame {
 
     private void TheoGioitinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoGioitinhActionPerformed
         // TODO add your handling code here:
-                JFrame frame= new JFrame("Tìm kiếm theo giới tính");
-        String s = (String)JOptionPane.showInputDialog(frame,
+               
+        String s = (String)JOptionPane.showInputDialog(this,
                 "Nhập giới tính cần tìm",
                 "Tìm kiếm theo giới tính",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -778,12 +787,12 @@ public class QLHSView extends javax.swing.JFrame {
             int i=0;
             while(rs.next()){
                 if (rs.getString(4).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
                     i++;
                 }               
             }      
            con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! Nhấn reload để trờ về danh sách!");
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! ");
         } catch(Exception e){
             System.out.println("Connect Error "+e);
         } 
@@ -792,8 +801,8 @@ public class QLHSView extends javax.swing.JFrame {
 
     private void TheoLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoLopActionPerformed
         // TODO add your handling code here:
-                JFrame frame= new JFrame("Tìm kiếm theo lớp");
-        String s = (String)JOptionPane.showInputDialog(frame,
+               
+        String s = (String)JOptionPane.showInputDialog(this,
                 "Nhập lớp cần tìm",
                 "Tìm kiếm theo lớp",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -812,17 +821,24 @@ public class QLHSView extends javax.swing.JFrame {
             int i=0;
             while(rs.next()){
                 if (rs.getString(6).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
                     i++;
                 }               
             }      
            con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! Nhấn reload để trờ về danh sách!");
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
         } catch(Exception e){
             System.out.println("Connect Error "+e);
         } 
         }
     }//GEN-LAST:event_TheoLopActionPerformed
+
+    private void RefreshMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshMenuActionPerformed
+        // TODO add your handling code here:
+        loadDataSQL();
+        loadDataTable();
+        resetForm();
+    }//GEN-LAST:event_RefreshMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -864,6 +880,7 @@ public class QLHSView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem RefreshMenu;
     private javax.swing.JMenuItem TheoGioitinh;
     private javax.swing.JMenuItem TheoHoten;
     private javax.swing.JMenuItem TheoLop;
