@@ -49,13 +49,3 @@ create table DIEMHOCSINH (
     HOA FLOAT(4),
     FOREIGN KEY(MAHS) REFERENCES HOCSINH(MAHS)
 );
-
-
-
-
-
-
-
-
-
-

@@ -26,27 +26,29 @@ import quanlyhocsinh.HocSinh;
 import quanlyhocsinh.HocSinh;
 import quanlyhocsinh.HocSinh;
 import static view.QLHSView.model;
+
 public class QLGVView extends javax.swing.JFrame {
 
     /**
      * Creates new form QLGVView
      */
-        String dbUrl ="jdbc:mysql://localhost:3306/qlhs";
+    String dbUrl ="jdbc:mysql://localhost:3306/qlhs";
     String username = "root"; String password= "12345678";
     String imgURL="none";
     File directory = new File("");
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-    ArrayList<HocSinh> dshs = new ArrayList<>();
+    ArrayList<HocSinh> dsgv = new ArrayList<>();
     static DefaultTableModel model ;
     public void loadDataSQL(){
         Connection con;
-        try{          
+        try{     
+            dsgv.clear();
             con = DriverManager.getConnection(dbUrl,username,password);
             System.out.println("Connection successful");
             Statement s=con.createStatement();
             ResultSet rs =s.executeQuery("SELECT * FROM HOCSINH");
             while(rs.next()){
-                 dshs.add(new HocSinh(rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
+                 dsgv.add(new HocSinh(rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
             }
            con.close();
         } catch(Exception e){
@@ -59,10 +61,10 @@ public class QLGVView extends javax.swing.JFrame {
         
         model = (DefaultTableModel)tbDSGV.getModel();
         model.setRowCount(0);
-        for (int i=0;i<dshs.size();i++){
+        for (int i=0;i<dsgv.size();i++){
            
-            model.addRow(new Object[]{i+1,dshs.get(i).getMSHS(),dshs.get(i).getHoTen(),formatDate.format(dshs.get(i).getNgaySinh()),
-                dshs.get(i).getGioiTinh(),dshs.get(i).getLop(),dshs.get(i).getQueQuan()});
+            model.addRow(new Object[]{i+1,dsgv.get(i).getMSHS(),dsgv.get(i).getHoTen(),formatDate.format(dsgv.get(i).getNgaySinh()),
+                dsgv.get(i).getGioiTinh(),dsgv.get(i).getLop(),dsgv.get(i).getQueQuan()});
           
         }
                   
@@ -117,10 +119,11 @@ public class QLGVView extends javax.swing.JFrame {
         tbDSGV = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        Refresh = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        TheoTen = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        TimKiem = new javax.swing.JMenu();
+        TheoTen = new javax.swing.JMenuItem();
         TheoMSGV = new javax.swing.JMenuItem();
         TheoNgaySinh = new javax.swing.JMenuItem();
         TheoGioiTinh = new javax.swing.JMenuItem();
@@ -313,6 +316,14 @@ public class QLGVView extends javax.swing.JFrame {
 
         jMenu1.setText("TOOL");
 
+        Refresh.setText("Refresh");
+        Refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Refresh);
+
         jMenuItem3.setText("Sắp xếp");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,10 +340,15 @@ public class QLGVView extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem5);
 
-        TheoTen.setText("Tìm kiếm");
+        TimKiem.setText("Tìm kiếm");
 
-        jMenuItem1.setText("Theo tên");
-        TheoTen.add(jMenuItem1);
+        TheoTen.setText("Theo tên");
+        TheoTen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TheoTenActionPerformed(evt);
+            }
+        });
+        TimKiem.add(TheoTen);
 
         TheoMSGV.setText("Theo MSGV");
         TheoMSGV.addActionListener(new java.awt.event.ActionListener() {
@@ -340,16 +356,31 @@ public class QLGVView extends javax.swing.JFrame {
                 TheoMSGVActionPerformed(evt);
             }
         });
-        TheoTen.add(TheoMSGV);
+        TimKiem.add(TheoMSGV);
 
         TheoNgaySinh.setText("Theo Ngày sinh");
-        TheoTen.add(TheoNgaySinh);
+        TheoNgaySinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TheoNgaySinhActionPerformed(evt);
+            }
+        });
+        TimKiem.add(TheoNgaySinh);
 
         TheoGioiTinh.setText("Theo giới tính");
-        TheoTen.add(TheoGioiTinh);
+        TheoGioiTinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TheoGioiTinhActionPerformed(evt);
+            }
+        });
+        TimKiem.add(TheoGioiTinh);
 
         TheoQueQuan.setText("Theo quê quán");
-        TheoTen.add(TheoQueQuan);
+        TheoQueQuan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TheoQueQuanActionPerformed(evt);
+            }
+        });
+        TimKiem.add(TheoQueQuan);
 
         TheoLop.setText("Theo lớp");
         TheoLop.addActionListener(new java.awt.event.ActionListener() {
@@ -357,9 +388,9 @@ public class QLGVView extends javax.swing.JFrame {
                 TheoLopActionPerformed(evt);
             }
         });
-        TheoTen.add(TheoLop);
+        TimKiem.add(TheoLop);
 
-        jMenu1.add(TheoTen);
+        jMenu1.add(TimKiem);
 
         jMenuBar1.add(jMenu1);
 
@@ -482,6 +513,17 @@ public class QLGVView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfHoTenActionPerformed
 
+    public void resetForm(){
+        tfHoTen.setText("");
+        tfMSGV.setText("");
+        tfLop.setText("");
+        rbNam.setSelected(true);
+        imgLabel.setIcon(null);
+        tfNgaySinh.setText("");
+        cbQueQuan.setSelectedIndex(0);
+        
+    }
+    
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         // TODO add your handling code here:
         if (tfNgaySinh.getText().equals("")||tfMSGV.getText().equals("")||tfHoTen.getText().equals("")||tfLop.getText().equals("")||(rbNam.isSelected()==false&&rbNu.isSelected()==false)){
@@ -489,23 +531,23 @@ public class QLGVView extends javax.swing.JFrame {
         }
         else {
             int i = tbDSGV.getSelectedRow();
-            dshs.get(i).setMSHS(tfMSGV.getText());
-            dshs.get(i).setHoTen(tfHoTen.getText());
-            dshs.get(i).setGioiTinh(rbNam.isSelected()?"Nam":"Nu");
+            dsgv.get(i).setMSHS(tfMSGV.getText());
+            dsgv.get(i).setHoTen(tfHoTen.getText());
+            dsgv.get(i).setGioiTinh(rbNam.isSelected()?"Nam":"Nu");
             try {
-                dshs.get(i).setNgaySinh(formatDate.parse(tfNgaySinh.getText()));
+                dsgv.get(i).setNgaySinh(formatDate.parse(tfNgaySinh.getText()));
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ");
             }
-            dshs.get(i).setQueQuan(cbQueQuan.getSelectedItem().toString());
-            dshs.get(i).setLop(tfLop.getText());
-            dshs.get(i).setImg(imgURL);
-            model.setValueAt(dshs.get(i).getMSHS(), i, 1);
-            model.setValueAt(dshs.get(i).getHoTen(), i, 2);
-            model.setValueAt(formatDate.format(dshs.get(i).getNgaySinh()), i, 3);
-            model.setValueAt(dshs.get(i).getGioiTinh(), i, 4);
-            model.setValueAt(dshs.get(i).getLop(), i, 5);
-            model.setValueAt(dshs.get(i).getQueQuan(), i, 6);   
+            dsgv.get(i).setQueQuan(cbQueQuan.getSelectedItem().toString());
+            dsgv.get(i).setLop(tfLop.getText());
+            dsgv.get(i).setImg(imgURL);
+            model.setValueAt(dsgv.get(i).getMSHS(), i, 1);
+            model.setValueAt(dsgv.get(i).getHoTen(), i, 2);
+            model.setValueAt(formatDate.format(dsgv.get(i).getNgaySinh()), i, 3);
+            model.setValueAt(dsgv.get(i).getGioiTinh(), i, 4);
+            model.setValueAt(dsgv.get(i).getLop(), i, 5);
+            model.setValueAt(dsgv.get(i).getQueQuan(), i, 6);   
         }    
         resetForm();
     }//GEN-LAST:event_editBtnActionPerformed
@@ -518,7 +560,7 @@ public class QLGVView extends javax.swing.JFrame {
         else {
             try {      
                 
-                dshs.add(new HocSinh(tfMSGV.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),tfLop.getText(),imgURL));
+                dsgv.add(new HocSinh(tfMSGV.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),tfLop.getText(),imgURL));
                 loadDataTable();
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng ngày sinh");
@@ -532,7 +574,7 @@ public class QLGVView extends javax.swing.JFrame {
         // TODO add your handling code here:
         int i = tbDSGV.getSelectedRow();
         model.removeRow(i);
-        dshs.remove(i);
+        dsgv.remove(i);
         resetForm();
     }//GEN-LAST:event_delBtnActionPerformed
 
@@ -544,7 +586,7 @@ public class QLGVView extends javax.swing.JFrame {
             System.out.println("Connection successful");
             Statement s=con.createStatement();
             s.executeUpdate("DELETE FROM HOCSINH");
-            for (HocSinh h : dshs){
+            for (HocSinh h : dsgv){
                 String img = h.getImg().replace("\\", "\\\\");
                 s.executeUpdate("INSERT INTO HOCSINH VALUES('"+h.getMSHS()+"','"+h.getHoTen()+"','"+formatDate.format(h.getNgaySinh())+"','"+h.getGioiTinh()+"','"+h.getQueQuan()+"','"+h.getLop()+"','"+img+"')");
             }       
@@ -582,22 +624,6 @@ public class QLGVView extends javax.swing.JFrame {
 
     private void tbDSHSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDSHSMouseClicked
         // TODO add your handling code here:
-        model = (DefaultTableModel)tbDSGV.getModel();
-        int i = tbDSGV.getSelectedRow();
-        if (i>=0){
-            tfMSGV.setText(model.getValueAt(i,1).toString());
-            tfHoTen.setText(model.getValueAt(i,2).toString());
-            tfNgaySinh.setText(model.getValueAt(i,3).toString());
-            if(model.getValueAt(i,4).toString().equals("Nam"))
-            rbNam.setSelected(true);
-            else rbNu.setSelected(true);
-            tfLop.setText(model.getValueAt(i,5).toString());
-            cbQueQuan.setSelectedItem(model.getValueAt(i,6).toString());
-            ImageIcon img = new ImageIcon(directory.getAbsolutePath()+dshs.get(i).getImg());
-            imgLabel.setIcon(new ImageIcon(img.getImage().getScaledInstance(imgLabel.getWidth()-10, imgLabel.getHeight()-20, Image.SCALE_SMOOTH)));
-
-        }
-
     }//GEN-LAST:event_tbDSHSMouseClicked
 
     private void tbDSGVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDSGVMouseClicked
@@ -613,7 +639,7 @@ public class QLGVView extends javax.swing.JFrame {
             else rbNu.setSelected(true);
             tfLop.setText(model.getValueAt(i,5).toString());
             cbQueQuan.setSelectedItem(model.getValueAt(i,6).toString());           
-            ImageIcon img = new ImageIcon(directory.getAbsolutePath()+dshs.get(i).getImg());
+            ImageIcon img = new ImageIcon(directory.getAbsolutePath()+dsgv.get(i).getImg());
             imgLabel.setIcon(new ImageIcon(img.getImage().getScaledInstance(imgLabel.getWidth()-10, imgLabel.getHeight()-20, Image.SCALE_SMOOTH)));
 
         }
@@ -621,26 +647,209 @@ public class QLGVView extends javax.swing.JFrame {
 
     private void TheoLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoLopActionPerformed
         // TODO add your handling code here:
-        JFrame frame= new JFrame("Tìm kiếm theo lớp");
-        JOptionPane.showInputDialog(frame,
+        String s = (String)JOptionPane.showInputDialog(this,
                 "Nhập lớp cần tìm",
                 "Tìm kiếm theo lớp",
                 JOptionPane.INFORMATION_MESSAGE);
+        if (s.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement st=con.createStatement();
+            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
+            model = (DefaultTableModel)tbDSGV.getModel();
+            model.setRowCount(0); 
+            int i=0;
+            while(rs.next()){
+                if (rs.getString(6).contains(s)){                      
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    i++;
+                }               
+            }      
+           con.close();
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+        }
     }//GEN-LAST:event_TheoLopActionPerformed
 
     private void TheoMSGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoMSGVActionPerformed
         // TODO add your handling code here:
+        String s = (String)JOptionPane.showInputDialog(this,
+                "Nhập MSSV cần tìm",
+                "Tìm kiếm theo MSSV",
+                JOptionPane.INFORMATION_MESSAGE);
+        if (s.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement st=con.createStatement();
+            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
+            model = (DefaultTableModel)tbDSGV.getModel();
+            model.setRowCount(0); 
+            int i=0;
+            while(rs.next()){               
+                if (rs.getString(1).contains(s)){                      
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    i++;
+                }               
+            }      
+           con.close();
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+        }
     }//GEN-LAST:event_TheoMSGVActionPerformed
-    public void resetForm(){
-        tfHoTen.setText("");
-        tfMSGV.setText("");
-        tfLop.setText("");
-        rbNam.setSelected(true);
-        imgLabel.setIcon(null);
-        tfNgaySinh.setText("");
-        cbQueQuan.setSelectedIndex(0);
-        
-    }
+
+    private void TheoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoTenActionPerformed
+        // TODO add your handling code here:
+        String s = (String)JOptionPane.showInputDialog(this,
+                "Nhập họ tên cần tìm",
+                "Tìm kiếm theo họ tên",
+                JOptionPane.INFORMATION_MESSAGE);
+        if (s.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement st=con.createStatement();
+            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
+            model = (DefaultTableModel)tbDSGV.getModel();
+            model.setRowCount(0); 
+            int i=0;
+            while(rs.next()){
+                if (rs.getString(2).contains(s)){                      
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    i++;
+                }               
+            }      
+           con.close();
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+        }
+    }//GEN-LAST:event_TheoTenActionPerformed
+
+    private void TheoNgaySinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoNgaySinhActionPerformed
+        // TODO add your handling code here:
+        String s = (String)JOptionPane.showInputDialog(this,
+                "Nhập ngày sinh cần tìm",
+                "Tìm kiếm theo ngày sinh",
+                JOptionPane.INFORMATION_MESSAGE);
+        if (s.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement st=con.createStatement();
+            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
+            model = (DefaultTableModel)tbDSGV.getModel();
+            model.setRowCount(0); 
+            int i=0;
+            while(rs.next()){
+                if (rs.getString(3).contains(s)){                      
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    i++;
+                }               
+            }      
+           con.close();
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+        }
+    }//GEN-LAST:event_TheoNgaySinhActionPerformed
+
+    private void TheoGioiTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoGioiTinhActionPerformed
+        // TODO add your handling code here:
+        String s = (String)JOptionPane.showInputDialog(this,
+                "Nhập giới tính cần tìm",
+                "Tìm kiếm theo giới tính",
+                JOptionPane.INFORMATION_MESSAGE);
+        if (s.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement st=con.createStatement();
+            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
+            model = (DefaultTableModel)tbDSGV.getModel();
+            model.setRowCount(0); 
+            int i=0;
+            while(rs.next()){
+                if (rs.getString(4).contains(s)){                      
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    i++;
+                }               
+            }      
+           con.close();
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! ");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+        }
+    }//GEN-LAST:event_TheoGioiTinhActionPerformed
+
+    private void TheoQueQuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoQueQuanActionPerformed
+        // TODO add your handling code here:
+        String s = (String)JOptionPane.showInputDialog(this,
+                "Nhập quê quán cần tìm",
+                "Tìm kiếm theo quê quán",
+                JOptionPane.INFORMATION_MESSAGE);
+        if (s.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        }
+        else {
+        Connection con;
+        try{          
+            con = DriverManager.getConnection(dbUrl,username,password);
+            System.out.println("Connection successful");
+            Statement st=con.createStatement();
+            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
+            model = (DefaultTableModel)tbDSGV.getModel();
+            model.setRowCount(0); 
+            int i=0;
+            while(rs.next()){
+                if (rs.getString(5).contains(s)){                      
+                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
+                    i++;
+                }               
+            }      
+           con.close();
+           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
+        }
+    }//GEN-LAST:event_TheoQueQuanActionPerformed
+
+    private void RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshActionPerformed
+        // TODO add your handling code here:
+        loadDataSQL();
+        loadDataTable();
+        resetForm();
+    }//GEN-LAST:event_RefreshActionPerformed
+
                              
 
 
@@ -680,12 +889,14 @@ public class QLGVView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Refresh;
     private javax.swing.JMenuItem TheoGioiTinh;
     private javax.swing.JMenuItem TheoLop;
     private javax.swing.JMenuItem TheoMSGV;
     private javax.swing.JMenuItem TheoNgaySinh;
     private javax.swing.JMenuItem TheoQueQuan;
-    private javax.swing.JMenu TheoTen;
+    private javax.swing.JMenuItem TheoTen;
+    private javax.swing.JMenu TimKiem;
     private javax.swing.JButton addBtn;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbQueQuan;
@@ -705,7 +916,6 @@ public class QLGVView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
