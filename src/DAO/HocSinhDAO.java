@@ -27,16 +27,15 @@ public class HocSinhDAO {
     ArrayList<HocSinh> dshs = new ArrayList<>();
     public ArrayList<HocSinh> getAllHocSinh(){
         try {
-            ArrayList<HocSinh> dshs = new ArrayList<>();
             String sqlSelectAll = "select * from HOCSINH";
             connection = MyConnection.getConnection();
             preparedStatement = connection.prepareStatement(sqlSelectAll);
             resultSet = preparedStatement.executeQuery();
-         dshs.add(new HocSinh("129","Quang",formatDate.parse("12/06/2002"),"Nam","Hà Nội","DCT1205","none"));        
+                 
          while(resultSet.next()){
             dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
-         System.out.println("dshs "+dshs.get(0).getHoTen());
+         
         } catch (SQLException ex) {
             System.out.println("error "+ex );
         } catch (ParseException ex) {
@@ -53,6 +52,32 @@ public class HocSinhDAO {
         }
         return dshs;
     }
+    public int addHocSinh(HocSinh hs){
+        int result = 0;
+        String sqlInsert = "insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values (?,?,?,?,?,?,?);";
 
-    
+        try {
+        connection = MyConnection.getConnection();
+                preparedStatement = connection.prepareStatement(sqlInsert);
+                preparedStatement.setString(1, hs.getMSHS());
+                preparedStatement.setString(2, hs.getHoTen());
+                preparedStatement.setString(3, formatDate.format(hs.getNgaySinh()));
+                preparedStatement.setString(4, hs.getGioiTinh());
+                preparedStatement.setString(5, hs.getQueQuan());
+                preparedStatement.setString(6, hs.getLop());
+                preparedStatement.setString(7, hs.getImg());
+                result = preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }  
 }

@@ -15,8 +15,11 @@ import java.util.ArrayList;
  */
 public class HocSinhBUS {
     HocSinhDAO hsDAO = new HocSinhDAO();
-    public ArrayList<HocSinh> getAllHocSinh() {
+    public ArrayList<HocSinh> getAllHocSinh() {  
         return hsDAO.getAllHocSinh();
+    }
+    public int addHocSinh(HocSinh hs) {  
+        return hsDAO.addHocSinh(hs);
     }
     
 }

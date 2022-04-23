@@ -51,7 +51,6 @@ public class QLHSView extends javax.swing.JFrame {
             dshs.clear();
             HocSinhBUS hsBUS = new HocSinhBUS();
             dshs = hsBUS.getAllHocSinh();
-            System.out.println("dshs "+dshs.get(0).getHoTen());
         } catch(Exception e){
             System.out.println("Connect Error "+e);
         } 
@@ -72,8 +71,6 @@ public class QLHSView extends javax.swing.JFrame {
     public QLHSView() {
         initComponents();
         
-       
-       
         loadDataSQL();
         loadDataTable();
     }
@@ -506,14 +503,14 @@ public class QLHSView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         }
         else {
-            try {      
-                
-                dshs.add(new HocSinh(tfMSHS.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),tfLop.getText(),imgURL));
-                loadDataTable();
-            } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng ngày sinh");
+            try {
+                HocSinh hs = new HocSinh(tfMSHS.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),tfLop.getText(),imgURL);
+                HocSinhBUS hsBUS = new HocSinhBUS();
+                if (hsBUS.addHocSinh(hs)!=0) JOptionPane.showMessageDialog(this, "Thêm thành công");
+                else JOptionPane.showMessageDialog(this, "Thêm không thành công");
+                } catch (ParseException ex) {
+                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng ngày sinh");
             }
-           
         }    
         resetForm();
 
