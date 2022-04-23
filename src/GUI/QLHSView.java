@@ -6,6 +6,7 @@
 package GUI;
 
 
+import BUS.HocSinhBUS;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -46,17 +47,11 @@ public class QLHSView extends javax.swing.JFrame {
     ArrayList<HocSinh> dshs = new ArrayList<>();
     static DefaultTableModel model ;
     public void loadDataSQL(){
-        Connection con;
         try{   
             dshs.clear();
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement s=con.createStatement();
-            ResultSet rs =s.executeQuery("SELECT * FROM HOCSINH");
-            while(rs.next()){
-                 dshs.add(new HocSinh(rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
-            }
-           con.close();
+            HocSinhBUS hsBUS = new HocSinhBUS();
+            dshs = hsBUS.getAllHocSinh();
+            System.out.println("dshs "+dshs.get(0).getHoTen());
         } catch(Exception e){
             System.out.println("Connect Error "+e);
         } 
@@ -68,7 +63,6 @@ public class QLHSView extends javax.swing.JFrame {
         model = (DefaultTableModel)tbDSHS.getModel();
         model.setRowCount(0);
         for (int i=0;i<dshs.size();i++){
-           
             model.addRow(new Object[]{i+1,dshs.get(i).getMSHS(),dshs.get(i).getHoTen(),formatDate.format(dshs.get(i).getNgaySinh()),
                 dshs.get(i).getGioiTinh(),dshs.get(i).getLop(),dshs.get(i).getQueQuan()});
           

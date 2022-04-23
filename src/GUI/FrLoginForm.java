@@ -12,6 +12,7 @@ import java.sql.*;
 
 import javax.swing.JOptionPane;
 import DTO.User;
+import sql.MyConnection;
 
 /**
  *
@@ -147,10 +148,8 @@ public class FrLoginForm extends javax.swing.JFrame {
         else return true;
     }
     public boolean checkLogin(String Username,String Password){
-         try{    
-            String dbUrl ="jdbc:mysql://localhost:3306/qlhs";
-            String username = "root"; String password= "12345678";
-            Connection con = DriverManager.getConnection(dbUrl,username,password);
+         try{     
+            Connection con = MyConnection.getConnection();
             System.out.println("Connect success");
             Statement s=con.createStatement();
             ResultSet rs =s.executeQuery("SELECT * FROM USERS");
@@ -158,6 +157,7 @@ public class FrLoginForm extends javax.swing.JFrame {
                 if (rs.getString(1).equals(Username)&&rs.getString(2).equals(Password)){
                     con.close();
                     return true;
+                    
                 }
             }
         } catch(Exception e){
