@@ -1,4 +1,4 @@
-package quanlyhocsinh;
+package DTO;
 
 public class QuanLiDiemHS {
 	private float toan, anh, van, ly, sinh, hoa;

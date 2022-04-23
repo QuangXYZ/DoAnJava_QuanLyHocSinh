@@ -1,4 +1,4 @@
-package quanlyhocsinh;
+package DTO;
 
 public class User {
     private String UserName;

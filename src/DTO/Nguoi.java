@@ -1,4 +1,4 @@
-package quanlyhocsinh;
+package DTO;
 
 import java.util.Date;
 

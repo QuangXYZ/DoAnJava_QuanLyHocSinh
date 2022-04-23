@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package GUI;
 
 
 import java.awt.Image;
@@ -25,9 +25,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import quanlyhocsinh.HocSinh;
-import quanlyhocsinh.HocSinh;
-import quanlyhocsinh.HocSinh;
+import DTO.HocSinh;
+import DTO.HocSinh;
+import DTO.HocSinh;
 
 /**
  *

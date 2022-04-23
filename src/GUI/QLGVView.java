@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package GUI;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -22,10 +22,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import quanlyhocsinh.HocSinh;
-import quanlyhocsinh.HocSinh;
-import quanlyhocsinh.HocSinh;
-import static view.QLHSView.model;
+import DTO.HocSinh;
+import DTO.HocSinh;
+import DTO.HocSinh;
+import static GUI.QLHSView.model;
 
 public class QLGVView extends javax.swing.JFrame {
 
