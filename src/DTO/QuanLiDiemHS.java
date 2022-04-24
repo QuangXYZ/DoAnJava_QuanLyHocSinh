@@ -1,14 +1,18 @@
 package DTO;
 
-public class QuanLiDiemHS {
+import java.util.Date;
+
+public class QuanLiDiemHS extends HocSinh {
 	private float toan, anh, van, ly, sinh, hoa;
 
 	public QuanLiDiemHS() {
 		
 	}
+	
 
-	public QuanLiDiemHS(float toan, float anh, float van, float ly, float sinh, float hoa) {
-		super();
+	public QuanLiDiemHS(String mSHS, String hoTen, Date ngaySinh, String gioiTinh, String queQuan, String lop,
+			String img, float toan, float anh, float van, float ly, float sinh, float hoa) {
+		super(mSHS, hoTen, ngaySinh, gioiTinh, queQuan, lop, img);
 		this.toan = toan;
 		this.anh = anh;
 		this.van = van;
@@ -17,7 +21,8 @@ public class QuanLiDiemHS {
 		this.hoa = hoa;
 	}
 
-	public double getToan() {
+
+	public float getToan() {
 		return toan;
 	}
 
@@ -25,7 +30,7 @@ public class QuanLiDiemHS {
 		this.toan = toan;
 	}
 
-	public double getAnh() {
+	public float getAnh() {
 		return anh;
 	}
 
@@ -33,7 +38,7 @@ public class QuanLiDiemHS {
 		this.anh = anh;
 	}
 
-	public double getVan() {
+	public float getVan() {
 		return van;
 	}
 
@@ -41,7 +46,7 @@ public class QuanLiDiemHS {
 		this.van = van;
 	}
 
-	public double getLy() {
+	public float getLy() {
 		return ly;
 	}
 
@@ -49,7 +54,7 @@ public class QuanLiDiemHS {
 		this.ly = ly;
 	}
 
-	public double getSinh() {
+	public float getSinh() {
 		return sinh;
 	}
 
@@ -57,14 +62,14 @@ public class QuanLiDiemHS {
 		this.sinh = sinh;
 	}
 
-	public double getHoa() {
+	public float getHoa() {
 		return hoa;
 	}
 
 	public void setHoa(float hoa) {
 		this.hoa = hoa;
 	}
-	
+
 	
 	
 
