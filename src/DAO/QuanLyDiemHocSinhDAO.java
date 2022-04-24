@@ -138,7 +138,7 @@ public class QuanLyDiemHocSinhDAO {
 	    public ArrayList<QuanLiDiemHS> timDiemHocSinh(String mshs){
 			 ArrayList<QuanLiDiemHS> dsDiemHS = new ArrayList<QuanLiDiemHS>();
 			 try {
-				 connection = MyConnection.getConnection();
+				 	connection = MyConnection.getConnection();
 					String sql = ("select HS.MAHS, HS.HOTEN, TOAN, ANH, VAN, SINH, LI, HOA FROM HOCSINH HS, DIEMHOCSINH DHS WHERE HS.MAHS = DHS.MAHS AND DHS.MAHS = ?");
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setString(1, mshs);
@@ -161,5 +161,26 @@ public class QuanLyDiemHocSinhDAO {
 			}
 			 return dsDiemHS;
 			}
+	    
+	  //lay ma hoc sinh trong bang DIEMHOCSINH sql
+	  		public  ArrayList<String> layMaHocSinh(){
+	  			ArrayList<String> listMSHS = new ArrayList<>();						
+	  				try {				
+	  				connection = MyConnection.getConnection();
+	  				Statement stmt=connection.createStatement();
+	  				ResultSet rs = stmt.executeQuery("select MAHS from HOCSINH  ");
+	  		
+	  				while(rs.next())
+	  	            {
+	  					String maHocSinh = new String(rs.getString("MAHS"));               
+	  					listMSHS.add(maHocSinh);
+	  	            }
+	  					
+	  				} catch (Exception e) {
+	  					System.out.println(e);
+	  				}
+	  				
+	  				return listMSHS;
+	  		}
 
 }
