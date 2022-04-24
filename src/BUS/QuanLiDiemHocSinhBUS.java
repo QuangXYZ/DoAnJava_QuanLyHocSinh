@@ -25,4 +25,8 @@ public class QuanLiDiemHocSinhBUS {
 	public ArrayList<QuanLiDiemHS> timDiemHocSinh(String mshs){
 		return diemHocSinhDAO.timDiemHocSinh(mshs);
 	}
+	
+	public ArrayList<String> layMaHocSinh(){
+		return diemHocSinhDAO.layMaHocSinh();
+	}
 }
