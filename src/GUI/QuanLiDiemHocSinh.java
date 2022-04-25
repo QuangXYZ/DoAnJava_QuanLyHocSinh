@@ -27,6 +27,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class QuanLiDiemHocSinh extends JFrame {
 	private JPanel contentPane;
@@ -58,97 +60,103 @@ public class QuanLiDiemHocSinh extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 816, 644);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(204, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Điểm Toán");
-		lblNewLabel.setBounds(26, 26, 90, 30);
+		lblNewLabel.setBounds(380, 247, 90, 30);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Điểm Anh");
-		lblNewLabel_1.setBounds(26, 89, 90, 30);
+		lblNewLabel_1.setBounds(10, 167, 90, 30);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Điểm Văn");
-		lblNewLabel_2.setBounds(26, 160, 90, 30);
+		lblNewLabel_2.setBounds(10, 207, 90, 30);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Điểm Sinh");
-		lblNewLabel_3.setBounds(450, 26, 90, 30);
+		lblNewLabel_3.setBounds(10, 247, 90, 30);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Điểm Lí");
-		lblNewLabel_4.setBounds(450, 98, 90, 30);
+		lblNewLabel_4.setBounds(380, 167, 90, 30);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Điểm Hóa");
-		lblNewLabel_5.setBounds(450, 152, 90, 30);
+		lblNewLabel_5.setBounds(380, 207, 90, 30);
 		contentPane.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("MAHS");
-		lblNewLabel_6.setBounds(26, 214, 90, 30);
+		lblNewLabel_6.setBounds(10, 127, 90, 30);
 		contentPane.add(lblNewLabel_6);
 		
 		tfToan = new JTextField();
-		tfToan.setBounds(212, 26, 96, 31);
+		tfToan.setBounds(523, 247, 96, 31);
 		contentPane.add(tfToan);
 		tfToan.setColumns(10);
 		
 		tfSinh = new JTextField();
-		tfSinh.setBounds(673, 26, 96, 30);
+		tfSinh.setBounds(191, 248, 96, 30);
 		contentPane.add(tfSinh);
 		tfSinh.setColumns(10);
 		
 		tfLi = new JTextField();
-		tfLi.setBounds(673, 89, 96, 30);
+		tfLi.setBounds(523, 168, 96, 30);
 		contentPane.add(tfLi);
 		tfLi.setColumns(10);
 		
 		tfMSHS = new JTextField();
-		tfMSHS.setBounds(212, 214, 96, 31);
+		tfMSHS.setBounds(191, 127, 96, 31);
 		contentPane.add(tfMSHS);
 		tfMSHS.setColumns(10);
 		
 		tfHoa = new JTextField();
-		tfHoa.setBounds(673, 152, 96, 33);
+		tfHoa.setBounds(523, 206, 96, 33);
 		contentPane.add(tfHoa);
 		tfHoa.setColumns(10);
 		
 		tfAnh = new JTextField();
-		tfAnh.setBounds(212, 90, 96, 30);
+		tfAnh.setBounds(191, 168, 96, 30);
 		contentPane.add(tfAnh);
 		tfAnh.setColumns(10);
 		
 		tfVan = new JTextField();
-		tfVan.setBounds(212, 155, 96, 30);
+		tfVan.setBounds(191, 208, 96, 30);
 		contentPane.add(tfVan);
 		tfVan.setColumns(10);
 		
 
 		JButton btnNhapLai = new JButton("NHẬP LẠI");
+		btnNhapLai.setBounds(10, 295, 119, 30);
+		btnNhapLai.setIcon(new ImageIcon("D:\\src\\Java\\src\\DoAnJaVa2\\src\\images\\btNhapLai.png"));
 		btnNhapLai.setBackground(new Color(176, 224, 230));
-		btnNhapLai.setBounds(10, 295, 106, 30);
 		contentPane.add(btnNhapLai);
 		
 		JButton btnThem = new JButton("THÊM");
+		btnThem.setBounds(176, 295, 119, 30);
+		btnThem.setIcon(new ImageIcon("D:\\src\\Java\\src\\DoAnJaVa2\\src\\images\\btThem.png"));
 		btnThem.setBackground(new Color(176, 224, 230));
-		btnThem.setBounds(163, 295, 96, 30);
 		contentPane.add(btnThem);
 		
 		JButton btXoa = new JButton("XÓA");
+		btXoa.setBounds(352, 295, 119, 30);
+		btXoa.setIcon(new ImageIcon("D:\\src\\Java\\src\\DoAnJaVa2\\src\\images\\btXoa.png"));
 		btXoa.setBackground(new Color(176, 224, 230));
-		btXoa.setBounds(329, 295, 96, 30);
 		contentPane.add(btXoa);
 		
 		JButton btSua = new JButton("SỬA");
+		btSua.setBounds(512, 295, 119, 30);
+		btSua.setIcon(new ImageIcon("D:\\src\\Java\\src\\DoAnJaVa2\\src\\images\\btSua.png"));
 		btSua.setBackground(new Color(176, 224, 230));
-		btSua.setBounds(504, 295, 96, 30);
 		contentPane.add(btSua);
 		
 		JButton btnTimKiem = new JButton("TÌM KIẾM");
+		btnTimKiem.setBounds(673, 295, 119, 30);
+		btnTimKiem.setIcon(new ImageIcon("D:\\src\\Java\\src\\DoAnJaVa2\\src\\images\\btTim.png"));
 		btnTimKiem.setBackground(new Color(176, 224, 230));
-		btnTimKiem.setBounds(673, 295, 96, 30);
 		contentPane.add(btnTimKiem);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -175,6 +183,15 @@ public class QuanLiDiemHocSinh extends JFrame {
 			table.getColumnModel().getColumn(6).setPreferredWidth(67);
 			table.getColumnModel().getColumn(7).setPreferredWidth(68);
 			scrollPane.setViewportView(table);
+			
+			JPanel panel = new JPanel();
+			panel.setBounds(0, 0, 802, 75);
+			panel.setBackground(new Color(100, 149, 237));
+			contentPane.add(panel);
+			
+			JLabel lblNewLabel_7 = new JLabel("QUẢN LÍ ĐIỂM HỌC SINH");
+			lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 30));
+			panel.add(lblNewLabel_7);
 			
 			//Xử lí sự kiện button Nhập Lại
 
@@ -370,9 +387,4 @@ public class QuanLiDiemHocSinh extends JFrame {
 				}
 			});
 		}
-		
-		
-		/**
-		 * Create the frame.
-		 */
 }
