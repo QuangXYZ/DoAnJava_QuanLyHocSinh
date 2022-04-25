@@ -21,5 +21,12 @@ public class HocSinhBUS {
     public int addHocSinh(HocSinh hs) {  
         return hsDAO.addHocSinh(hs);
     }
+    public int deleteHocSinh(String mshs) {  
+        return hsDAO.deleteHocSinh(mshs);
+    }
+    public int updateHocSinh(HocSinh hs) {  
+        return hsDAO.updateHocSinh(hs);
+    }
+    
     
 }

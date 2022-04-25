@@ -80,4 +80,53 @@ public class HocSinhDAO {
         }
         return result;
     }  
+     public int deleteHocSinh(String ms){
+        int result = 0;  
+        String sqlDelete = "delete from HOCSINH where MAHS = ?";
+        try {      
+                connection = MyConnection.getConnection();
+                preparedStatement = connection.prepareStatement(sqlDelete);
+                preparedStatement.setString(1,ms);
+                result = preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally{
+        try {
+            connection.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            }
+        }
+        return result;
+    }
+     public int updateHocSinh(HocSinh hs){
+    int result = 0;
+    String sqlUpdate = "update  HOCSINH set HOTEN = ?, NGAYSINH = ?, GIOITINH = ?, QUEQUAN = ?, LOP = ?, IMG = ? where MAHS = ?";
+
+    try { 
+       connection = MyConnection.getConnection();
+                preparedStatement = connection.prepareStatement(sqlUpdate);
+                preparedStatement.setString(7, hs.getMSHS());
+                preparedStatement.setString(1, hs.getHoTen());
+                preparedStatement.setString(2, formatDate.format(hs.getNgaySinh()));
+                preparedStatement.setString(3, hs.getGioiTinh());
+                preparedStatement.setString(4, hs.getQueQuan());
+                preparedStatement.setString(5, hs.getLop());
+                preparedStatement.setString(6, hs.getImg());
+            result = preparedStatement.executeUpdate();
+    }catch (SQLException e) {
+        e.printStackTrace();
+    }
+    finally{
+    try {
+        connection.close();
+        preparedStatement.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    }
+    return result;
+    }
 }

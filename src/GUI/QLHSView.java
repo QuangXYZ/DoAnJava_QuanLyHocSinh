@@ -237,7 +237,7 @@ public class QLHSView extends javax.swing.JFrame {
 
         saveBtn.setBackground(new java.awt.Color(204, 255, 255));
         saveBtn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        saveBtn.setText("LƯU");
+        saveBtn.setText("THOÁT");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveBtnActionPerformed(evt);
@@ -519,6 +519,10 @@ public class QLHSView extends javax.swing.JFrame {
     private void delBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delBtnActionPerformed
         // TODO add your handling code here:
         int i = tbDSHS.getSelectedRow();
+        HocSinhBUS hsBUS = new HocSinhBUS();
+        
+                if (hsBUS.deleteHocSinh(model.getValueAt(i,1).toString())!=0) JOptionPane.showMessageDialog(this, "Xóa thành công");
+                else JOptionPane.showMessageDialog(this, "Xóa không thành công");
         model.removeRow(i);
         dshs.remove(i);
         resetForm();
@@ -579,45 +583,21 @@ public class QLHSView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         }
         else {
-            int i = tbDSHS.getSelectedRow();
-            dshs.get(i).setMSHS(tfMSHS.getText());
-            dshs.get(i).setHoTen(tfHoTen.getText());
-            dshs.get(i).setGioiTinh(rbNam.isSelected()?"Nam":"Nu");
             try {
-                dshs.get(i).setNgaySinh(formatDate.parse(tfNgaySinh.getText()));
+                HocSinh hs = new HocSinh(tfMSHS.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),tfLop.getText(),imgURL);
+                HocSinhBUS hsBUS = new HocSinhBUS();
+                if (hsBUS.updateHocSinh(hs)!=0) JOptionPane.showMessageDialog(this, "Thêm thành công");
+                else JOptionPane.showMessageDialog(this, "Thêm không thành công");
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ");
             }
-            dshs.get(i).setQueQuan(cbQueQuan.getSelectedItem().toString());
-            dshs.get(i).setLop(tfLop.getText());
-            dshs.get(i).setImg(imgURL);
-            model.setValueAt(dshs.get(i).getMSHS(), i, 1);
-            model.setValueAt(dshs.get(i).getHoTen(), i, 2);
-            model.setValueAt(formatDate.format(dshs.get(i).getNgaySinh()), i, 3);
-            model.setValueAt(dshs.get(i).getGioiTinh(), i, 4);
-            model.setValueAt(dshs.get(i).getLop(), i, 5);
-            model.setValueAt(dshs.get(i).getQueQuan(), i, 6);   
-        }    
+            } 
         resetForm();
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement s=con.createStatement();
-            s.executeUpdate("DELETE FROM HOCSINH");
-            for (HocSinh h : dshs){
-                String img = h.getImg().replace("\\", "\\\\");
-                s.executeUpdate("INSERT INTO HOCSINH VALUES('"+h.getMSHS()+"','"+h.getHoTen()+"','"+formatDate.format(h.getNgaySinh())+"','"+h.getGioiTinh()+"','"+h.getQueQuan()+"','"+h.getLop()+"','"+img+"')");
-            }       
-           con.close();
-           JOptionPane.showMessageDialog(this, "Lưu thành công ! ");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        System.exit(0);
     }//GEN-LAST:event_saveBtnActionPerformed
 
 
