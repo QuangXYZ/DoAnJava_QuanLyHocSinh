@@ -103,7 +103,7 @@ public class HocSinhDAO {
     }
      public int updateHocSinh(HocSinh hs){
     int result = 0;
-    String sqlUpdate = "update  HOCSINH set HOTEN = ?, NGAYSINH = ?, GIOITINH = ?, QUEQUAN = ?, LOP = ?, IMG = ? where MAHS = ?";
+    String sqlUpdate = "update HOCSINH set HOTEN = ?, NGAYSINH = ?, GIOITINH = ?, QUEQUAN = ?, LOP = ?, IMG = ? where MAHS = ?";
 
     try { 
        connection = MyConnection.getConnection();

@@ -46,7 +46,7 @@ public class QLHSView extends javax.swing.JFrame {
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
     ArrayList<HocSinh> dshs = new ArrayList<>();
     static DefaultTableModel model ;
-    public void loadDataSQL(){
+    public void loadData(){
         try{   
             dshs.clear();
             HocSinhBUS hsBUS = new HocSinhBUS();
@@ -58,7 +58,7 @@ public class QLHSView extends javax.swing.JFrame {
            
 
     public void loadDataTable(){   
-        
+        loadData();
         model = (DefaultTableModel)tbDSHS.getModel();
         model.setRowCount(0);
         for (int i=0;i<dshs.size();i++){
@@ -71,7 +71,6 @@ public class QLHSView extends javax.swing.JFrame {
     public QLHSView() {
         initComponents();
         
-        loadDataSQL();
         loadDataTable();
     }
 
@@ -513,6 +512,7 @@ public class QLHSView extends javax.swing.JFrame {
             }
         }    
         resetForm();
+        loadData();
 
     }//GEN-LAST:event_addBtnActionPerformed
 
@@ -523,9 +523,9 @@ public class QLHSView extends javax.swing.JFrame {
         
                 if (hsBUS.deleteHocSinh(model.getValueAt(i,1).toString())!=0) JOptionPane.showMessageDialog(this, "Xóa thành công");
                 else JOptionPane.showMessageDialog(this, "Xóa không thành công");
-        model.removeRow(i);
-        dshs.remove(i);
+        
         resetForm();
+        loadDataTable();
     }//GEN-LAST:event_delBtnActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -586,12 +586,13 @@ public class QLHSView extends javax.swing.JFrame {
             try {
                 HocSinh hs = new HocSinh(tfMSHS.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),tfLop.getText(),imgURL);
                 HocSinhBUS hsBUS = new HocSinhBUS();
-                if (hsBUS.updateHocSinh(hs)!=0) JOptionPane.showMessageDialog(this, "Thêm thành công");
-                else JOptionPane.showMessageDialog(this, "Thêm không thành công");
+                if (hsBUS.updateHocSinh(hs)!=0) JOptionPane.showMessageDialog(this, "Sửa thành công");
+                else JOptionPane.showMessageDialog(this, "Sửa không thành công");
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ");
             }
             } 
+        loadDataTable();
         resetForm();
     }//GEN-LAST:event_editBtnActionPerformed
 
@@ -806,7 +807,7 @@ public class QLHSView extends javax.swing.JFrame {
 
     private void RefreshMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshMenuActionPerformed
         // TODO add your handling code here:
-        loadDataSQL();
+        loadData();
         loadDataTable();
         resetForm();
     }//GEN-LAST:event_RefreshMenuActionPerformed
