@@ -2,23 +2,45 @@ package DTO;
 
 import java.util.Date;
 
-public class QuanLiDiemHS extends HocSinh {
+public class QuanLiDiemHS /*extends HocSinh*/ {
 	private float toan, anh, van, ly, sinh, hoa;
-
+	private String MSHS;
+	private HocSinh hocSinh;
+	
 	public QuanLiDiemHS() {
-		
+		hocSinh = new HocSinh();
 	}
 	
 
-	public QuanLiDiemHS(String mSHS, String hoTen, Date ngaySinh, String gioiTinh, String queQuan, String lop,
-			String img, float toan, float anh, float van, float ly, float sinh, float hoa) {
-		super(mSHS, hoTen, ngaySinh, gioiTinh, queQuan, lop, img);
+	public QuanLiDiemHS(String mSHS,float toan, float anh, float van, float ly, float sinh, float hoa) {
 		this.toan = toan;
 		this.anh = anh;
 		this.van = van;
 		this.ly = ly;
 		this.sinh = sinh;
 		this.hoa = hoa;
+		this.MSHS = mSHS;
+	}
+	
+	
+
+	public HocSinh getHocSinh() {
+		return hocSinh;
+	}
+
+
+	public void setHocSinh(HocSinh hs) {
+		this.hocSinh = hs;
+	}
+
+
+	public String getMSHS() {
+		return MSHS;
+	}
+
+
+	public void setMSHS(String mSHS) {
+		MSHS = mSHS;
 	}
 
 
@@ -69,8 +91,4 @@ public class QuanLiDiemHS extends HocSinh {
 	public void setHoa(float hoa) {
 		this.hoa = hoa;
 	}
-
-	
-	
-
 }

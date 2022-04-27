@@ -1,14 +1,11 @@
 package DAO;
 
+import DTO.HocSinh;
 import DTO.QuanLiDiemHS;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.swing.table.DefaultTableModel;
-
 import sql.MyConnection;
 
 public class QuanLyDiemHocSinhDAO {
@@ -16,7 +13,7 @@ public class QuanLyDiemHocSinhDAO {
 	    private Connection connection = null;
 	    private PreparedStatement preparedStatement = null;
 	    private ResultSet resultSet = null;
-	    SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+	    //SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 	    ArrayList<QuanLiDiemHS> dsDiemHocSinh = new ArrayList<QuanLiDiemHS>();
 	    public ArrayList<QuanLiDiemHS> docDiemHocSinh(){
 	        try {
@@ -26,14 +23,16 @@ public class QuanLyDiemHocSinhDAO {
 				resultSet = preparedStatement.executeQuery();
 				while(resultSet.next()) {
 					QuanLiDiemHS diemHS = new QuanLiDiemHS();
+					HocSinh hocSinh = new HocSinh();
 					diemHS.setMSHS(resultSet.getString(1));
-					diemHS.setHoTen(resultSet.getString(2));
+					hocSinh.setHoTen(resultSet.getString(2));
 					diemHS.setToan(resultSet.getFloat(3));
 					diemHS.setVan(resultSet.getFloat(4));
 					diemHS.setAnh(resultSet.getFloat(5));
 					diemHS.setSinh(resultSet.getFloat(6));
 					diemHS.setLy(resultSet.getFloat(7));
 					diemHS.setHoa(resultSet.getFloat(8));
+					diemHS.setHocSinh(hocSinh);
 					dsDiemHocSinh.add(diemHS);
 				}
 	         
@@ -46,7 +45,7 @@ public class QuanLyDiemHocSinhDAO {
 	                preparedStatement.close();
 	                resultSet.close();
 	            } catch (SQLException ex) {
-	                Logger.getLogger(HocSinhDAO.class.getName()).log(Level.SEVERE, null, ex);
+	                Logger.getLogger(QuanLyDiemHocSinhDAO.class.getName()).log(Level.SEVERE, null, ex);
 	            }
 	        }
 	        return dsDiemHocSinh;
@@ -145,14 +144,16 @@ public class QuanLyDiemHocSinhDAO {
 					resultSet = preparedStatement.executeQuery();
 					while(resultSet.next()) {
 						QuanLiDiemHS diemHS = new QuanLiDiemHS();
+						HocSinh hocSinh = new HocSinh();
 						diemHS.setMSHS(resultSet.getString(1));
-						diemHS.setHoTen(resultSet.getString(2));
+						hocSinh.setHoTen(resultSet.getString(2));
 						diemHS.setToan(resultSet.getFloat(3));
 						diemHS.setVan(resultSet.getFloat(4));
 						diemHS.setAnh(resultSet.getFloat(5));
 						diemHS.setSinh(resultSet.getFloat(6));
 						diemHS.setLy(resultSet.getFloat(7));
 						diemHS.setHoa(resultSet.getFloat(8));
+						diemHS.setHocSinh(hocSinh);
 						dsDiemHS.add(diemHS);
 					}
 					connection.close();
