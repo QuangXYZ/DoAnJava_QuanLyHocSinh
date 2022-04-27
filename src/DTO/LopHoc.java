@@ -12,14 +12,13 @@ package DTO;
 public class LopHoc {
     private String MaLop;
     private String TenLop;
-    private String MSGV;
 
     public LopHoc() {
     }
-    public LopHoc(String MaLop, String TenLop, String MSGV) {
+    public LopHoc(String MaLop, String TenLop) {
         this.MaLop = MaLop;
         this.TenLop = TenLop;
-        this.MSGV = MSGV;
+       
     }
 
     public String getMaLop() {
@@ -37,15 +36,5 @@ public class LopHoc {
     public void setTenLop(String TenLop) {
         this.TenLop = TenLop;
     }
-
-    public String getMSGV() {
-        return MSGV;
-    }
-
-    public void setMSGV(String MSGV) {
-        this.MSGV = MSGV;
-    }
-    
-    
     
 }

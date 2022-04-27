@@ -25,7 +25,7 @@ import javax.swing.table.TableModel;
 import DTO.HocSinh;
 import DTO.HocSinh;
 import DTO.HocSinh;
-import static GUI.QLHSView.model;
+
 
 public class QLGVView extends javax.swing.JFrame {
 
@@ -38,7 +38,7 @@ public class QLGVView extends javax.swing.JFrame {
     File directory = new File("");
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
     ArrayList<HocSinh> dsgv = new ArrayList<>();
-    static DefaultTableModel model ;
+    DefaultTableModel model ;
     public void loadDataSQL(){
         Connection con;
         try{     

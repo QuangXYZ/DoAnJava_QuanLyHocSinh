@@ -45,7 +45,7 @@ public class QLHSView extends javax.swing.JFrame {
     File directory = new File("");
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
     ArrayList<HocSinh> dshs = new ArrayList<>();
-    static DefaultTableModel model ;
+    DefaultTableModel model ;
     public void loadData(){
         try{   
             dshs.clear();
@@ -541,11 +541,16 @@ public class QLHSView extends javax.swing.JFrame {
         int i = tbDSHS.getSelectedRow();
         HocSinhBUS hsBUS = new HocSinhBUS();
         
+        if (i>=0){
                 if (hsBUS.deleteHocSinh(model.getValueAt(i,1).toString())!=0) JOptionPane.showMessageDialog(this, "Xóa thành công");
                 else JOptionPane.showMessageDialog(this, "Xóa không thành công");
         
         resetForm();
         loadDataTable();
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn học sinh để xóa");
+        }
     }//GEN-LAST:event_delBtnActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
