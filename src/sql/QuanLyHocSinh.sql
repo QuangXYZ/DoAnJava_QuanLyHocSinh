@@ -20,9 +20,16 @@ create table HOCSINH (
     IMG nchar(40)
 );
 
-insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('123','Nguyễn Thanh Quang','30/07/2002','Nam','Hà Nội','DCT1206','\src\images\Quang.jpg');
-insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('124','Đặng Huỳnh Như Y','30/07/2002','Nam','Hà Nội','DCT1206','\\src\\images\\NhuY.jpg');
-insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('125','Trần Minh Quân','30/07/2002','Nam','Hà Nội','DCT1206','\\src\\images\\Quan.jpg');
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('123','Nguyễn Thanh Quang','30/07/2002','Nam','Hà Nội','DCT1201','\\src\\images\\Quang.jpg');
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('124','Đặng Huỳnh Như Y','30/07/2002','Nam','Hà Nội','DCT1201','\\src\\images\\NhuY.jpg');
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('125','Trần Minh Quân','30/07/2002','Nam','Hà Nội','DCT1202','\\src\\images\\Quan.jpg');
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('126','Nguyễn Thanh Quang','30/07/2002','Nam','Hà Nội','DCT1202','\\src\\images\\Quang.jpg');
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('127','Đặng Huỳnh Như Y','30/07/2002','Nam','Hà Nội','DCT1203','\\src\\images\\NhuY.jpg');
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('128','Trần Minh Quân','30/07/2002','Nam','Hà Nội','DCT1203','\\src\\images\\Quan.jpg');
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('125','Trần Minh Quân','30/07/2002','Nam','Hà Nội','DCT1204','\\src\\images\\Quan.jpg');
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('126','Nguyễn Thanh Quang','30/07/2002','Nam','Hà Nội','DCT1204','\\src\\images\\Quang.jpg');
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('127','Đặng Huỳnh Như Y','30/07/2002','Nam','Hà Nội','DCT1205','\\src\\images\\NhuY.jpg');
+insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('128','Trần Minh Quân','30/07/2002','Nam','Hà Nội','DCT1205','\\src\\images\\Quan.jpg');
 
 create table GIAOVIEN (
     MAGV nchar(20) not null primary key,
@@ -49,3 +56,18 @@ create table DIEMHOCSINH (
     HOA FLOAT(4),
     FOREIGN KEY(MAHS) REFERENCES HOCSINH(MAHS)
 );
+
+
+
+create table LOPHOC(
+	MALOP nchar(20) not null primary key,
+    TENLOP nchar(20)
+);
+
+insert into LOPHOC(MALOP,TENLOP) values ('101','DCT1201');
+insert into LOPHOC(MALOP,TENLOP) values ('102','DCT1202');
+insert into LOPHOC(MALOP,TENLOP) values ('103','DCT1203');
+insert into LOPHOC(MALOP,TENLOP) values ('104','DCT1204');
+insert into LOPHOC(MALOP,TENLOP) values ('105','DCT1205');
+insert into LOPHOC(MALOP,TENLOP) values ('106','DCT1206');
+
