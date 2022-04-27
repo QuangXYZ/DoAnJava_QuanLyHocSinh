@@ -13,7 +13,11 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import BUS.KetQuaBUS;
 import BUS.QuanLiDiemHocSinhBUS;
+import DTO.HocSinh;
+import DTO.KetQuaDTO;
 import DTO.QuanLiDiemHS;
 
 import java.awt.event.ActionListener;
@@ -48,7 +52,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 		model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		for(QuanLiDiemHS dsDiem: dsDiemHS) {
-			Object[] row = new Object[] {dsDiem.getMSHS(), dsDiem.getHoTen(), dsDiem.getToan(), dsDiem.getAnh(), dsDiem.getVan(),dsDiem.getSinh(), dsDiem.getLy(), dsDiem.getHoa()};
+			Object[] row = new Object[] {dsDiem.getMSHS(), dsDiem.getHocSinh().getHoTen(), dsDiem.getToan(), dsDiem.getAnh(), dsDiem.getVan(),dsDiem.getSinh(), dsDiem.getLy(), dsDiem.getHoa()};
 			model.addRow(row);
 		}
 	}
@@ -60,78 +64,78 @@ public class QuanLiDiemHocSinh extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 816, 644);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(204, 255, 255));
+		contentPane.setBackground(new Color(224, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Điểm Toán");
-		lblNewLabel.setBounds(380, 247, 90, 30);
+		lblNewLabel.setBounds(441, 234, 90, 30);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Điểm Anh");
-		lblNewLabel_1.setBounds(10, 167, 90, 30);
+		lblNewLabel_1.setBounds(126, 128, 90, 30);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Điểm Văn");
-		lblNewLabel_2.setBounds(10, 207, 90, 30);
+		lblNewLabel_2.setBounds(126, 181, 90, 30);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Điểm Sinh");
-		lblNewLabel_3.setBounds(10, 247, 90, 30);
+		lblNewLabel_3.setBounds(126, 234, 90, 30);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Điểm Lí");
-		lblNewLabel_4.setBounds(380, 167, 90, 30);
+		lblNewLabel_4.setBounds(441, 128, 90, 30);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Điểm Hóa");
-		lblNewLabel_5.setBounds(380, 207, 90, 30);
+		lblNewLabel_5.setBounds(441, 181, 90, 30);
 		contentPane.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("MAHS");
-		lblNewLabel_6.setBounds(10, 127, 90, 30);
+		lblNewLabel_6.setBounds(126, 78, 90, 30);
 		contentPane.add(lblNewLabel_6);
 		
 		tfToan = new JTextField();
-		tfToan.setBounds(523, 247, 96, 31);
+		tfToan.setBounds(569, 234, 96, 31);
 		contentPane.add(tfToan);
 		tfToan.setColumns(10);
 		
 		tfSinh = new JTextField();
-		tfSinh.setBounds(191, 248, 96, 30);
+		tfSinh.setBounds(242, 235, 96, 30);
 		contentPane.add(tfSinh);
 		tfSinh.setColumns(10);
 		
 		tfLi = new JTextField();
-		tfLi.setBounds(523, 168, 96, 30);
+		tfLi.setBounds(569, 129, 96, 30);
 		contentPane.add(tfLi);
 		tfLi.setColumns(10);
 		
 		tfMSHS = new JTextField();
-		tfMSHS.setBounds(191, 127, 96, 31);
+		tfMSHS.setBounds(242, 78, 96, 31);
 		contentPane.add(tfMSHS);
 		tfMSHS.setColumns(10);
 		
 		tfHoa = new JTextField();
-		tfHoa.setBounds(523, 206, 96, 33);
+		tfHoa.setBounds(569, 180, 96, 33);
 		contentPane.add(tfHoa);
 		tfHoa.setColumns(10);
 		
 		tfAnh = new JTextField();
-		tfAnh.setBounds(191, 168, 96, 30);
+		tfAnh.setBounds(241, 129, 96, 30);
 		contentPane.add(tfAnh);
 		tfAnh.setColumns(10);
 		
 		tfVan = new JTextField();
-		tfVan.setBounds(191, 208, 96, 30);
+		tfVan.setBounds(241, 182, 96, 30);
 		contentPane.add(tfVan);
 		tfVan.setColumns(10);
 		
 
 		JButton btnNhapLai = new JButton("NHẬP LẠI");
 		btnNhapLai.setBounds(10, 295, 119, 30);
-		btnNhapLai.setIcon(new ImageIcon("D:\\src\\Java\\src\\DoAnJaVa2\\src\\images\\btNhapLai.png"));
+		btnNhapLai.setIcon(new ImageIcon("src\\images\\btNhapLai.png"));
 		btnNhapLai.setBackground(new Color(176, 224, 230));
 		contentPane.add(btnNhapLai);
 		
@@ -185,10 +189,12 @@ public class QuanLiDiemHocSinh extends JFrame {
 			scrollPane.setViewportView(table);
 			
 			JPanel panel = new JPanel();
-			panel.setBounds(0, 0, 802, 75);
+			panel.setBounds(0, 0, 802, 47);
 			panel.setBackground(new Color(100, 149, 237));
 			contentPane.add(panel);
-			
+			/*label.setVerticalAlignment(JLabel.TOP);
+				label.setVerticalTextPosition(JLabel.TOP);
+				panel.setAlignmentY(TOP_ALIGNMENT);*/
 			JLabel lblNewLabel_7 = new JLabel("QUẢN LÍ ĐIỂM HỌC SINH");
 			lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 30));
 			panel.add(lblNewLabel_7);
@@ -264,6 +270,12 @@ public class QuanLiDiemHocSinh extends JFrame {
 		diemHS.setSinh(Float.parseFloat(tfSinh.getText()));
 		diemHS.setLy(Float.parseFloat(tfLi.getText()));
 		diemHS.setHoa(Float.parseFloat(tfHoa.getText()));
+		
+		
+		
+		
+		
+		
 		QuanLiDiemHocSinhBUS diemHocSinhBUS = new QuanLiDiemHocSinhBUS();
 		if(diemHocSinhBUS.themDiemHocSinh(diemHS) != 0) {
 			JOptionPane.showMessageDialog(this, "Thêm thành công ! ");
@@ -272,6 +284,32 @@ public class QuanLiDiemHocSinh extends JFrame {
 			JOptionPane.showMessageDialog(this, "Thêm không thành công ! ");
 		}
 		
+
+		//Tính điểm trung bình 
+		float toan = 0, anh = 0, van = 0, sinh = 0, ly = 0, hoa = 0;
+		toan = Float.parseFloat(tfToan.getText());
+		anh = Float.parseFloat(tfAnh.getText());
+		van = Float.parseFloat(tfVan.getText());
+		sinh = Float.parseFloat(tfSinh.getText());
+		hoa = Float.parseFloat(tfHoa.getText());
+		ly = Float.parseFloat(tfLi.getText());
+		
+		float trungBinh = (toan + anh + van + hoa + ly + sinh)/6;
+		KetQuaDTO ketQuaDTO = new KetQuaDTO();
+		ketQuaDTO.setMSHS(tfMSHS.getText());
+		ketQuaDTO.setDiemTrungBinh(trungBinh);
+		if(trungBinh >= 8) {
+			ketQuaDTO.setHocLuc("Giỏi");
+		}else if(trungBinh >= 7 && trungBinh <= 8) {
+			ketQuaDTO.setHocLuc("Khá");
+		}else if(trungBinh >= 5 && trungBinh <= 7) {
+			ketQuaDTO.setHocLuc("Trung bình");
+		} else {
+			ketQuaDTO.setHocLuc("Yếu");
+		}
+		
+		KetQuaBUS ketQuaBUS = new KetQuaBUS();
+		ketQuaBUS.themKetQuaHocLuc(ketQuaDTO);
 	}
 	
 	
@@ -338,10 +376,9 @@ public class QuanLiDiemHocSinh extends JFrame {
             ArrayList<QuanLiDiemHS> dsDiemHS  = diemHocSinhBUS.timDiemHocSinh(MAHS);
 			model = (DefaultTableModel)table.getModel();
 			model.setRowCount(0);
-			
 			for(int i=0; i<dsDiemHS.size(); i++) {
 				String MSHS =dsDiemHS.get(i).getMSHS();
-				String HoTen =dsDiemHS.get(i).getHoTen();
+				String HoTen =dsDiemHS.get(i).getHocSinh().getHoTen();
 				float Toan = dsDiemHS.get(i).getToan();
 				float Van = dsDiemHS.get(i).getVan();
 				float Anh = dsDiemHS.get(i).getAnh();
