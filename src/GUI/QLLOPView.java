@@ -270,11 +270,24 @@ public class QLLOPView extends javax.swing.JFrame {
         else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn lớp để xóa");
         }
+        loadDataTable();
     }//GEN-LAST:event_delBtnActionPerformed
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         // TODO add your handling code here:
+
+     
+        LopHocBUS lhBUS = new LopHocBUS();
+                
+        if (tfMSLop.getText().equals("")&&tfTenLop.getText().equals("")){JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");}
+        else {
+            LopHoc lh = new LopHoc(tfMSLop.getText(), tfTenLop.getText());
+            int j =lhBUS.updateLopHoc(lh);
+            if (j!=0) JOptionPane.showMessageDialog(this, "Sửa thành công");
+                else JOptionPane.showMessageDialog(this, "Sửa không thành công");
         
+        }
+       
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

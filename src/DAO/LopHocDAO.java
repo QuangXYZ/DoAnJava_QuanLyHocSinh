@@ -136,4 +136,29 @@ public class LopHocDAO {
         }
         return result;
     }
+    public int updateLopHoc(LopHoc lh){
+        int result = 0;  
+        int result2 =0;
+        String sqlUpdate = "update LOPHOC set TENLOP = ? where MALOP = ?;";
+        String sqlDelete2 = "delete from HOCSINH where LOP = ?;";
+        try {      
+                connection = MyConnection.getConnection();
+                preparedStatement = connection.prepareStatement(sqlUpdate);
+                preparedStatement.setString(1,lh.getTenLop());
+                preparedStatement.setString(2,lh.getMaLop());
+                result = preparedStatement.executeUpdate(); 
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally{
+        try {
+            connection.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            }
+        }
+        return result;
+    }
 }
