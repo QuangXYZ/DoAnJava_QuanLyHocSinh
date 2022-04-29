@@ -136,18 +136,21 @@ public class LopHocDAO {
         }
         return result;
     }
-    public int updateLopHoc(LopHoc lh){
+    public int updateLopHoc(LopHoc lh,String lh2){
         int result = 0;  
         int result2 =0;
         String sqlUpdate = "update LOPHOC set TENLOP = ? where MALOP = ?;";
-        String sqlDelete2 = "delete from HOCSINH where LOP = ?;";
+        String sqlUpdate2 = "update HOCSINH set LOP = ? where LOP = ?;";
         try {      
                 connection = MyConnection.getConnection();
                 preparedStatement = connection.prepareStatement(sqlUpdate);
                 preparedStatement.setString(1,lh.getTenLop());
                 preparedStatement.setString(2,lh.getMaLop());
                 result = preparedStatement.executeUpdate(); 
-
+                PreparedStatement preparedStatement2 = connection.prepareStatement(sqlUpdate2);
+                preparedStatement2.setString(1,lh.getTenLop());
+                preparedStatement2.setString(2,lh2);
+                result = preparedStatement2.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();
         }

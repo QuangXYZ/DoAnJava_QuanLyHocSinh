@@ -29,8 +29,8 @@ public class LopHocBUS {
     public int delLopHoc(LopHoc lh){
         return lhDAO.delLopHoc(lh);
     }
-    public int updateLopHoc(LopHoc lh){
-        return lhDAO.updateLopHoc(lh);
+    public int updateLopHoc(LopHoc lh,String lh1){
+        return lhDAO.updateLopHoc(lh,lh1);
     }
-    
+ 
 }
