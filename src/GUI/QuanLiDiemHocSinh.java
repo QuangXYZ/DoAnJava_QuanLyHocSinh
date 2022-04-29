@@ -163,6 +163,12 @@ public class QuanLiDiemHocSinh extends JFrame {
 		btnTimKiem.setBackground(new Color(176, 224, 230));
 		contentPane.add(btnTimKiem);
 		
+		JButton btnQuayLai = new JButton("QUAY LẠI");
+		btnQuayLai.setIcon(new ImageIcon("src\\images\\btQuayLai.png"));
+		btnQuayLai.setBackground(new Color(176, 224, 230));
+		btnQuayLai.setBounds(673, 295, 119, 30);
+		contentPane.add(btnQuayLai);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 335, 782, 262);
 		contentPane.add(scrollPane);
@@ -198,12 +204,6 @@ public class QuanLiDiemHocSinh extends JFrame {
 			JLabel lblNewLabel_7 = new JLabel("QUẢN LÍ ĐIỂM HỌC SINH");
 			lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 30));
 			panel.add(lblNewLabel_7);
-			
-			JButton btnNewButton = new JButton("QUAY LẠI");
-			btnNewButton.setIcon(new ImageIcon("D:\\src\\Java\\src\\DoAnJaVa2\\src\\images\\btQuayLai.png"));
-			btnNewButton.setBackground(new Color(176, 224, 230));
-			btnNewButton.setBounds(673, 295, 119, 30);
-			contentPane.add(btnNewButton);
 			
 			//Xử lí sự kiện button Nhập Lại
 
@@ -247,6 +247,12 @@ public class QuanLiDiemHocSinh extends JFrame {
 			btnTimKiem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
 					btnTimKiemActionPerformed(evt);
+				}
+			});
+			
+			btnQuayLai.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					btnQuayLaiActionPerformed(evt);
 				}
 			});
 		
@@ -411,6 +417,14 @@ public class QuanLiDiemHocSinh extends JFrame {
 				
 				}
 			}
+		
+		private void btnQuayLaiActionPerformed(ActionEvent evt) {
+			FrMainForm mainForm;
+            mainForm = new FrMainForm();
+            mainForm.setVisible(true);
+            mainForm.setLocationRelativeTo(null);
+            this.dispose();
+		}
 		
 		
 		/**
