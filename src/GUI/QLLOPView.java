@@ -278,14 +278,23 @@ public class QLLOPView extends javax.swing.JFrame {
 
      
         LopHocBUS lhBUS = new LopHocBUS();
-                
-        if (tfMSLop.getText().equals("")&&tfTenLop.getText().equals("")){JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");}
+        int i = tbLop.getSelectedRow();
+        if (i>=0){
+            if (tfMSLop.getText().equals("")&&tfTenLop.getText().equals("")){JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");}
+            else {
+                int qes=JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn? Tất cả học sinh sẽ được thay đổi sang lớp mới", "Question",JOptionPane.YES_NO_OPTION);
+                if(qes==JOptionPane.YES_OPTION){
+                    LopHoc lh = new LopHoc(tfMSLop.getText(), tfTenLop.getText());
+                    int j =lhBUS.updateLopHoc(lh,model.getValueAt(i, 1).toString());
+                    System.out.println(model.getValueAt(i, 1).toString());
+                    if (j!=0) JOptionPane.showMessageDialog(this, "Sửa thành công");
+                    else JOptionPane.showMessageDialog(this, "Sửa không thành công");
+                }
+                else return;
+            }
+        }
         else {
-            LopHoc lh = new LopHoc(tfMSLop.getText(), tfTenLop.getText());
-            int j =lhBUS.updateLopHoc(lh);
-            if (j!=0) JOptionPane.showMessageDialog(this, "Sửa thành công");
-                else JOptionPane.showMessageDialog(this, "Sửa không thành công");
-        
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn lớp để sửa");
         }
        
     }//GEN-LAST:event_editBtnActionPerformed
