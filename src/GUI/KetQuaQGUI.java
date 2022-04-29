@@ -18,9 +18,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import BUS.KetQuaBUS;
+import BUS.QuanLiDiemHocSinhBUS;
 import DAO.KetQuaDAO;
 import DTO.HocSinh;
 import DTO.KetQuaDTO;
+import DTO.QuanLiDiemHS;
 import sql.MyConnection;
 
 import java.awt.event.ActionListener;
@@ -44,6 +46,7 @@ public class KetQuaQGUI extends JFrame {
 	private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+    //public String maLop;
 
 	/**
 	 * Launch the application.
@@ -62,25 +65,17 @@ public class KetQuaQGUI extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.s
-	 */
 	
-	/*ublic void hienThiDuLieu() {
-		KetQuaBUS ketQuaBUS = new KetQuaBUS();
-		ArrayList<KetQuaDTO> dsHocLuc = ketQuaBUS.docKetQuaHocLuc();
-		model = (DefaultTableModel) table.getModel();
-		model.setRowCount(0);
-		for(KetQuaDTO ds: dsHocLuc) {
-			Object[] row = new Object[] {ds.getMSHS(), ds.getHoTen(), ds.getLop(), ds.getDiemTrungBinh(), ds.getHocLuc()};
-			model.addRow(row);
-		}
-	}*/
+	
+	 
 	
 	public void hienThiDuLieu() {
-		//KetQuaBUS ketQuaBUS = new KetQuaBUS();
-		ArrayList<KetQuaDTO> dsHocLuc = KetQuaHocLuc();
+		//maLop = comboBox.getSelectedItem().toString();
+		//System.out.println(maLop);
+		//System.out.println(layMaLopTuComboBox() );
+		KetQuaBUS ketQuaBUS = new KetQuaBUS();
+		var maLop = comboBox.getSelectedItem().toString();
+		ArrayList<KetQuaDTO> dsHocLuc = ketQuaBUS.docKetQuaHocLuc(maLop);
 		model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		for(KetQuaDTO ds: dsHocLuc) {
@@ -111,7 +106,7 @@ public class KetQuaQGUI extends JFrame {
 				comboBoxActionPerformed(evt);
 			}
 			private void comboBoxActionPerformed(ActionEvent evt) {
-				comboBox.getSelectedItem().toString();
+				//hienThiDuLieu();
 			}
 		});
 		contentPane.add(comboBox);
@@ -156,7 +151,16 @@ public class KetQuaQGUI extends JFrame {
 		scrollPane.setViewportView(table);
 	}	
 	
-	private void doDuLieuComboBox() {
+	public void doDuLieuComboBox() {
+		KetQuaBUS ketQuaBUS = new KetQuaBUS();
+		ArrayList<KetQuaDTO> dsMaLop = ketQuaBUS.doDuLieuComboBox();
+		//comboBox.addItem(dsMaLop);
+		for(KetQuaDTO ds: dsMaLop) {
+			comboBox.addItem(ds.getHocSinh().getLop());
+		}
+	}
+	
+	/*private void doDuLieuComboBox() {
 		try {
 			connection = MyConnection.getConnection();
 			String sql = ("select DISTINCT LOP from HOCSINH;  ");
@@ -177,7 +181,9 @@ public class KetQuaQGUI extends JFrame {
 				System.out.println(e);
 				System.out.println("Kết nối thất bại");
 			}
-	}
+	}*/
+	
+	
 	
     public ArrayList<KetQuaDTO> KetQuaHocLuc(){
     	ArrayList<KetQuaDTO> dsKetQuaHocLuc = new ArrayList<KetQuaDTO>();

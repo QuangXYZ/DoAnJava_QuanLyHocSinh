@@ -4,18 +4,21 @@ import java.util.ArrayList;
 
 import DAO.KetQuaDAO;
 import DTO.KetQuaDTO;
-import DTO.QuanLiDiemHS;
 
 public class KetQuaBUS {
-	
 	KetQuaDAO ketQuaDAO = new KetQuaDAO();
 	
-	/*public ArrayList<KetQuaDTO> docKetQuaHocLuc(){
-		return ketQuaDAO.docKetQuaHocLuc();
-	}*/
+	public ArrayList<KetQuaDTO> docKetQuaHocLuc(String maLop){
+		return ketQuaDAO.docKetQuaHocLuc(maLop);
+	}
 	
 	public int themKetQuaHocLuc(KetQuaDTO ketQuaDTO) {
 		return ketQuaDAO.themKetQuaHocLuc(ketQuaDTO);
+	}
+
+	
+	public ArrayList<KetQuaDTO> doDuLieuComboBox() {
+		return ketQuaDAO.doDuLieuComboBox();
 	}
 	
 }

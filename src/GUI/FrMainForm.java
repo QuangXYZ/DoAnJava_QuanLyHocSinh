@@ -183,6 +183,7 @@ public class FrMainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         QuanLiDiemHocSinh qlDiemHocSinh;
                     qlDiemHocSinh = new QuanLiDiemHocSinh();
+                    qlDiemHocSinh.hienThiDuLieu();
                     qlDiemHocSinh.setVisible(true);
                     qlDiemHocSinh.setLocationRelativeTo(null);
                     this.dispose();
