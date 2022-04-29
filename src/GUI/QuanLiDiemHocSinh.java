@@ -140,26 +140,26 @@ public class QuanLiDiemHocSinh extends JFrame {
 		contentPane.add(btnNhapLai);
 		
 		JButton btnThem = new JButton("THÊM");
-		btnThem.setBounds(176, 295, 119, 30);
-		btnThem.setIcon(new ImageIcon("D:\\src\\Java\\src\\DoAnJaVa2\\src\\images\\btThem.png"));
+		btnThem.setBounds(142, 295, 119, 30);
+		btnThem.setIcon(new ImageIcon("src\\images\\btThem.png"));
 		btnThem.setBackground(new Color(176, 224, 230));
 		contentPane.add(btnThem);
 		
 		JButton btXoa = new JButton("XÓA");
-		btXoa.setBounds(352, 295, 119, 30);
-		btXoa.setIcon(new ImageIcon("D:\\src\\Java\\src\\DoAnJaVa2\\src\\images\\btXoa.png"));
+		btXoa.setBounds(275, 295, 119, 30);
+		btXoa.setIcon(new ImageIcon("src\\images\\btXoa.png"));
 		btXoa.setBackground(new Color(176, 224, 230));
 		contentPane.add(btXoa);
 		
 		JButton btSua = new JButton("SỬA");
-		btSua.setBounds(512, 295, 119, 30);
-		btSua.setIcon(new ImageIcon("D:\\src\\Java\\src\\DoAnJaVa2\\src\\images\\btSua.png"));
+		btSua.setBounds(412, 295, 119, 30);
+		btSua.setIcon(new ImageIcon("src\\images\\btSua.png"));
 		btSua.setBackground(new Color(176, 224, 230));
 		contentPane.add(btSua);
 		
 		JButton btnTimKiem = new JButton("TÌM KIẾM");
-		btnTimKiem.setBounds(673, 295, 119, 30);
-		btnTimKiem.setIcon(new ImageIcon("D:\\src\\Java\\src\\DoAnJaVa2\\src\\images\\btTim.png"));
+		btnTimKiem.setBounds(544, 295, 119, 30);
+		btnTimKiem.setIcon(new ImageIcon("src\\images\\btTim.png"));
 		btnTimKiem.setBackground(new Color(176, 224, 230));
 		contentPane.add(btnTimKiem);
 		
@@ -198,6 +198,12 @@ public class QuanLiDiemHocSinh extends JFrame {
 			JLabel lblNewLabel_7 = new JLabel("QUẢN LÍ ĐIỂM HỌC SINH");
 			lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 30));
 			panel.add(lblNewLabel_7);
+			
+			JButton btnNewButton = new JButton("QUAY LẠI");
+			btnNewButton.setIcon(new ImageIcon("D:\\src\\Java\\src\\DoAnJaVa2\\src\\images\\btQuayLai.png"));
+			btnNewButton.setBackground(new Color(176, 224, 230));
+			btnNewButton.setBounds(673, 295, 119, 30);
+			contentPane.add(btnNewButton);
 			
 			//Xử lí sự kiện button Nhập Lại
 
