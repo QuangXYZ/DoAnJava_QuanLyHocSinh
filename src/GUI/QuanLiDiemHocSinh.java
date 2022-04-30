@@ -202,6 +202,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 				label.setVerticalTextPosition(JLabel.TOP);
 				panel.setAlignmentY(TOP_ALIGNMENT);*/
 			JLabel lblNewLabel_7 = new JLabel("QUẢN LÍ ĐIỂM HỌC SINH");
+			lblNewLabel_7.setForeground(new Color(173, 255, 47));
 			lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 30));
 			panel.add(lblNewLabel_7);
 			
