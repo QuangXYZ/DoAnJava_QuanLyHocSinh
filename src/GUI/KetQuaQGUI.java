@@ -43,6 +43,7 @@ public class KetQuaQGUI extends JFrame {
 			public void run() {
 				try {
 					KetQuaQGUI frame = new KetQuaQGUI();
+					
 					frame.doDuLieuComboBox();
 					//frame.hienThiDuLieu();
 					frame.setVisible(true);
@@ -59,6 +60,7 @@ public class KetQuaQGUI extends JFrame {
 	public void hienThiDuLieu() {
 		KetQuaBUS ketQuaBUS = new KetQuaBUS();
 		var maLop = comboBox.getSelectedItem().toString();
+		
 		ArrayList<KetQuaDTO> dsHocLuc = ketQuaBUS.docKetQuaHocLuc(maLop);
 		model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
@@ -66,7 +68,30 @@ public class KetQuaQGUI extends JFrame {
 			Object[] row = new Object[] {ds.getMSHS(), ds.getHocSinh().getHoTen(), ds.getHocSinh().getLop(), ds.getDiemTrungBinh(), ds.getHocLuc()};
 			model.addRow(row);
 		}
+		
+		ArrayList<KetQuaDTO> soLuongHSKha = ketQuaBUS.laySoLuongHSKha(maLop);
+		for(KetQuaDTO sl: soLuongHSKha) {
+			tfSoLuongHSKha.setText(sl.getSlHocSinhKha());
+		}
+		
+		ArrayList<KetQuaDTO> soLuongHSGioi = ketQuaBUS.laySoLuongHSGioi(maLop);
+		for(KetQuaDTO sl: soLuongHSGioi) {
+			tfSoLuongHSGioi.setText(sl.getSlHocSinhGioi());
+		}
+		
+		ArrayList<KetQuaDTO> soLuongHSTrungBinh = ketQuaBUS.laySoLuongHSTrungBinh(maLop);
+		for(KetQuaDTO sl: soLuongHSTrungBinh) {
+			tfSoLuongHSTrungBinh.setText(sl.getSlHocSinhTrungBinh());
+		}
+		
+		ArrayList<KetQuaDTO> soLuongHSYeu = ketQuaBUS.laySoLuongHSYeu(maLop);
+		for(KetQuaDTO sl: soLuongHSYeu) {
+			tfSoLuongHSYeu.setText(sl.getSlHocsinhYeu());
+		}
 	}
+	
+	
+	
 	
 	public KetQuaQGUI() {
 		setTitle("TH\u1ED0NG K\u00CA");
@@ -159,4 +184,6 @@ public class KetQuaQGUI extends JFrame {
 			comboBox.addItem(ds.getHocSinh().getLop());
 		}
 	}
+	
+	
 }

@@ -27,7 +27,6 @@ insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('125',
 insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('126','Nguyễn Thanh Quang','30/07/2002','Nam','Hà Nội','DCT1202','\\src\\images\\Quang.jpg');
 insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('127','Đặng Huỳnh Như Y','30/07/2002','Nam','Hà Nội','DCT1203','\\src\\images\\NhuY.jpg');
 insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('128','Trần Minh Quân','30/07/2002','Nam','Hà Nội','DCT1203','\\src\\images\\Quan.jpg');
-
 create table GIAOVIEN (
     MAGV nchar(20) not null primary key,
     HOTEN nvarchar(40),
@@ -41,7 +40,6 @@ create table GIAOVIEN (
 insert into GIAOVIEN(MAGV,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('1234','Nguyễn Thanh Quang','30/07/2002','Nam','Hà Nội','DCT1206','\src\images\Quang.jpg');
 insert into GIAOVIEN(MAGV,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('1235','Đặng Huỳnh Như Y','30/07/2002','Nam','Hà Nội','DCT1206','\\src\\images\\NhuY.jpg');
 insert into GIAOVIEN(MAGV,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('1236','Trần Minh Quân','30/07/2002','Nam','Hà Nội','DCT1206','\\src\\images\\Quan.jpg');
-
 create table DIEMHOCSINH (
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     MAHS nchar(20) not null UNIQUE,
@@ -75,3 +73,4 @@ create table KETQUA (
     HOCLUC nchar(20),
     FOREIGN KEY(MAHS) REFERENCES HOCSINH(MAHS)
 );
+

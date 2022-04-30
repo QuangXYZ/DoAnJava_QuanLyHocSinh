@@ -54,10 +54,7 @@ public class KetQuaDAO {
     
     public ArrayList<KetQuaDTO> docKetQuaHocLuc(String maLop){
     	ArrayList<KetQuaDTO> dsKetQuaHocLuc = new ArrayList<KetQuaDTO>();
-    	KetQuaBUS ketQuaBUS = new KetQuaBUS();
-        try {
-        	
-			
+        try {			
 			String sql = ("select HS.MAHS, HS.HOTEN, HS.LOP, KQ.DIEMTB, KQ.HOCLUC from HOCSINH HS, KETQUA KQ where HS.MAHS = KQ.MAHS AND  HS.LOP= '" + maLop +"'");
 			connection = MyConnection.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
@@ -118,8 +115,6 @@ public class KetQuaDAO {
 	
 	public ArrayList<KetQuaDTO> doDuLieuComboBox() {
 		ArrayList<KetQuaDTO> dsMaLop = new ArrayList<KetQuaDTO>();
-	
-		//KetQuaQGUI kq = new KetQuaQGUI();
 		try {
 			connection = MyConnection.getConnection();
 			String sql = ("select DISTINCT LOP from HOCSINH;  ");
@@ -151,5 +146,117 @@ public class KetQuaDAO {
 	        }
 		return dsMaLop;
 	}
+	
+	public ArrayList<KetQuaDTO> laySoLuongHSKha(String maLop){
+    	ArrayList<KetQuaDTO> soLuongHocSinh = new ArrayList<KetQuaDTO>();
+        try {			
+			String sql = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Khá' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
+			connection = MyConnection.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+			KetQuaDTO soluong = new KetQuaDTO();
+			soluong.setSlHocSinhKha(resultSet.getString(1));
+			soLuongHocSinh.add(soluong);
+			}
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(KetQuaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return soLuongHocSinh;
+    }
+	
+	public ArrayList<KetQuaDTO> laySoLuongHSGioi(String maLop){
+    	ArrayList<KetQuaDTO> soLuongHocSinh = new ArrayList<KetQuaDTO>();
+        try {			
+			String sql = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Giỏi' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
+			connection = MyConnection.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+			KetQuaDTO soluong = new KetQuaDTO();
+			soluong.setSlHocSinhGioi(resultSet.getString(1));
+			soLuongHocSinh.add(soluong);
+			}
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(KetQuaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return soLuongHocSinh;
+    }
+	
+	public ArrayList<KetQuaDTO> laySoLuongHSTrungBinh(String maLop){
+    	ArrayList<KetQuaDTO> soLuongHocSinh = new ArrayList<KetQuaDTO>();
+        try {			
+			String sql = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Trung bình' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
+			connection = MyConnection.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+			KetQuaDTO soluong = new KetQuaDTO();
+			soluong.setSlHocSinhTrungBinh(resultSet.getString(1));
+			soLuongHocSinh.add(soluong);
+			}
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(KetQuaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return soLuongHocSinh;
+    }
+	
+	public ArrayList<KetQuaDTO> laySoLuongHSYeu(String maLop){
+    	ArrayList<KetQuaDTO> soLuongHocSinh = new ArrayList<KetQuaDTO>();
+        try {			
+			String sql = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Yếu' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
+			connection = MyConnection.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+			KetQuaDTO soluong = new KetQuaDTO();
+			soluong.setSlHocsinhYeu(resultSet.getString(1));
+			soLuongHocSinh.add(soluong);
+			}
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(KetQuaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return soLuongHocSinh;
+    }
 	
 }

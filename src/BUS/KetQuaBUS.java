@@ -21,4 +21,20 @@ public class KetQuaBUS {
 		return ketQuaDAO.doDuLieuComboBox();
 	}
 	
+	public ArrayList<KetQuaDTO> laySoLuongHSKha(String maLop){
+		return ketQuaDAO.laySoLuongHSKha(maLop);
+	}
+	
+	public ArrayList<KetQuaDTO> laySoLuongHSGioi(String maLop){
+		return ketQuaDAO.laySoLuongHSGioi(maLop);
+	}
+	
+	public ArrayList<KetQuaDTO> laySoLuongHSTrungBinh(String maLop){
+		return ketQuaDAO.laySoLuongHSTrungBinh(maLop);
+	}
+	
+	public ArrayList<KetQuaDTO> laySoLuongHSYeu(String maLop){
+		return ketQuaDAO.laySoLuongHSYeu(maLop);
+	}
+	
 }
