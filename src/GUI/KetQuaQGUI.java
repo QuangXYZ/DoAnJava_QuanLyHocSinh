@@ -205,7 +205,7 @@ public class KetQuaQGUI extends JFrame {
 		lblNewLabel.setBounds(10, 0, 661, 45);
 		panel.add(lblNewLabel);
 		
-		JButton btQuayLai = new JButton("btQuayLai");
+		JButton btQuayLai = new JButton("Quay Lại");
 		btQuayLai.setBackground(new Color(176, 224, 230));
 		btQuayLai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
