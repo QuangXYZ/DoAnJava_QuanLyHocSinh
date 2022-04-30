@@ -37,4 +37,8 @@ public class KetQuaBUS {
 		return ketQuaDAO.laySoLuongHSYeu(maLop);
 	}
 	
+	public ArrayList<KetQuaDTO> layTongSoHocSinh(String maLop){
+		return ketQuaDAO.layTongSoHocSinh(maLop);
+	}
+	
 }

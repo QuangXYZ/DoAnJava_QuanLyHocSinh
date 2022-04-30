@@ -18,40 +18,6 @@ public class KetQuaDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     
-   /* public ArrayList<KetQuaDTO> docKetQuaHocLuc(){
-    	ArrayList<KetQuaDTO> dsKetQuaHocLuc = new ArrayList<KetQuaDTO>();
-        try {
-        	KetQuaQGUI kq = new KetQuaQGUI();
-			String sql = ("select HS.MAHS, HS.HOTEN, HS.LOP, KQ.DIEMTB, KQ.HOCLUC from HOCSINH HS, KETQUA KQ where HS.MAHS = KQ.MAHS AND  HS.LOP= '" + kq.comboBox.getSelectedItem().toString() +"'");
-			connection = MyConnection.getConnection();
-			preparedStatement = connection.prepareStatement(sql);
-			resultSet = preparedStatement.executeQuery();
-			while(resultSet.next()) {
-				KetQuaDTO KQ = new KetQuaDTO();
-				KQ.setMSHS(resultSet.getString(1));
-				KQ.setHoTen(resultSet.getString(2));
-				KQ.setLop(resultSet.getString(3));
-				KQ.setDiemTrungBinh(resultSet.getFloat(4));
-				KQ.setHocLuc(resultSet.getString(5));
-				
-				dsKetQuaHocLuc.add(KQ);
-			}
-         
-        } catch (SQLException ex) {
-            System.out.println("error "+ex );
-        }
-         finally{
-            try {
-                connection.close();
-                preparedStatement.close();
-                resultSet.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(KetQuaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return dsKetQuaHocLuc;
-    }*/
-    
     public ArrayList<KetQuaDTO> docKetQuaHocLuc(String maLop){
     	ArrayList<KetQuaDTO> dsKetQuaHocLuc = new ArrayList<KetQuaDTO>();
         try {			
@@ -241,6 +207,34 @@ public class KetQuaDAO {
 			while(resultSet.next()) {
 			KetQuaDTO soluong = new KetQuaDTO();
 			soluong.setSlHocsinhYeu(resultSet.getString(1));
+			soLuongHocSinh.add(soluong);
+			}
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(KetQuaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return soLuongHocSinh;
+    }
+	
+	public ArrayList<KetQuaDTO> layTongSoHocSinh(String maLop){
+    	ArrayList<KetQuaDTO> soLuongHocSinh = new ArrayList<KetQuaDTO>();
+        try {			
+			String sql = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;;");
+			connection = MyConnection.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+			KetQuaDTO soluong = new KetQuaDTO();
+			soluong.setTongSoHocSinh(resultSet.getString(1));
 			soLuongHocSinh.add(soluong);
 			}
          
