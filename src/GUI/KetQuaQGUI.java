@@ -61,7 +61,7 @@ public class KetQuaQGUI extends JFrame {
 	
 	public void hienThiDuLieu() {
 		KetQuaBUS ketQuaBUS = new KetQuaBUS();
-		var maLop = comboBox.getSelectedItem().toString();
+		String maLop = comboBox.getSelectedItem().toString();
 		
 		ArrayList<KetQuaDTO> dsHocLuc = ketQuaBUS.docKetQuaHocLuc(maLop);
 		model = (DefaultTableModel) table.getModel();
