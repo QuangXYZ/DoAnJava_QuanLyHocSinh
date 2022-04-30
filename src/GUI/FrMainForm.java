@@ -346,6 +346,7 @@ public class FrMainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         KetQuaQGUI kqqgui ;
                     kqqgui = new KetQuaQGUI();
+                    kqqgui.doDuLieuComboBox();
                     kqqgui.setVisible(true);
                     kqqgui.setLocationRelativeTo(null);
                     this.dispose();
