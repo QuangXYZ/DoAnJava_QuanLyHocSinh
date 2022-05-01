@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
+import BUS.GiaoVienBUS;
+import BUS.LopHocBUS;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -22,9 +24,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import DTO.HocSinh;
-import DTO.HocSinh;
-import DTO.HocSinh;
+import DTO.LopHoc;
+import DTO.GiaoVien;
 
 
 public class QLGVView extends javax.swing.JFrame {
@@ -37,20 +38,13 @@ public class QLGVView extends javax.swing.JFrame {
     String imgURL="none";
     File directory = new File("");
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-    ArrayList<HocSinh> dsgv = new ArrayList<>();
+    ArrayList<GiaoVien> dsgv = new ArrayList<>();
     DefaultTableModel model ;
-    public void loadDataSQL(){
-        Connection con;
-        try{     
+    public void loadData(){
+        try{   
             dsgv.clear();
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement s=con.createStatement();
-            ResultSet rs =s.executeQuery("SELECT * FROM HOCSINH");
-            while(rs.next()){
-                 dsgv.add(new HocSinh(rs.getString(1),rs.getString(2),formatDate.parse(rs.getString(3)),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
-            }
-           con.close();
+            GiaoVienBUS gvBUS = new GiaoVienBUS();
+            dsgv = gvBUS.getAllGiaoVien();
         } catch(Exception e){
             System.out.println("Connect Error "+e);
         } 
@@ -58,21 +52,35 @@ public class QLGVView extends javax.swing.JFrame {
            
 
     public void loadDataTable(){   
-        
+        loadData();
         model = (DefaultTableModel)tbDSGV.getModel();
         model.setRowCount(0);
-        for (int i=0;i<dsgv.size();i++){
-           
-            model.addRow(new Object[]{i+1,dsgv.get(i).getMSHS(),dsgv.get(i).getHoTen(),formatDate.format(dsgv.get(i).getNgaySinh()),
-                dsgv.get(i).getGioiTinh(),dsgv.get(i).getLop(),dsgv.get(i).getQueQuan()});
+        for (int i=0;i<dsgv.size();i++){          
+            model.addRow(new Object[]{i+1,dsgv.get(i).getMSGV(),dsgv.get(i).getHoTen(),formatDate.format(dsgv.get(i).getNgaySinh()),
+                dsgv.get(i).getGioiTinh(),dsgv.get(i).getlop(),dsgv.get(i).getQueQuan()});
           
+        }                 
+    }
+    
+    public void loadDataCBLop(){
+        LopHocBUS lh = new LopHocBUS();
+        ArrayList<LopHoc> arr = new ArrayList<>();
+        arr = lh.getAllLopHoc();
+        for (LopHoc l : arr){
+            cbLop.addItem(l.getTenLop());
         }
-                  
+        
     }
     public QLGVView() {
         initComponents();
-        
-        loadDataSQL();
+        addBtn.setIcon(new ImageIcon(new ImageIcon("src//images//plus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        delBtn.setIcon(new ImageIcon(new ImageIcon("src//images//delete.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        editBtn.setIcon(new ImageIcon(new ImageIcon("src//images//edit.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        backBtn.setIcon(new ImageIcon(new ImageIcon("src//images//previous.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        RefreshMenu.setIcon(new ImageIcon(new ImageIcon("src//images//refresh.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        searchMenu.setIcon(new ImageIcon(new ImageIcon("src//images//search.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        this.getContentPane().setBackground(new java.awt.Color(110, 255, 140));
+        loadDataCBLop();
         loadDataTable();
     }
 
@@ -96,7 +104,6 @@ public class QLGVView extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jLabel1 = new javax.swing.JLabel();
         tfMSGV = new javax.swing.JTextField();
         tfHoTen = new javax.swing.JTextField();
         tfNgaySinh = new javax.swing.JTextField();
@@ -108,28 +115,28 @@ public class QLGVView extends javax.swing.JFrame {
         rbNam = new javax.swing.JRadioButton();
         rbNu = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
-        tfLop = new javax.swing.JTextField();
         addBtn = new javax.swing.JButton();
         delBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
-        saveBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
         imgLabel = new javax.swing.JLabel();
         cbQueQuan = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbDSGV = new javax.swing.JTable();
+        cbLop = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        Refresh = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        RefreshMenu = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        TimKiem = new javax.swing.JMenu();
+        searchMenu = new javax.swing.JMenu();
         TheoTen = new javax.swing.JMenuItem();
         TheoMSGV = new javax.swing.JMenuItem();
         TheoNgaySinh = new javax.swing.JMenuItem();
         TheoGioiTinh = new javax.swing.JMenuItem();
         TheoQueQuan = new javax.swing.JMenuItem();
         TheoLop = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         jMenuItem4.setText("jMenuItem4");
 
@@ -197,9 +204,6 @@ public class QLGVView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel1.setText("QUẢN LÝ GIÁO VIÊN");
-
         tfMSGV.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         tfHoTen.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -247,8 +251,6 @@ public class QLGVView extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("Quê quán :");
 
-        tfLop.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-
         addBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         addBtn.setText("THÊM");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -273,8 +275,13 @@ public class QLGVView extends javax.swing.JFrame {
             }
         });
 
-        saveBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        saveBtn.setText("LƯU");
+        backBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        backBtn.setText("QUAY LẠI");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         imgLabel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Image"));
         imgLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -314,23 +321,38 @@ public class QLGVView extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tbDSGV);
 
-        jMenu1.setText("TOOL");
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        Refresh.setText("Refresh");
-        Refresh.addActionListener(new java.awt.event.ActionListener() {
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(204, 204, 0));
+        jLabel13.setText("QUẢN LÝ GIÁO VIÊN");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addGap(277, 277, 277))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jMenu1.setText("Công cụ");
+
+        RefreshMenu.setText("Refresh");
+        RefreshMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RefreshActionPerformed(evt);
+                RefreshMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(Refresh);
-
-        jMenuItem3.setText("Sắp xếp");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem3);
+        jMenu1.add(RefreshMenu);
 
         jMenuItem5.setText("Lọc");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -340,7 +362,7 @@ public class QLGVView extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem5);
 
-        TimKiem.setText("Tìm kiếm");
+        searchMenu.setText("Tìm kiếm");
 
         TheoTen.setText("Theo tên");
         TheoTen.addActionListener(new java.awt.event.ActionListener() {
@@ -348,7 +370,7 @@ public class QLGVView extends javax.swing.JFrame {
                 TheoTenActionPerformed(evt);
             }
         });
-        TimKiem.add(TheoTen);
+        searchMenu.add(TheoTen);
 
         TheoMSGV.setText("Theo MSGV");
         TheoMSGV.addActionListener(new java.awt.event.ActionListener() {
@@ -356,7 +378,7 @@ public class QLGVView extends javax.swing.JFrame {
                 TheoMSGVActionPerformed(evt);
             }
         });
-        TimKiem.add(TheoMSGV);
+        searchMenu.add(TheoMSGV);
 
         TheoNgaySinh.setText("Theo Ngày sinh");
         TheoNgaySinh.addActionListener(new java.awt.event.ActionListener() {
@@ -364,7 +386,7 @@ public class QLGVView extends javax.swing.JFrame {
                 TheoNgaySinhActionPerformed(evt);
             }
         });
-        TimKiem.add(TheoNgaySinh);
+        searchMenu.add(TheoNgaySinh);
 
         TheoGioiTinh.setText("Theo giới tính");
         TheoGioiTinh.addActionListener(new java.awt.event.ActionListener() {
@@ -372,7 +394,7 @@ public class QLGVView extends javax.swing.JFrame {
                 TheoGioiTinhActionPerformed(evt);
             }
         });
-        TimKiem.add(TheoGioiTinh);
+        searchMenu.add(TheoGioiTinh);
 
         TheoQueQuan.setText("Theo quê quán");
         TheoQueQuan.addActionListener(new java.awt.event.ActionListener() {
@@ -380,7 +402,7 @@ public class QLGVView extends javax.swing.JFrame {
                 TheoQueQuanActionPerformed(evt);
             }
         });
-        TimKiem.add(TheoQueQuan);
+        searchMenu.add(TheoQueQuan);
 
         TheoLop.setText("Theo lớp");
         TheoLop.addActionListener(new java.awt.event.ActionListener() {
@@ -388,14 +410,11 @@ public class QLGVView extends javax.swing.JFrame {
                 TheoLopActionPerformed(evt);
             }
         });
-        TimKiem.add(TheoLop);
+        searchMenu.add(TheoLop);
 
-        jMenu1.add(TimKiem);
+        jMenu1.add(searchMenu);
 
         jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("THỐNG KÊ");
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -403,9 +422,20 @@ public class QLGVView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
+                .addComponent(delBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -415,47 +445,30 @@ public class QLGVView extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel6))
                         .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfMSGV)
-                            .addComponent(tfHoTen)
-                            .addComponent(tfNgaySinh)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cbQueQuan, javax.swing.GroupLayout.Alignment.LEADING, 0, 269, Short.MAX_VALUE)
+                            .addComponent(tfHoTen, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(rbNam)
                                 .addGap(48, 48, 48)
                                 .addComponent(rbNu))
-                            .addComponent(tfLop, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbQueQuan, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(tfMSGV, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfNgaySinh, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbLop, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(imgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(85, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addComponent(delBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
-                                .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(imgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(23, 23, 23))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4)
-                .addContainerGap())
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfMSGV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -472,9 +485,7 @@ public class QLGVView extends javax.swing.JFrame {
                             .addComponent(rbNam)
                             .addComponent(rbNu)
                             .addComponent(jLabel5)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(imgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(imgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -482,28 +493,20 @@ public class QLGVView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(tfLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
+                    .addComponent(cbLop, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(delBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void tfNgaySinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNgaySinhActionPerformed
         // TODO add your handling code here:
@@ -516,7 +519,7 @@ public class QLGVView extends javax.swing.JFrame {
     public void resetForm(){
         tfHoTen.setText("");
         tfMSGV.setText("");
-        tfLop.setText("");
+        cbLop.setSelectedIndex(0);
         rbNam.setSelected(true);
         imgLabel.setIcon(null);
         tfNgaySinh.setText("");
@@ -526,76 +529,59 @@ public class QLGVView extends javax.swing.JFrame {
     
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         // TODO add your handling code here:
-        if (tfNgaySinh.getText().equals("")||tfMSGV.getText().equals("")||tfHoTen.getText().equals("")||tfLop.getText().equals("")||(rbNam.isSelected()==false&&rbNu.isSelected()==false)){
+        if (tfNgaySinh.getText().equals("")||tfMSGV.getText().equals("")||tfHoTen.getText().equals("")||(rbNam.isSelected()==false&&rbNu.isSelected()==false)){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         }
         else {
-            int i = tbDSGV.getSelectedRow();
-            dsgv.get(i).setMSHS(tfMSGV.getText());
-            dsgv.get(i).setHoTen(tfHoTen.getText());
-            dsgv.get(i).setGioiTinh(rbNam.isSelected()?"Nam":"Nu");
             try {
-                dsgv.get(i).setNgaySinh(formatDate.parse(tfNgaySinh.getText()));
+                GiaoVien gv = new GiaoVien(tfMSGV.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),cbLop.getSelectedItem().toString(),imgURL);
+                GiaoVienBUS hsBUS = new GiaoVienBUS();
+                if (hsBUS.updateGiaoVien(gv)!=0) JOptionPane.showMessageDialog(this, "Sửa thành công");
+                else JOptionPane.showMessageDialog(this, "Sửa không thành công");
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ");
             }
-            dsgv.get(i).setQueQuan(cbQueQuan.getSelectedItem().toString());
-            dsgv.get(i).setLop(tfLop.getText());
-            dsgv.get(i).setImg(imgURL);
-            model.setValueAt(dsgv.get(i).getMSHS(), i, 1);
-            model.setValueAt(dsgv.get(i).getHoTen(), i, 2);
-            model.setValueAt(formatDate.format(dsgv.get(i).getNgaySinh()), i, 3);
-            model.setValueAt(dsgv.get(i).getGioiTinh(), i, 4);
-            model.setValueAt(dsgv.get(i).getLop(), i, 5);
-            model.setValueAt(dsgv.get(i).getQueQuan(), i, 6);   
-        }    
+            } 
+        loadDataTable();
         resetForm();
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-                if (tfNgaySinh.getText().equals("")||tfMSGV.getText().equals("")||tfHoTen.getText().equals("")||tfLop.getText().equals("")||(rbNam.isSelected()==false&&rbNu.isSelected()==false)){
+        if (tfNgaySinh.getText().equals("")||tfMSGV.getText().equals("")||tfHoTen.getText().equals("")||(rbNam.isSelected()==false&&rbNu.isSelected()==false)){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         }
         else {
-            try {      
-                
-                dsgv.add(new HocSinh(tfMSGV.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),tfLop.getText(),imgURL));
-                loadDataTable();
-            } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng ngày sinh");
+            try {
+                GiaoVien gv = new GiaoVien(tfMSGV.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),cbLop.getSelectedItem().toString(),imgURL);
+                GiaoVienBUS hsBUS = new GiaoVienBUS();
+                if (hsBUS.addGiaoVien(gv)!=0) JOptionPane.showMessageDialog(this, "Thêm thành công");
+                else JOptionPane.showMessageDialog(this, "Thêm không thành công");
+                } catch (ParseException ex) {
+                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng ngày sinh");
             }
-           
         }    
         resetForm();
+        loadDataTable();
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void delBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delBtnActionPerformed
         // TODO add your handling code here:
         int i = tbDSGV.getSelectedRow();
-        model.removeRow(i);
-        dsgv.remove(i);
+        GiaoVienBUS gvBUS = new GiaoVienBUS();
+        
+        if (i>=0){
+                if (gvBUS.deleteGiaoVien(model.getValueAt(i,1).toString())!=0) JOptionPane.showMessageDialog(this, "Xóa thành công");
+                else JOptionPane.showMessageDialog(this, "Xóa không thành công");
+        
         resetForm();
+        loadDataTable();
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn học sinh để xóa");
+        }
     }//GEN-LAST:event_delBtnActionPerformed
 
-        private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        // TODO add your handling code here:
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement s=con.createStatement();
-            s.executeUpdate("DELETE FROM HOCSINH");
-            for (HocSinh h : dsgv){
-                String img = h.getImg().replace("\\", "\\\\");
-                s.executeUpdate("INSERT INTO HOCSINH VALUES('"+h.getMSHS()+"','"+h.getHoTen()+"','"+formatDate.format(h.getNgaySinh())+"','"+h.getGioiTinh()+"','"+h.getQueQuan()+"','"+h.getLop()+"','"+img+"')");
-            }       
-           con.close();
-           JOptionPane.showMessageDialog(this, "Lưu thành công ! ");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
-    }
         
     private void imgLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLabelMouseClicked
         try {
@@ -637,7 +623,7 @@ public class QLGVView extends javax.swing.JFrame {
             if(model.getValueAt(i,4).toString().equals("Nam"))
                 rbNam.setSelected(true); 
             else rbNu.setSelected(true);
-            tfLop.setText(model.getValueAt(i,5).toString());
+            cbLop.setSelectedItem(model.getValueAt(i,5).toString());
             cbQueQuan.setSelectedItem(model.getValueAt(i,6).toString());           
             ImageIcon img = new ImageIcon(directory.getAbsolutePath()+dsgv.get(i).getImg());
             imgLabel.setIcon(new ImageIcon(img.getImage().getScaledInstance(imgLabel.getWidth()-10, imgLabel.getHeight()-20, Image.SCALE_SMOOTH)));
@@ -843,12 +829,25 @@ public class QLGVView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TheoQueQuanActionPerformed
 
-    private void RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshActionPerformed
+    private void RefreshMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshMenuActionPerformed
         // TODO add your handling code here:
-        loadDataSQL();
+        loadData();
         loadDataTable();
         resetForm();
-    }//GEN-LAST:event_RefreshActionPerformed
+    }//GEN-LAST:event_RefreshMenuActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        FrMainForm mainForm;
+        mainForm = new FrMainForm();
+        mainForm.setVisible(true);
+        mainForm.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
                              
 
@@ -889,16 +888,23 @@ public class QLGVView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem Refresh;
+    private javax.swing.JMenuItem RefreshMenu;
     private javax.swing.JMenuItem TheoGioiTinh;
     private javax.swing.JMenuItem TheoLop;
     private javax.swing.JMenuItem TheoMSGV;
     private javax.swing.JMenuItem TheoNgaySinh;
     private javax.swing.JMenuItem TheoQueQuan;
     private javax.swing.JMenuItem TheoTen;
-    private javax.swing.JMenu TimKiem;
     private javax.swing.JButton addBtn;
+    private javax.swing.JButton backBtn;
+    private javax.swing.JPanel background;
+    private javax.swing.JPanel background1;
+    private javax.swing.JPanel background2;
+    private javax.swing.JPanel background3;
+    private javax.swing.JPanel background4;
+    private javax.swing.JPanel background5;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbLop;
     private javax.swing.JComboBox<String> cbQueQuan;
     private javax.swing.JButton delBtn;
     private javax.swing.JButton editBtn;
@@ -907,31 +913,35 @@ public class QLGVView extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog2;
     private javax.swing.JDialog jDialog3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JRadioButton rbNam;
     private javax.swing.JRadioButton rbNu;
-    private javax.swing.JButton saveBtn;
+    private javax.swing.JMenu searchMenu;
     private javax.swing.JTable tbDSGV;
     private javax.swing.JTable tbDSHS;
     private javax.swing.JTextField tfHoTen;
-    private javax.swing.JTextField tfLop;
     private javax.swing.JTextField tfMSGV;
     private javax.swing.JTextField tfNgaySinh;
     // End of variables declaration//GEN-END:variables

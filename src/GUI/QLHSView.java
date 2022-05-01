@@ -28,8 +28,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import DTO.HocSinh;
-import DTO.HocSinh;
-import DTO.HocSinh;
 import DTO.LopHoc;
 
 /**
@@ -57,7 +55,7 @@ public class QLHSView extends javax.swing.JFrame {
             System.out.println("Connect Error "+e);
         } 
     }
-           
+        
 
     public void loadDataTable(){   
         loadData();
