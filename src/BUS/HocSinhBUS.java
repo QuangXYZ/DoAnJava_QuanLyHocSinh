@@ -27,6 +27,21 @@ public class HocSinhBUS {
     public int updateHocSinh(HocSinh hs) {  
         return hsDAO.updateHocSinh(hs);
     }
+    public ArrayList<HocSinh> searchHocSinhMSHS(String MSHS) {  
+        return hsDAO.searchHocSinhMSHS(MSHS);
+    }
+    public ArrayList<HocSinh> searchHocSinhHoTen(String HoTen) {  
+        return hsDAO.searchHocSinhHoTen(HoTen);
+    }
+    public ArrayList<HocSinh> searchHocSinhNgaySinh(String NgaySinh) {  
+        return hsDAO.searchHocSinhNgaySinh(NgaySinh);
+    }
+    public ArrayList<HocSinh> searchHocSinhQueQuan(String QueQuan) {  
+        return hsDAO.searchHocSinhQueQuan(QueQuan);
+    }
+    public ArrayList<HocSinh> searchHocSinhLop(String Lop) {  
+        return hsDAO.searchHocSinhLop(Lop);
+    }
     
     
 }

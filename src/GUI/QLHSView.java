@@ -5,7 +5,6 @@
  */
 package GUI;
 
-
 import BUS.HocSinhBUS;
 import BUS.LopHocBUS;
 import java.awt.Image;
@@ -23,12 +22,12 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import DTO.HocSinh;
 import DTO.LopHoc;
+import sql.MyConnection;
 
 /**
  *
@@ -39,44 +38,44 @@ public class QLHSView extends javax.swing.JFrame {
     /**
      * Creates new form QLHSView
      */
-    String dbUrl ="jdbc:mysql://localhost:3306/qlhs";
-    String username = "root"; String password= "12345678";
-    String imgURL="none";
+    String imgURL = "none";
     File directory = new File("");
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
     ArrayList<HocSinh> dshs = new ArrayList<>();
-    DefaultTableModel model ;
-    public void loadData(){
-        try{   
+    DefaultTableModel model;
+
+    public void loadData() {
+        try {
             dshs.clear();
             HocSinhBUS hsBUS = new HocSinhBUS();
             dshs = hsBUS.getAllHocSinh();
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
-    }
-        
-
-    public void loadDataTable(){   
-        loadData();
-        model = (DefaultTableModel)tbDSHS.getModel();
-        model.setRowCount(0);
-        for (int i=0;i<dshs.size();i++){
-            model.addRow(new Object[]{i+1,dshs.get(i).getMSHS(),dshs.get(i).getHoTen(),formatDate.format(dshs.get(i).getNgaySinh()),
-                dshs.get(i).getGioiTinh(),dshs.get(i).getLop(),dshs.get(i).getQueQuan()});
-          
+        } catch (Exception e) {
+            System.out.println("Connect Error " + e);
         }
-                  
     }
-    public void loadDataCBLop(){
+
+    public void loadDataTable() {
+        loadData();
+        model = (DefaultTableModel) tbDSHS.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < dshs.size(); i++) {
+            model.addRow(new Object[]{i + 1, dshs.get(i).getMSHS(), dshs.get(i).getHoTen(), formatDate.format(dshs.get(i).getNgaySinh()),
+                dshs.get(i).getGioiTinh(), dshs.get(i).getLop(), dshs.get(i).getQueQuan()});
+
+        }
+
+    }
+
+    public void loadDataCBLop() {
         LopHocBUS lh = new LopHocBUS();
         ArrayList<LopHoc> arr = new ArrayList<>();
         arr = lh.getAllLopHoc();
-        for (LopHoc l : arr){
+        for (LopHoc l : arr) {
             cbLop.addItem(l.getTenLop());
         }
-        
+
     }
+
     public QLHSView() {
         initComponents();
         addBtn.setIcon(new ImageIcon(new ImageIcon("src//images//plus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
@@ -85,10 +84,10 @@ public class QLHSView extends javax.swing.JFrame {
         backBtn.setIcon(new ImageIcon(new ImageIcon("src//images//previous.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         RefreshMenu.setIcon(new ImageIcon(new ImageIcon("src//images//refresh.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         searchMenu.setIcon(new ImageIcon(new ImageIcon("src//images//search.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        this.getContentPane().setBackground(new java.awt.Color(110, 255, 140));
+        this.getContentPane().setBackground(new java.awt.Color(200, 255, 255));
         loadDataCBLop();
         loadDataTable();
-        
+
     }
 
     /**
@@ -481,8 +480,7 @@ public class QLHSView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfMSHSActionPerformed
 
-    
-    public void resetForm(){
+    public void resetForm() {
         tfHoTen.setText("");
         tfMSHS.setText("");
         cbLop.setSelectedIndex(0);
@@ -490,23 +488,25 @@ public class QLHSView extends javax.swing.JFrame {
         imgLabel.setIcon(null);
         tfNgaySinh.setText("");
         cbQueQuan.setSelectedIndex(0);
-        
+
     }
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-        if (tfNgaySinh.getText().equals("")||tfMSHS.getText().equals("")||tfHoTen.getText().equals("")||(rbNam.isSelected()==false&&rbNu.isSelected()==false)){
+        if (tfNgaySinh.getText().equals("") || tfMSHS.getText().equals("") || tfHoTen.getText().equals("") || (rbNam.isSelected() == false && rbNu.isSelected() == false)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
+        } else {
             try {
-                HocSinh hs = new HocSinh(tfMSHS.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),cbLop.getSelectedItem().toString(),imgURL);
+                HocSinh hs = new HocSinh(tfMSHS.getText(), tfHoTen.getText(), formatDate.parse(tfNgaySinh.getText()), rbNam.isSelected() ? "Nam" : "Nu", cbQueQuan.getSelectedItem().toString(), cbLop.getSelectedItem().toString(), imgURL);
                 HocSinhBUS hsBUS = new HocSinhBUS();
-                if (hsBUS.addHocSinh(hs)!=0) JOptionPane.showMessageDialog(this, "Thêm thành công");
-                else JOptionPane.showMessageDialog(this, "Thêm không thành công");
-                } catch (ParseException ex) {
-                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng ngày sinh");
+                if (hsBUS.addHocSinh(hs) != 0) {
+                    JOptionPane.showMessageDialog(this, "Thêm thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm không thành công");
+                }
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng ngày sinh");
             }
-        }    
+        }
         resetForm();
         loadDataTable();
 
@@ -516,15 +516,17 @@ public class QLHSView extends javax.swing.JFrame {
         // TODO add your handling code here:
         int i = tbDSHS.getSelectedRow();
         HocSinhBUS hsBUS = new HocSinhBUS();
-        
-        if (i>=0){
-                if (hsBUS.deleteHocSinh(model.getValueAt(i,1).toString())!=0) JOptionPane.showMessageDialog(this, "Xóa thành công");
-                else JOptionPane.showMessageDialog(this, "Xóa không thành công");
-        
-        resetForm();
-        loadDataTable();
-        }
-        else {
+
+        if (i >= 0) {
+            if (hsBUS.deleteHocSinh(model.getValueAt(i, 1).toString()) != 0) {
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa không thành công");
+            }
+
+            resetForm();
+            loadDataTable();
+        } else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn học sinh để xóa");
         }
     }//GEN-LAST:event_delBtnActionPerformed
@@ -532,18 +534,18 @@ public class QLHSView extends javax.swing.JFrame {
     private void imgLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLabelMouseClicked
         try {
             // TODO add your handling code here:
-            JFileChooser jfc = new JFileChooser(directory.getAbsolutePath()+"//src//images");
+            JFileChooser jfc = new JFileChooser(directory.getAbsolutePath() + "//src//images");
             jfc.showOpenDialog(null);
             File file = jfc.getSelectedFile();
-            imgURL=file.toString().replace(directory.getAbsolutePath(),"");
+            imgURL = file.toString().replace(directory.getAbsolutePath(), "");
             Image img = ImageIO.read(file);
             int width = imgLabel.getWidth();
             int height = imgLabel.getHeight();
-            imgLabel.setIcon(new ImageIcon(img.getScaledInstance(width, height-20,  Image.SCALE_SMOOTH)));
+            imgLabel.setIcon(new ImageIcon(img.getScaledInstance(width, height - 20, Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
             Logger.getLogger(QLHSView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_imgLabelMouseClicked
 
     private void tfNgaySinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNgaySinhActionPerformed
@@ -552,253 +554,202 @@ public class QLHSView extends javax.swing.JFrame {
 
     private void tbDSHSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDSHSMouseClicked
         // TODO add your handling code here:
-        model = (DefaultTableModel)tbDSHS.getModel();
+        model = (DefaultTableModel) tbDSHS.getModel();
         int i = tbDSHS.getSelectedRow();
-        if (i>=0){
-            tfMSHS.setText(model.getValueAt(i,1).toString());
-            tfHoTen.setText(model.getValueAt(i,2).toString());
-            tfNgaySinh.setText(model.getValueAt(i,3).toString());
-            if(model.getValueAt(i,4).toString().equals("Nam"))
-                rbNam.setSelected(true); 
-            else rbNu.setSelected(true);
-            cbLop.setSelectedItem(model.getValueAt(i,5).toString());
-            cbQueQuan.setSelectedItem(model.getValueAt(i,6).toString());           
-            ImageIcon img = new ImageIcon(directory.getAbsolutePath()+dshs.get(i).getImg());
-            imgLabel.setIcon(new ImageIcon(img.getImage().getScaledInstance(imgLabel.getWidth()-10, imgLabel.getHeight()-20, Image.SCALE_SMOOTH)));
+        if (i >= 0) {
+            tfMSHS.setText(model.getValueAt(i, 1).toString());
+            tfHoTen.setText(model.getValueAt(i, 2).toString());
+            tfNgaySinh.setText(model.getValueAt(i, 3).toString());
+            if (model.getValueAt(i, 4).toString().equals("Nam")) {
+                rbNam.setSelected(true);
+            } else {
+                rbNu.setSelected(true);
+            }
+            cbLop.setSelectedItem(model.getValueAt(i, 5).toString());
+            cbQueQuan.setSelectedItem(model.getValueAt(i, 6).toString());
+            ImageIcon img = new ImageIcon(directory.getAbsolutePath() + dshs.get(i).getImg());
+            imgLabel.setIcon(new ImageIcon(img.getImage().getScaledInstance(imgLabel.getWidth() - 10, imgLabel.getHeight() - 20, Image.SCALE_SMOOTH)));
             imgURL = dshs.get(i).getImg();
         }
-             
+
     }//GEN-LAST:event_tbDSHSMouseClicked
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         // TODO add your handling code here:
-        if (tfNgaySinh.getText().equals("")||tfMSHS.getText().equals("")||tfHoTen.getText().equals("")||(rbNam.isSelected()==false&&rbNu.isSelected()==false)){
+        if (tfNgaySinh.getText().equals("") || tfMSHS.getText().equals("") || tfHoTen.getText().equals("") || (rbNam.isSelected() == false && rbNu.isSelected() == false)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
+        } else {
             try {
-                HocSinh hs = new HocSinh(tfMSHS.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),cbLop.getSelectedItem().toString(),imgURL);
+                HocSinh hs = new HocSinh(tfMSHS.getText(), tfHoTen.getText(), formatDate.parse(tfNgaySinh.getText()), rbNam.isSelected() ? "Nam" : "Nu", cbQueQuan.getSelectedItem().toString(), cbLop.getSelectedItem().toString(), imgURL);
                 HocSinhBUS hsBUS = new HocSinhBUS();
-                if (hsBUS.updateHocSinh(hs)!=0) JOptionPane.showMessageDialog(this, "Sửa thành công");
-                else JOptionPane.showMessageDialog(this, "Sửa không thành công");
+                if (hsBUS.updateHocSinh(hs) != 0) {
+                    JOptionPane.showMessageDialog(this, "Sửa thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Sửa không thành công");
+                }
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ");
             }
-            } 
+        }
         loadDataTable();
         resetForm();
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-         FrMainForm mainForm;
-                    mainForm = new FrMainForm();
-                    mainForm.setVisible(true);
-                    mainForm.setLocationRelativeTo(null);
-                    this.dispose();
+        FrMainForm mainForm;
+        mainForm = new FrMainForm();
+        mainForm.setVisible(true);
+        mainForm.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
 
     private void TheoQuequanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoQuequanActionPerformed
         // TODO add your handling code here:
-       
-        String s = (String)JOptionPane.showInputDialog(this,
+
+        String s = (String) JOptionPane.showInputDialog(this,
                 "Nhập quê quán cần tìm",
                 "Tìm kiếm theo quê quán",
                 JOptionPane.INFORMATION_MESSAGE);
-        if (s.equals("")){
+        if (s.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement st=con.createStatement();
-            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
-            model = (DefaultTableModel)tbDSHS.getModel();
-            model.setRowCount(0); 
-            int i=0;
-            while(rs.next()){
-                if (rs.getString(5).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
-                    i++;
-                }               
-            }      
-           con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        } else {
+            Connection con;
+            try {
+                con = MyConnection.getConnection();
+                System.out.println("Connection successful");
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery("SELECT * FROM HOCSINH");
+                model = (DefaultTableModel) tbDSHS.getModel();
+                model.setRowCount(0);
+                int i = 0;
+                while (rs.next()) {
+                    if (rs.getString(5).contains(s)) {
+                        model.addRow(new Object[]{i + 1, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(6), rs.getString(5)});
+                        i++;
+                    }
+                }
+                con.close();
+                JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+            } catch (Exception e) {
+                System.out.println("Connect Error " + e);
+            }
         }
     }//GEN-LAST:event_TheoQuequanActionPerformed
 
     private void TheoMSSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoMSSVActionPerformed
         // TODO add your handling code here:
-        String s = (String)JOptionPane.showInputDialog(this,
+        String s = (String) JOptionPane.showInputDialog(this,
                 "Nhập MSSV cần tìm",
                 "Tìm kiếm theo MSSV",
                 JOptionPane.INFORMATION_MESSAGE);
-        if (s.equals("")){
+        if (s.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement st=con.createStatement();
-            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
-            model = (DefaultTableModel)tbDSHS.getModel();
-            model.setRowCount(0); 
-            int i=0;
-            while(rs.next()){               
-                if (rs.getString(1).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
-                    i++;
-                }               
-            }      
-           con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        } else {
+            HocSinhBUS hsBUS = new HocSinhBUS();
+            dshs = hsBUS.searchHocSinhMSHS(s);
+            model = (DefaultTableModel) tbDSHS.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < dshs.size(); i++) {
+                model.addRow(new Object[]{i + 1, dshs.get(i).getMSHS(), dshs.get(i).getHoTen(), formatDate.format(dshs.get(i).getNgaySinh()),
+                    dshs.get(i).getGioiTinh(), dshs.get(i).getLop(), dshs.get(i).getQueQuan()});
+
+            }
+            JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+
         }
     }//GEN-LAST:event_TheoMSSVActionPerformed
 
     private void TheoHotenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoHotenActionPerformed
         // TODO add your handling code here:
-               
-        String s = (String)JOptionPane.showInputDialog(this,
+
+        String s = (String) JOptionPane.showInputDialog(this,
                 "Nhập họ tên cần tìm",
                 "Tìm kiếm theo họ tên",
                 JOptionPane.INFORMATION_MESSAGE);
-        if (s.equals("")){
+        if (s.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement st=con.createStatement();
-            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
-            model = (DefaultTableModel)tbDSHS.getModel();
-            model.setRowCount(0); 
-            int i=0;
-            while(rs.next()){
-                if (rs.getString(2).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
-                    i++;
-                }               
-            }      
-           con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        } else {
+            HocSinhBUS hsBUS = new HocSinhBUS();
+            dshs = hsBUS.searchHocSinhHoTen(s);
+            model = (DefaultTableModel) tbDSHS.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < dshs.size(); i++) {
+                model.addRow(new Object[]{i + 1, dshs.get(i).getMSHS(), dshs.get(i).getHoTen(), formatDate.format(dshs.get(i).getNgaySinh()),
+                    dshs.get(i).getGioiTinh(), dshs.get(i).getLop(), dshs.get(i).getQueQuan()});
+            }
+            JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+
         }
     }//GEN-LAST:event_TheoHotenActionPerformed
 
     private void TheoNgaysinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoNgaysinhActionPerformed
         // TODO add your handling code here:
-               
-        String s = (String)JOptionPane.showInputDialog(this,
+
+        String s = (String) JOptionPane.showInputDialog(this,
                 "Nhập ngày sinh cần tìm",
                 "Tìm kiếm theo ngày sinh",
                 JOptionPane.INFORMATION_MESSAGE);
-        if (s.equals("")){
+        if (s.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement st=con.createStatement();
-            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
-            model = (DefaultTableModel)tbDSHS.getModel();
-            model.setRowCount(0); 
-            int i=0;
-            while(rs.next()){
-                if (rs.getString(3).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
-                    i++;
-                }               
-            }      
-           con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        } else {
+            HocSinhBUS hsBUS = new HocSinhBUS();
+            dshs = hsBUS.searchHocSinhNgaySinh(s);
+            model = (DefaultTableModel) tbDSHS.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < dshs.size(); i++) {
+                model.addRow(new Object[]{i + 1, dshs.get(i).getMSHS(), dshs.get(i).getHoTen(), formatDate.format(dshs.get(i).getNgaySinh()),
+                    dshs.get(i).getGioiTinh(), dshs.get(i).getLop(), dshs.get(i).getQueQuan()});
+            }
+                JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+
         }
     }//GEN-LAST:event_TheoNgaysinhActionPerformed
 
     private void TheoGioitinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoGioitinhActionPerformed
         // TODO add your handling code here:
-               
-        String s = (String)JOptionPane.showInputDialog(this,
+
+        String s = (String) JOptionPane.showInputDialog(this,
                 "Nhập giới tính cần tìm",
                 "Tìm kiếm theo giới tính",
                 JOptionPane.INFORMATION_MESSAGE);
-        if (s.equals("")){
+        if (s.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement st=con.createStatement();
-            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
-            model = (DefaultTableModel)tbDSHS.getModel();
-            model.setRowCount(0); 
-            int i=0;
-            while(rs.next()){
-                if (rs.getString(4).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
-                    i++;
-                }               
-            }      
-           con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! ");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        } else {
+            HocSinhBUS hsBUS = new HocSinhBUS();
+            dshs = hsBUS.searchHocSinhNgaySinh(s);
+            model = (DefaultTableModel) tbDSHS.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < dshs.size(); i++) {
+                model.addRow(new Object[]{i + 1, dshs.get(i).getMSHS(), dshs.get(i).getHoTen(), formatDate.format(dshs.get(i).getNgaySinh()),
+                    dshs.get(i).getGioiTinh(), dshs.get(i).getLop(), dshs.get(i).getQueQuan()});
+            }
+            JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! ");
+           
         }
     }//GEN-LAST:event_TheoGioitinhActionPerformed
 
     private void TheoLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TheoLopActionPerformed
         // TODO add your handling code here:
-               
-        String s = (String)JOptionPane.showInputDialog(this,
+
+        String s = (String) JOptionPane.showInputDialog(this,
                 "Nhập lớp cần tìm",
                 "Tìm kiếm theo lớp",
                 JOptionPane.INFORMATION_MESSAGE);
-        if (s.equals("")){
+        if (s.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement st=con.createStatement();
-            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
-            model = (DefaultTableModel)tbDSHS.getModel();
-            model.setRowCount(0); 
-            int i=0;
-            while(rs.next()){
-                if (rs.getString(6).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
-                    i++;
-                }               
-            }      
-           con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        } else {
+            HocSinhBUS hsBUS = new HocSinhBUS();
+            dshs = hsBUS.searchHocSinhNgaySinh(s);
+            model = (DefaultTableModel) tbDSHS.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < dshs.size(); i++) {
+                model.addRow(new Object[]{i + 1, dshs.get(i).getMSHS(), dshs.get(i).getHoTen(), formatDate.format(dshs.get(i).getNgaySinh()),
+                    dshs.get(i).getGioiTinh(), dshs.get(i).getLop(), dshs.get(i).getQueQuan()});
+            }
+                JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+            
         }
     }//GEN-LAST:event_TheoLopActionPerformed
 
@@ -841,9 +792,9 @@ public class QLHSView extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {           
-                    new QLHSView().setVisible(true);
-                
+            public void run() {
+                new QLHSView().setVisible(true);
+
             }
         });
     }

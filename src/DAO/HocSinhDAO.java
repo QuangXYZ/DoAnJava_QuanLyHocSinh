@@ -129,4 +129,171 @@ public class HocSinhDAO {
     }
     return result;
     }
+     
+     
+     public ArrayList<HocSinh> searchHocSinhMSHS(String MSHS){
+        try {
+            String sqlSelectAll = "select * from HOCSINH";
+            connection = MyConnection.getConnection();
+            preparedStatement = connection.prepareStatement(sqlSelectAll);
+            resultSet = preparedStatement.executeQuery();
+         while(resultSet.next()){
+            if (resultSet.getString(1).contains(MSHS))   
+            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+         }
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        } catch (ParseException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(HocSinhDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return dshs;
+    }
+     public ArrayList<HocSinh> searchHocSinhHoTen(String HoTen){
+        try {
+            String sqlSelectAll = "select * from HOCSINH";
+            connection = MyConnection.getConnection();
+            preparedStatement = connection.prepareStatement(sqlSelectAll);
+        
+            resultSet = preparedStatement.executeQuery();
+         while(resultSet.next()){
+            if (resultSet.getString(2).contains(HoTen))
+            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+         }
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        } catch (ParseException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(HocSinhDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return dshs;
+    }
+     public ArrayList<HocSinh> searchHocSinhNgaySinh(String NgaySinh){
+        try {
+            String sqlSelectAll = "select * from HOCSINH";
+            connection = MyConnection.getConnection();
+            preparedStatement = connection.prepareStatement(sqlSelectAll);
+        
+            resultSet = preparedStatement.executeQuery();
+         while(resultSet.next()){
+            if (resultSet.getString(3).contains(NgaySinh))
+            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+         }
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        } catch (ParseException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(HocSinhDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return dshs;
+    }
+     public ArrayList<HocSinh> searchHocSinhGioiTinh(String GioiTinh){
+        try {
+            String sqlSelectAll = "select * from HOCSINH ";
+            connection = MyConnection.getConnection();
+            preparedStatement = connection.prepareStatement(sqlSelectAll);
+            resultSet = preparedStatement.executeQuery();
+         while(resultSet.next()){
+             if (resultSet.getString(4).contains(GioiTinh))
+            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+         }
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        } catch (ParseException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(HocSinhDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return dshs;
+    }
+     public ArrayList<HocSinh> searchHocSinhQueQuan(String QueQuan){
+        try {
+            String sqlSelectAll = "select * from HOCSINH ";
+            connection = MyConnection.getConnection();
+            preparedStatement = connection.prepareStatement(sqlSelectAll);
+            resultSet = preparedStatement.executeQuery();
+         while(resultSet.next()){
+             if (resultSet.getString(5).contains(QueQuan))
+            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+         }
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        } catch (ParseException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(HocSinhDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return dshs;
+    }
+     public ArrayList<HocSinh> searchHocSinhLop(String Lop){
+        try {
+            String sqlSelectAll = "select * from HOCSINH ";
+            connection = MyConnection.getConnection();
+            preparedStatement = connection.prepareStatement(sqlSelectAll);
+            resultSet = preparedStatement.executeQuery();
+         while(resultSet.next()){
+             if (resultSet.getString(6).contains(Lop))
+            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+         }
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        } catch (ParseException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(HocSinhDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return dshs;
+    }
+   
 }

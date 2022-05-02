@@ -3,9 +3,11 @@ package DTO;
 public class User {
     private String UserName;
     private String PassWord;
-    public User(String userName, String passWord) {
+    private int Level;
+    public User(String userName, String passWord, int level) {
         UserName = userName;
         PassWord = passWord;
+        Level = Level;
     }
     public User() {
     }
@@ -20,6 +22,14 @@ public class User {
     }
     public void setPassWord(String passWord) {
         PassWord = passWord;
+    }
+
+    public int getLevel() {
+        return Level;
+    }
+
+    public void setLevel(int Level) {
+        this.Level = Level;
     }
     
 }
