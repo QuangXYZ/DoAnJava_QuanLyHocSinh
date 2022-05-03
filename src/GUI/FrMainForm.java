@@ -37,7 +37,9 @@ public class FrMainForm extends javax.swing.JFrame {
         jButton6.setIcon(new ImageIcon(new ImageIcon("src//images//turn-off.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
         jLabel1.setIcon(new ImageIcon(new ImageIcon("src//images//home.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
         jButton7.setIcon(new ImageIcon(new ImageIcon("src//images//analytics.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
-  
+        lbLogouot.setIcon(new ImageIcon(new ImageIcon("src//images//log-out.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        this.getContentPane().setBackground(new java.awt.Color(240, 225, 213));
+        jPanel2.setBackground(new java.awt.Color(240, 225, 213));
     }
 
     /**
@@ -52,6 +54,7 @@ public class FrMainForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbChao = new javax.swing.JLabel();
+        lbLogouot = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -62,6 +65,7 @@ public class FrMainForm extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Trang chủ");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
@@ -74,6 +78,20 @@ public class FrMainForm extends javax.swing.JFrame {
         lbChao.setForeground(new java.awt.Color(255, 255, 255));
         lbChao.setText("XIN CHÀO ");
 
+        lbLogouot.setForeground(new java.awt.Color(255, 255, 255));
+        lbLogouot.setText("LOG OUT");
+        lbLogouot.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLogouotMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbLogouotMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbLogouotMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -83,7 +101,9 @@ public class FrMainForm extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbChao, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbLogouot, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,7 +111,8 @@ public class FrMainForm extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbChao, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbChao, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbLogouot, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
@@ -232,15 +253,15 @@ public class FrMainForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addGap(0, 79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
@@ -394,6 +415,25 @@ public class FrMainForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void lbLogouotMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogouotMouseEntered
+        // TODO add your handling code here:
+        lbLogouot.setForeground(red);
+    }//GEN-LAST:event_lbLogouotMouseEntered
+
+    private void lbLogouotMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogouotMouseExited
+        // TODO add your handling code here:
+         lbLogouot.setForeground(white);
+    }//GEN-LAST:event_lbLogouotMouseExited
+
+    private void lbLogouotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogouotMouseClicked
+        // TODO add your handling code here:
+        FrLoginForm loginForm ;
+                    loginForm = new FrLoginForm(); 
+                    loginForm.setVisible(true);
+                    loginForm.setLocationRelativeTo(null);
+                    this.dispose();
+    }//GEN-LAST:event_lbLogouotMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -441,5 +481,6 @@ public class FrMainForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbChao;
+    private javax.swing.JLabel lbLogouot;
     // End of variables declaration//GEN-END:variables
 }

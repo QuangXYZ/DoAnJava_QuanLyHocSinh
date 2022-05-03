@@ -48,7 +48,7 @@ public class QLUserView extends javax.swing.JFrame {
         btnBack.setIcon(new ImageIcon(new ImageIcon("src//images//previous.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         btnSearch.setIcon(new ImageIcon(new ImageIcon("src//images//search.png").getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH)));
         btnClear.setIcon(new ImageIcon(new ImageIcon("src//images//cleaning.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-    
+        this.getContentPane().setBackground(new java.awt.Color(200, 255, 255));
 
         loadDataTable();
         
@@ -86,7 +86,10 @@ public class QLUserView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("QUẢN LÝ TÀI KHOẢN ");
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText("   QUẢN LÝ TÀI KHOẢN ");
+        jLabel1.setToolTipText("");
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel2.setText("USERNAME :");
 
@@ -138,41 +141,53 @@ public class QLUserView extends javax.swing.JFrame {
             }
         });
 
+        btnSearch.setBackground(new java.awt.Color(255, 204, 153));
+        btnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
 
+        btnAdd.setBackground(new java.awt.Color(255, 204, 153));
         btnAdd.setText("THÊM");
+        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
 
+        btnEdit.setBackground(new java.awt.Color(255, 204, 153));
         btnEdit.setText("SỬA");
+        btnEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
             }
         });
 
+        btnDel.setBackground(new java.awt.Color(255, 204, 153));
         btnDel.setText("XÓA");
+        btnDel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDelActionPerformed(evt);
             }
         });
 
+        btnBack.setBackground(new java.awt.Color(255, 204, 153));
         btnBack.setText("QUAY LẠI");
+        btnBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
 
+        btnClear.setBackground(new java.awt.Color(255, 204, 153));
         btnClear.setText("CLEAR");
+        btnClear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
@@ -221,8 +236,8 @@ public class QLUserView extends javax.swing.JFrame {
                                 .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(29, 29, 29))
             .addGroup(layout.createSequentialGroup()
-                .addGap(194, 194, 194)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(182, 182, 182)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -348,10 +363,6 @@ public class QLUserView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");return;}
         
         if (i >= 0) {
-            for (User u : dsUser) if (u.getUserName().equals(tfUser.getText())) {
-                JOptionPane.showMessageDialog(this, "Tài khoản "+tfUser.getText()+" đã tồn tại !");
-                return;
-            }
             User us = new User(tfUser.getText(),tfPass.getText(),rdAdmin.isSelected() ? 0:1);
             if (usBUS.delUser(model.getValueAt(i, 0).toString())!=0&&usBUS.addUser(us)!=0){
                 JOptionPane.showMessageDialog(this, "Sửa thành công");
