@@ -496,6 +496,10 @@ public class QLHSView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         } else {
             try {
+                for (HocSinh hs : dshs) if (hs.getMSHS().equals(tfMSHS.getText())) {
+                JOptionPane.showMessageDialog(this, "Học sinh "+tfMSHS.getText()+" đã tồn tại !");
+                return;
+            }
                 HocSinh hs = new HocSinh(tfMSHS.getText(), tfHoTen.getText(), formatDate.parse(tfNgaySinh.getText()), rbNam.isSelected() ? "Nam" : "Nu", cbQueQuan.getSelectedItem().toString(), cbLop.getSelectedItem().toString(), imgURL);
                 HocSinhBUS hsBUS = new HocSinhBUS();
                 if (hsBUS.addHocSinh(hs) != 0) {
@@ -514,7 +518,7 @@ public class QLHSView extends javax.swing.JFrame {
 
     private void delBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delBtnActionPerformed
         // TODO add your handling code here:
-        int i = tbDSHS.getSelectedRow();
+       int i = tbDSHS.getSelectedRow();
         HocSinhBUS hsBUS = new HocSinhBUS();
 
         if (i >= 0) {

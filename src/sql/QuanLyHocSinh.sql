@@ -3,12 +3,14 @@ use QLHS;
 
 create table USERS(
 	USERNAME nchar(20) not null primary key,
-    USERPASSWORD nchar(20)
+    USERPASSWORD nchar(20),
+    USERLEVEL int(10)
 );
-insert into USERS(USERNAME,USERPASSWORD) values ('Admin','123456');
-insert into USERS(USERNAME,USERPASSWORD) values ('Quang','123456');
-insert into USERS(USERNAME,USERPASSWORD) values ('Quan','123456');
-insert into USERS(USERNAME,USERPASSWORD) values ('Nhu Y','123456');
+
+insert into USERS(USERNAME,USERPASSWORD,USERLEVEL) values ('Admin','123456',0);
+insert into USERS(USERNAME,USERPASSWORD,USERLEVEL) values ('Quang','123456',1);
+insert into USERS(USERNAME,USERPASSWORD,USERLEVEL) values ('Quan','123456',1);
+insert into USERS(USERNAME,USERPASSWORD,USERLEVEL) values ('Nhu Y','123456',1);
 
 create table HOCSINH (
     MAHS nchar(20) not null primary key,

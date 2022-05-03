@@ -5,8 +5,14 @@
  */
 package GUI;
 
+import BUS.UserBUS;
 import DTO.User;
+import static java.awt.Color.BLACK;
+import static java.awt.Color.GRAY;
+import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,20 +27,32 @@ public class QLUserView extends javax.swing.JFrame {
     ArrayList<User> dsUser = new ArrayList<>();
     DefaultTableModel model;
     void loadDataTable(){
-    
+        
+        UserBUS userBUS = new UserBUS();
+        dsUser = userBUS.getAllUser();
         model = (DefaultTableModel) tbUsers.getModel();
         model.setRowCount(0);
         for (int i = 0; i < dsUser.size(); i++) {
             model.addRow(new Object[]{dsUser.get(i).getUserName()});
-
-        }
-
-    
+           
+        }  
     }
+    
         
         
     public QLUserView() {
         initComponents();
+        btnAdd.setIcon(new ImageIcon(new ImageIcon("src//images//plus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        btnDel.setIcon(new ImageIcon(new ImageIcon("src//images//delete.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        btnEdit.setIcon(new ImageIcon(new ImageIcon("src//images//edit.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        btnBack.setIcon(new ImageIcon(new ImageIcon("src//images//previous.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        btnSearch.setIcon(new ImageIcon(new ImageIcon("src//images//search.png").getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH)));
+        btnClear.setIcon(new ImageIcon(new ImageIcon("src//images//cleaning.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+    
+
+        loadDataTable();
+        
+        
     }
 
     /**
@@ -51,18 +69,19 @@ public class QLUserView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        rdStandard = new javax.swing.JRadioButton();
+        rdAdmin = new javax.swing.JRadioButton();
+        tfUser = new javax.swing.JTextField();
+        tfPass = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbUsers = new javax.swing.JTable();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        tfSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnDel = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,14 +94,16 @@ public class QLUserView extends javax.swing.JFrame {
 
         jLabel4.setText("ACCOUNT TYPE :  ");
 
-        jRadioButton1.setText("Standard");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdStandard);
+        rdStandard.setText("Standard");
+        rdStandard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rdStandardActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText(" Administrator");
+        buttonGroup1.add(rdAdmin);
+        rdAdmin.setText(" Administrator");
 
         tbUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,106 +115,293 @@ public class QLUserView extends javax.swing.JFrame {
         ));
         tbUsers.setSelectionBackground(new java.awt.Color(255, 204, 0));
         tbUsers.setSelectionForeground(new java.awt.Color(0, 0, 153));
+        tbUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbUsersMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbUsers);
 
-        jTextField3.setText("search");
+        tfSearch.setForeground(java.awt.Color.gray);
+        tfSearch.setText("Search");
+        tfSearch.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfSearchFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfSearchFocusLost(evt);
+            }
+        });
+        tfSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSearchActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Q");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("THÊM");
+        btnAdd.setText("THÊM");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("SỬA");
+        btnEdit.setText("SỬA");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("XÓA");
+        btnDel.setText("XÓA");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("QUAY LẠI");
+        btnBack.setText("QUAY LẠI");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnClear.setText("CLEAR");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfPass, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tfUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(rdStandard)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2))))
+                                .addComponent(rdAdmin))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))))
-                .addContainerGap(71, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(29, 29, 29))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(194, 194, 194)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(192, 192, 192))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfSearch)
+                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
+                            .addComponent(rdStandard)
+                            .addComponent(rdAdmin))
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(55, 55, 55))
+                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rdStandardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdStandardActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_rdStandardActionPerformed
+
+    private void tbUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsersMouseClicked
+        // TODO add your handling code here:
+        model = (DefaultTableModel) tbUsers.getModel();
+        int i = tbUsers.getSelectedRow();
+        for (User u : dsUser){
+            if (u.getUserName().equals(model.getValueAt(i,0))) {
+                tfUser.setText(u.getUserName());
+                tfPass.setText(u.getPassWord());
+                if (u.getLevel() == 0) rdAdmin.setSelected(true); else rdStandard.setSelected(true);
+                break;
+            }
+        }
+    }//GEN-LAST:event_tbUsersMouseClicked
+    void resetForm(){
+        tfUser.setText("");
+        tfPass.setText("");
+        rdAdmin.setSelected(false);
+        rdStandard.setSelected(false);
+    }
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        if (tfPass.getText().equals("")||tfUser.getText().equals("")||(rdAdmin.isSelected() == false && rdStandard.isSelected() == false)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+        } else {
+            for (User u : dsUser) if (u.getUserName().equals(tfUser.getText())) {
+                JOptionPane.showMessageDialog(this, "Tài khoản "+tfUser.getText()+" đã tồn tại !");
+                return;
+            }
+                User us = new User(tfUser.getText(),tfPass.getText(),rdAdmin.isSelected() ? 0:1);
+                UserBUS hsBUS = new UserBUS();
+                if (hsBUS.addUser(us) != 0) {
+                    JOptionPane.showMessageDialog(this, "Thêm thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm không thành công");
+                }
+        }
+        resetForm();
+        loadDataTable();
+
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        // TODO add your handling code here:
+        int i = tbUsers.getSelectedRow();
+         UserBUS usBUS = new UserBUS();
+
+        if (i >= 0) {
+            if (usBUS.delUser(model.getValueAt(i, 0).toString()) != 0) {
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa không thành công");
+            }
+
+            resetForm();
+            loadDataTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn tài khoản để xóa");
+        }
+        
+    }//GEN-LAST:event_btnDelActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        FrMainForm mainForm;
+        mainForm = new FrMainForm();
+        mainForm.setVisible(true);
+        mainForm.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        int i = tbUsers.getSelectedRow();
+        UserBUS usBUS = new UserBUS();
+        if (tfPass.getText().equals("")||tfUser.getText().equals("")||(rdAdmin.isSelected() == false && rdStandard.isSelected() == false)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");return;}
+        
+        if (i >= 0) {
+            for (User u : dsUser) if (u.getUserName().equals(tfUser.getText())) {
+                JOptionPane.showMessageDialog(this, "Tài khoản "+tfUser.getText()+" đã tồn tại !");
+                return;
+            }
+            User us = new User(tfUser.getText(),tfPass.getText(),rdAdmin.isSelected() ? 0:1);
+            if (usBUS.delUser(model.getValueAt(i, 0).toString())!=0&&usBUS.addUser(us)!=0){
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+            }
+            else JOptionPane.showMessageDialog(this, "Sửa không thành công");
+            resetForm();
+            loadDataTable();
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn tài khoản để sửa");
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void tfSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSearchFocusGained
+        // TODO add your handling code here
+        if (tfSearch.getText().equals("Search")) {
+            tfSearch.setText("");
+            tfSearch.setForeground(BLACK);
+        }
+    }//GEN-LAST:event_tfSearchFocusGained
+
+    private void tfSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSearchFocusLost
+        // TODO add your handling code here:
+        if (tfSearch.getText().isEmpty()) {
+            tfSearch.setForeground(GRAY);
+            tfSearch.setText("Search");
+        }
+    }//GEN-LAST:event_tfSearchFocusLost
+
+    private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfSearchActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        UserBUS usBUS = new UserBUS();
+        ArrayList<User> Users = usBUS.search(tfSearch.getText());
+        model = (DefaultTableModel) tbUsers.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < Users.size(); i++) {
+            model.addRow(new Object[]{Users.get(i).getUserName()});
+            }
+        
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        resetForm();
+        loadDataTable();
+    }//GEN-LAST:event_btnClearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,22 +439,23 @@ public class QLUserView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnDel;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnSearch;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JRadioButton rdAdmin;
+    private javax.swing.JRadioButton rdStandard;
     private javax.swing.JTable tbUsers;
+    private javax.swing.JTextField tfPass;
+    private javax.swing.JTextField tfSearch;
+    private javax.swing.JTextField tfUser;
     // End of variables declaration//GEN-END:variables
 }
