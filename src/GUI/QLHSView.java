@@ -28,6 +28,7 @@ import javax.swing.table.TableModel;
 import DTO.HocSinh;
 import DTO.LopHoc;
 import sql.MyConnection;
+import java.awt.Dimension;
 
 /**
  *
@@ -140,7 +141,7 @@ public class QLHSView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("QUAN LY SINH VIEN");
         setBackground(new java.awt.Color(102, 102, 102));
-        setSize(new java.awt.Dimension(626, 550));
+        setSize(new Dimension(702, 665));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("MSHS : ");
@@ -192,18 +193,22 @@ public class QLHSView extends javax.swing.JFrame {
 
         tbDSHS.setBackground(new java.awt.Color(255, 255, 102));
         tbDSHS.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tbDSHS.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "STT", "MSHS", "HỌ VÀ TÊN", "NGÀY SINH", "GIỚI TÍNH", "LỚP", "QUÊ QUÁN"
-            }
+        tbDSHS.setModel(new DefaultTableModel(
+        	new Object[][] {
+        		{null, null, null, null, null, null, null},
+        		{null, null, null, null, null, null, null},
+        		{null, null, null, null, null, null, null},
+        		{null, null, null, null, null, null, null},
+        		{null, null, null, null, null, null, null},
+        	},
+        	new String[] {
+        			"STT", "MSHS", "HỌ VÀ TÊN", "NGÀY SINH", "GIỚI TÍNH", "LỚP", "QUÊ QUÁN"        	}
         ));
+        tbDSHS.getColumnModel().getColumn(0).setPreferredWidth(40);
+        tbDSHS.getColumnModel().getColumn(2).setPreferredWidth(166);
+        tbDSHS.getColumnModel().getColumn(3).setPreferredWidth(89);
+        tbDSHS.getColumnModel().getColumn(5).setPreferredWidth(83);
+        tbDSHS.getColumnModel().getColumn(6).setPreferredWidth(90);
         tbDSHS.setSelectionBackground(new java.awt.Color(0, 0, 153));
         tbDSHS.setSelectionForeground(new java.awt.Color(255, 255, 51));
         tbDSHS.addMouseListener(new java.awt.event.MouseAdapter() {
