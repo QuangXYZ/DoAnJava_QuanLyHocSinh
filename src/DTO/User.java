@@ -7,7 +7,7 @@ public class User {
     public User(String userName, String passWord, int level) {
         UserName = userName;
         PassWord = passWord;
-        Level = Level;
+        Level = level;
     }
     public User() {
     }

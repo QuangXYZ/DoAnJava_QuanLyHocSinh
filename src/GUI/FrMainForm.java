@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import BUS.UserBUS;
 import static GUI.FrLoginForm.Username;
 import static java.awt.Color.*;
 import java.awt.Image;
@@ -178,6 +179,11 @@ public class FrMainForm extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jButton5MouseExited(evt);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
             }
         });
         jPanel2.add(jButton5);
@@ -374,6 +380,19 @@ public class FrMainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         changeColorExit(jButton7);
     }//GEN-LAST:event_jButton7MouseExited
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        UserBUS usBUS = new UserBUS();
+        if (usBUS.checkAdmin(Username)) {
+            QLUserView qluv ;
+                    qluv = new QLUserView(); 
+                    qluv.setVisible(true);
+                    qluv.setLocationRelativeTo(null);
+                    this.dispose();
+        }
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
