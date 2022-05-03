@@ -40,5 +40,8 @@ public class KetQuaBUS {
 	public ArrayList<KetQuaDTO> layTongSoHocSinh(String maLop){
 		return ketQuaDAO.layTongSoHocSinh(maLop);
 	}
+        public int xoaKetQua(String ms){
+            return ketQuaDAO.xoaKetQua(ms);
+        }
 	
 }

@@ -21,6 +21,16 @@ public class QuanLiDiemHS /*extends HocSinh*/ {
 		this.hoa = hoa;
 		this.MSHS = mSHS;
 	}
+        public QuanLiDiemHS(String mSHS) {
+		toan = 0;
+                anh = 0;
+                ly = 0;
+                hoa = 0;
+                sinh = 0;
+                anh = 0;
+                van = 0;
+		this.MSHS = mSHS;
+	}
 	
 	
 

@@ -6,7 +6,9 @@
 package GUI;
 
 import BUS.HocSinhBUS;
+import BUS.KetQuaBUS;
 import BUS.LopHocBUS;
+import BUS.QuanLiDiemHocSinhBUS;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +29,7 @@ import javax.swing.table.TableModel;
 
 import DTO.HocSinh;
 import DTO.LopHoc;
+import DTO.QuanLiDiemHS;
 import sql.MyConnection;
 import java.awt.Dimension;
 
@@ -531,6 +534,10 @@ public class QLHSView extends javax.swing.JFrame {
         HocSinhBUS hsBUS = new HocSinhBUS();
 
         if (i >= 0) {
+            QuanLiDiemHocSinhBUS  qldhsbus = new QuanLiDiemHocSinhBUS();
+            KetQuaBUS kqbus= new KetQuaBUS();
+            kqbus.xoaKetQua(model.getValueAt(i, 1).toString());
+            qldhsbus.xoaDiemHocSinh(new QuanLiDiemHS(model.getValueAt(i, 1).toString()));
             if (hsBUS.deleteHocSinh(model.getValueAt(i, 1).toString()) != 0) {
                 JOptionPane.showMessageDialog(this, "Xóa thành công");
             } else {

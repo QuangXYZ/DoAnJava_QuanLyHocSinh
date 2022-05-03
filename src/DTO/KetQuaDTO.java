@@ -14,6 +14,11 @@ public class KetQuaDTO {
 		this.hocLuc = hocLuc;
 		this.MSHS = mSHS;
 	}
+        public KetQuaDTO(String mSHS) {
+		this.diemTrungBinh = 0;
+		this.hocLuc = null;
+		this.MSHS = mSHS;
+	}
 	
 	
 

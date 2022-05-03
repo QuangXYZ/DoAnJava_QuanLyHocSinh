@@ -252,5 +252,25 @@ public class KetQuaDAO {
         }
         return soLuongHocSinh;
     }
-	
+    public int xoaKetQua(String ms){
+        int result = 0;  
+        String sqlDelete = "delete from KETQUA where MAHS = ?";
+        try {      
+                connection = MyConnection.getConnection();
+                preparedStatement = connection.prepareStatement(sqlDelete);
+                preparedStatement.setString(1,ms);
+                result = preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally{
+        try {
+            connection.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            }
+        }
+        return result;
+    }
 }
