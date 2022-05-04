@@ -127,14 +127,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RefreshMenuActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="L&#x1ecd;c"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
-              </Events>
-            </MenuItem>
             <Menu class="javax.swing.JMenu" name="searchMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
@@ -142,7 +134,7 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="TheoTen">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Theo t&#xea;n"/>
+                    <Property name="text" type="java.lang.String" value="Theo T&#xea;n"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TheoTenActionPerformed"/>
@@ -166,7 +158,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="TheoGioiTinh">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Theo gi&#x1edb;i t&#xed;nh"/>
+                    <Property name="text" type="java.lang.String" value="Theo Gi&#x1edb;i t&#xed;nh"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TheoGioiTinhActionPerformed"/>
@@ -174,7 +166,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="TheoQueQuan">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Theo qu&#xea; qu&#xe1;n"/>
+                    <Property name="text" type="java.lang.String" value="Theo Qu&#xea; qu&#xe1;n"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TheoQueQuanActionPerformed"/>
@@ -182,7 +174,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="TheoLop">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Theo l&#x1edb;p"/>
+                    <Property name="text" type="java.lang.String" value="Theo L&#x1edb;p"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TheoLopActionPerformed"/>

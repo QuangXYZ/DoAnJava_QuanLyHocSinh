@@ -27,6 +27,22 @@ public class GiaoVienBUS {
     public int updateGiaoVien(GiaoVien gv) {  
         return gvDAO.updateGiaoVien(gv);
     }
-    
-    
+    public ArrayList<GiaoVien> searchGiaoVienMSGV(String MSGV) {  
+        return gvDAO.searchGiaoVienMSGV(MSGV);
+    }
+    public ArrayList<GiaoVien> searchGiaoVienHoTen(String HoTen) {  
+        return gvDAO.searchGiaoVienHoTen(HoTen);
+    }
+    public ArrayList<GiaoVien> searchGiaoVienNgaySinh(String NgaySinh) {  
+        return gvDAO.searchGiaoVienNgaySinh(NgaySinh);
+    }
+    public ArrayList<GiaoVien> searchGiaoVienQueQuan(String QueQuan) {  
+        return gvDAO.searchGiaoVienQueQuan(QueQuan);
+    }
+    public ArrayList<GiaoVien> searchGiaoVienLop(String Lop) {  
+        return gvDAO.searchGiaoVienLop(Lop);
+    }
+    public ArrayList<GiaoVien> searchGiaoVienGioiTinh(String GioiTinh) {  
+        return gvDAO.searchGiaoVienGioiTinh(GioiTinh);
+    }
 }

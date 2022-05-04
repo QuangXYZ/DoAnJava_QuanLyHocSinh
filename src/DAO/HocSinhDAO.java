@@ -131,7 +131,7 @@ public class HocSinhDAO {
     }
      
      
-     public ArrayList<HocSinh> searchHocSinhMSHS(String MSHS){
+    public ArrayList<HocSinh> searchHocSinhMSHS(String MSHS){
         try {
             String sqlSelectAll = "select * from HOCSINH";
             connection = MyConnection.getConnection();

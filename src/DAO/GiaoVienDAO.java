@@ -129,4 +129,168 @@ public class GiaoVienDAO {
     }
     return result;
     }
+    public ArrayList<GiaoVien> searchGiaoVienMSGV(String MSGV){
+        try {
+            String sqlSelectAll = "select * from GIAOVIEN";
+            connection = MyConnection.getConnection();
+            preparedStatement = connection.prepareStatement(sqlSelectAll);
+            resultSet = preparedStatement.executeQuery();
+         while(resultSet.next()){
+            if (resultSet.getString(1).contains(MSGV))   
+            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+         }
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        } catch (ParseException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(GiaoVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return dsgv;
+    }
+     public ArrayList<GiaoVien> searchGiaoVienHoTen(String HoTen){
+        try {
+            String sqlSelectAll = "select * from GIAOVIEN";
+            connection = MyConnection.getConnection();
+            preparedStatement = connection.prepareStatement(sqlSelectAll);
+        
+            resultSet = preparedStatement.executeQuery();
+         while(resultSet.next()){
+            if (resultSet.getString(2).contains(HoTen))
+            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+         }
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        } catch (ParseException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(GiaoVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return dsgv;
+    }
+     public ArrayList<GiaoVien> searchGiaoVienNgaySinh(String NgaySinh){
+        try {
+            String sqlSelectAll = "select * from GIAOVIEN";
+            connection = MyConnection.getConnection();
+            preparedStatement = connection.prepareStatement(sqlSelectAll);
+        
+            resultSet = preparedStatement.executeQuery();
+         while(resultSet.next()){
+            if (resultSet.getString(3).contains(NgaySinh))
+            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+         }
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        } catch (ParseException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(GiaoVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return dsgv;
+    }
+     public ArrayList<GiaoVien> searchGiaoVienGioiTinh(String GioiTinh){
+        try {
+            String sqlSelectAll = "select * from GIAOVIEN ";
+            connection = MyConnection.getConnection();
+            preparedStatement = connection.prepareStatement(sqlSelectAll);
+            resultSet = preparedStatement.executeQuery();
+         while(resultSet.next()){
+             if (resultSet.getString(4).contains(GioiTinh))
+            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+         }
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        } catch (ParseException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(GiaoVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return dsgv;
+    }
+     public ArrayList<GiaoVien> searchGiaoVienQueQuan(String QueQuan){
+        try {
+            String sqlSelectAll = "select * from GIAOVIEN ";
+            connection = MyConnection.getConnection();
+            preparedStatement = connection.prepareStatement(sqlSelectAll);
+            resultSet = preparedStatement.executeQuery();
+         while(resultSet.next()){
+             if (resultSet.getString(5).contains(QueQuan))
+            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+         }
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        } catch (ParseException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(GiaoVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return dsgv;
+    }
+     public ArrayList<GiaoVien> searchGiaoVienLop(String Lop){
+        try {
+            String sqlSelectAll = "select * from GIAOVIEN ";
+            connection = MyConnection.getConnection();
+            preparedStatement = connection.prepareStatement(sqlSelectAll);
+            resultSet = preparedStatement.executeQuery();
+         while(resultSet.next()){
+             if (resultSet.getString(6).contains(Lop))
+            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+         }
+         
+        } catch (SQLException ex) {
+            System.out.println("error "+ex );
+        } catch (ParseException ex) {
+            System.out.println("error "+ex );
+        }
+         finally{
+            try {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(GiaoVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return dsgv;
+    }
 }

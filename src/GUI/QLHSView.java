@@ -635,26 +635,17 @@ public class QLHSView extends javax.swing.JFrame {
         if (s.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         } else {
-            Connection con;
-            try {
-                con = MyConnection.getConnection();
-                System.out.println("Connection successful");
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("SELECT * FROM HOCSINH");
-                model = (DefaultTableModel) tbDSHS.getModel();
-                model.setRowCount(0);
-                int i = 0;
-                while (rs.next()) {
-                    if (rs.getString(5).contains(s)) {
-                        model.addRow(new Object[]{i + 1, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(6), rs.getString(5)});
-                        i++;
-                    }
-                }
-                con.close();
-                JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
-            } catch (Exception e) {
-                System.out.println("Connect Error " + e);
+            HocSinhBUS hsBUS = new HocSinhBUS();
+            dshs = hsBUS.searchHocSinhQueQuan(s);
+            model = (DefaultTableModel) tbDSHS.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < dshs.size(); i++) {
+                model.addRow(new Object[]{i + 1, dshs.get(i).getMSHS(), dshs.get(i).getHoTen(), formatDate.format(dshs.get(i).getNgaySinh()),
+                    dshs.get(i).getGioiTinh(), dshs.get(i).getLop(), dshs.get(i).getQueQuan()});
+
             }
+            JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+
         }
     }//GEN-LAST:event_TheoQuequanActionPerformed
 
@@ -738,7 +729,7 @@ public class QLHSView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         } else {
             HocSinhBUS hsBUS = new HocSinhBUS();
-            dshs = hsBUS.searchHocSinhNgaySinh(s);
+            dshs = hsBUS.searchHocSinhGioiTinh(s);
             model = (DefaultTableModel) tbDSHS.getModel();
             model.setRowCount(0);
             for (int i = 0; i < dshs.size(); i++) {
@@ -761,7 +752,7 @@ public class QLHSView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         } else {
             HocSinhBUS hsBUS = new HocSinhBUS();
-            dshs = hsBUS.searchHocSinhNgaySinh(s);
+            dshs = hsBUS.searchHocSinhLop(s);
             model = (DefaultTableModel) tbDSHS.getModel();
             model.setRowCount(0);
             for (int i = 0; i < dshs.size(); i++) {

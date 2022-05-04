@@ -129,7 +129,6 @@ public class QLGVView extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         RefreshMenu = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         searchMenu = new javax.swing.JMenu();
         TheoTen = new javax.swing.JMenuItem();
         TheoMSGV = new javax.swing.JMenuItem();
@@ -354,17 +353,9 @@ public class QLGVView extends javax.swing.JFrame {
         });
         jMenu1.add(RefreshMenu);
 
-        jMenuItem5.setText("Lọc");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem5);
-
         searchMenu.setText("Tìm kiếm");
 
-        TheoTen.setText("Theo tên");
+        TheoTen.setText("Theo Tên");
         TheoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TheoTenActionPerformed(evt);
@@ -388,7 +379,7 @@ public class QLGVView extends javax.swing.JFrame {
         });
         searchMenu.add(TheoNgaySinh);
 
-        TheoGioiTinh.setText("Theo giới tính");
+        TheoGioiTinh.setText("Theo Giới tính");
         TheoGioiTinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TheoGioiTinhActionPerformed(evt);
@@ -396,7 +387,7 @@ public class QLGVView extends javax.swing.JFrame {
         });
         searchMenu.add(TheoGioiTinh);
 
-        TheoQueQuan.setText("Theo quê quán");
+        TheoQueQuan.setText("Theo Quê quán");
         TheoQueQuan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TheoQueQuanActionPerformed(evt);
@@ -404,7 +395,7 @@ public class QLGVView extends javax.swing.JFrame {
         });
         searchMenu.add(TheoQueQuan);
 
-        TheoLop.setText("Theo lớp");
+        TheoLop.setText("Theo Lớp");
         TheoLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TheoLopActionPerformed(evt);
@@ -639,28 +630,17 @@ public class QLGVView extends javax.swing.JFrame {
                 JOptionPane.INFORMATION_MESSAGE);
         if (s.equals("")){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement st=con.createStatement();
-            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
-            model = (DefaultTableModel)tbDSGV.getModel();
-            model.setRowCount(0); 
-            int i=0;
-            while(rs.next()){
-                if (rs.getString(6).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
-                    i++;
-                }               
-            }      
-           con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        } else {
+            GiaoVienBUS gvBUS = new GiaoVienBUS();
+            dsgv = gvBUS.searchGiaoVienLop(s);
+            model = (DefaultTableModel) tbDSGV.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < dsgv.size(); i++) {
+                model.addRow(new Object[]{i + 1, dsgv.get(i).getMSGV(), dsgv.get(i).getHoTen(), formatDate.format(dsgv.get(i).getNgaySinh()),
+                    dsgv.get(i).getGioiTinh(), dsgv.get(i).getlop(), dsgv.get(i).getQueQuan()});
+            }
+                JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+            
         }
     }//GEN-LAST:event_TheoLopActionPerformed
 
@@ -672,28 +652,18 @@ public class QLGVView extends javax.swing.JFrame {
                 JOptionPane.INFORMATION_MESSAGE);
         if (s.equals("")){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement st=con.createStatement();
-            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
-            model = (DefaultTableModel)tbDSGV.getModel();
-            model.setRowCount(0); 
-            int i=0;
-            while(rs.next()){               
-                if (rs.getString(1).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
-                    i++;
-                }               
-            }      
-           con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        } else {
+            GiaoVienBUS gvBUS = new GiaoVienBUS();
+            dsgv = gvBUS.searchGiaoVienMSGV(s);
+            model = (DefaultTableModel) tbDSGV.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < dsgv.size(); i++) {
+                model.addRow(new Object[]{i + 1, dsgv.get(i).getMSGV(), dsgv.get(i).getHoTen(), formatDate.format(dsgv.get(i).getNgaySinh()),
+                    dsgv.get(i).getGioiTinh(), dsgv.get(i).getlop(), dsgv.get(i).getQueQuan()});
+
+            }
+            JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+
         }
     }//GEN-LAST:event_TheoMSGVActionPerformed
 
@@ -705,28 +675,17 @@ public class QLGVView extends javax.swing.JFrame {
                 JOptionPane.INFORMATION_MESSAGE);
         if (s.equals("")){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement st=con.createStatement();
-            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
-            model = (DefaultTableModel)tbDSGV.getModel();
-            model.setRowCount(0); 
-            int i=0;
-            while(rs.next()){
-                if (rs.getString(2).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
-                    i++;
-                }               
-            }      
-           con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        } else {
+            GiaoVienBUS gvBUS = new GiaoVienBUS();
+            dsgv = gvBUS.searchGiaoVienHoTen(s);
+            model = (DefaultTableModel) tbDSGV.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < dsgv.size(); i++) {
+                model.addRow(new Object[]{i + 1, dsgv.get(i).getMSGV(), dsgv.get(i).getHoTen(), formatDate.format(dsgv.get(i).getNgaySinh()),
+                    dsgv.get(i).getGioiTinh(), dsgv.get(i).getlop(), dsgv.get(i).getQueQuan()});
+            }
+            JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+
         }
     }//GEN-LAST:event_TheoTenActionPerformed
 
@@ -738,28 +697,17 @@ public class QLGVView extends javax.swing.JFrame {
                 JOptionPane.INFORMATION_MESSAGE);
         if (s.equals("")){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement st=con.createStatement();
-            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
-            model = (DefaultTableModel)tbDSGV.getModel();
-            model.setRowCount(0); 
-            int i=0;
-            while(rs.next()){
-                if (rs.getString(3).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
-                    i++;
-                }               
-            }      
-           con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        } else {
+            GiaoVienBUS gvBUS = new GiaoVienBUS();
+            dsgv = gvBUS.searchGiaoVienNgaySinh(s);
+            model = (DefaultTableModel) tbDSGV.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < dsgv.size(); i++) {
+                model.addRow(new Object[]{i + 1, dsgv.get(i).getMSGV(), dsgv.get(i).getHoTen(), formatDate.format(dsgv.get(i).getNgaySinh()),
+                    dsgv.get(i).getGioiTinh(), dsgv.get(i).getlop(), dsgv.get(i).getQueQuan()});
+            }
+                JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+
         }
     }//GEN-LAST:event_TheoNgaySinhActionPerformed
 
@@ -771,28 +719,17 @@ public class QLGVView extends javax.swing.JFrame {
                 JOptionPane.INFORMATION_MESSAGE);
         if (s.equals("")){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement st=con.createStatement();
-            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
-            model = (DefaultTableModel)tbDSGV.getModel();
-            model.setRowCount(0); 
-            int i=0;
-            while(rs.next()){
-                if (rs.getString(4).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
-                    i++;
-                }               
-            }      
-           con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! ");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        } else {
+            GiaoVienBUS gvBUS = new GiaoVienBUS();
+            dsgv = gvBUS.searchGiaoVienGioiTinh(s);
+            model = (DefaultTableModel) tbDSGV.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < dsgv.size(); i++) {
+                model.addRow(new Object[]{i + 1, dsgv.get(i).getMSGV(), dsgv.get(i).getHoTen(), formatDate.format(dsgv.get(i).getNgaySinh()),
+                    dsgv.get(i).getGioiTinh(), dsgv.get(i).getlop(), dsgv.get(i).getQueQuan()});
+            }
+            JOptionPane.showMessageDialog(this, "Tìm kiếm thành công! ");
+           
         }
     }//GEN-LAST:event_TheoGioiTinhActionPerformed
 
@@ -804,28 +741,18 @@ public class QLGVView extends javax.swing.JFrame {
                 JOptionPane.INFORMATION_MESSAGE);
         if (s.equals("")){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-        }
-        else {
-        Connection con;
-        try{          
-            con = DriverManager.getConnection(dbUrl,username,password);
-            System.out.println("Connection successful");
-            Statement st=con.createStatement();
-            ResultSet rs =st.executeQuery("SELECT * FROM HOCSINH");
-            model = (DefaultTableModel)tbDSGV.getModel();
-            model.setRowCount(0); 
-            int i=0;
-            while(rs.next()){
-                if (rs.getString(5).contains(s)){                      
-                    model.addRow(new Object[]{i+1,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(6),rs.getString(5)});
-                    i++;
-                }               
-            }      
-           con.close();
-           JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
-        } catch(Exception e){
-            System.out.println("Connect Error "+e);
-        } 
+        } else {
+            GiaoVienBUS gvBUS = new GiaoVienBUS();
+            dsgv = gvBUS.searchGiaoVienQueQuan(s);
+            model = (DefaultTableModel) tbDSGV.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < dsgv.size(); i++) {
+                model.addRow(new Object[]{i + 1, dsgv.get(i).getMSGV(), dsgv.get(i).getHoTen(), formatDate.format(dsgv.get(i).getNgaySinh()),
+                    dsgv.get(i).getGioiTinh(), dsgv.get(i).getlop(), dsgv.get(i).getQueQuan()});
+
+            }
+            JOptionPane.showMessageDialog(this, "Tìm kiếm thành công!");
+
         }
     }//GEN-LAST:event_TheoQueQuanActionPerformed
 
@@ -844,10 +771,6 @@ public class QLGVView extends javax.swing.JFrame {
         mainForm.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
                              
 
@@ -897,12 +820,6 @@ public class QLGVView extends javax.swing.JFrame {
     private javax.swing.JMenuItem TheoTen;
     private javax.swing.JButton addBtn;
     private javax.swing.JButton backBtn;
-    private javax.swing.JPanel background;
-    private javax.swing.JPanel background1;
-    private javax.swing.JPanel background2;
-    private javax.swing.JPanel background3;
-    private javax.swing.JPanel background4;
-    private javax.swing.JPanel background5;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbLop;
     private javax.swing.JComboBox<String> cbQueQuan;
@@ -912,10 +829,6 @@ public class QLGVView extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JDialog jDialog3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -923,13 +836,10 @@ public class QLGVView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;

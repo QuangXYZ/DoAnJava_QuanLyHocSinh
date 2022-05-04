@@ -42,6 +42,8 @@ public class HocSinhBUS {
     public ArrayList<HocSinh> searchHocSinhLop(String Lop) {  
         return hsDAO.searchHocSinhLop(Lop);
     }
-    
+    public ArrayList<HocSinh> searchHocSinhGioiTinh(String GioiTinh) {  
+        return hsDAO.searchHocSinhGioiTinh(GioiTinh);
+    }
     
 }
