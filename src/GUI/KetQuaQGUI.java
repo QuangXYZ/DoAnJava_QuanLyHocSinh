@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -179,8 +180,8 @@ public class KetQuaQGUI extends JFrame {
 		contentPane.add(lbSoLuongHSYeu);
 		
 		tfSoLuongHSYeu = new JTextField();
-		tfSoLuongHSYeu.setColumns(10);
 		tfSoLuongHSYeu.setBounds(575, 205, 51, 35);
+		tfSoLuongHSYeu.setColumns(10);
 		contentPane.add(tfSoLuongHSYeu);
 		tfSoLuongHSYeu.setEditable(false);
 		
@@ -195,8 +196,8 @@ public class KetQuaQGUI extends JFrame {
 		tfTongSoHocSinh.setEditable(false);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(65, 105, 225));
 		panel.setBounds(0, 0, 691, 49);
+		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		
 		JLabel lblNewLabel = new JLabel("THỐNG KÊ");
@@ -205,7 +206,8 @@ public class KetQuaQGUI extends JFrame {
 		lblNewLabel.setBounds(10, 0, 661, 45);
 		panel.add(lblNewLabel);
 		
-		JButton btQuayLai = new JButton("Quay Lại");
+		JButton btQuayLai = new JButton("QUAY lẠI");
+		btQuayLai.setBounds(49, 274, 120, 35);
 		btQuayLai.setBackground(new Color(176, 224, 230));
 		btQuayLai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -213,8 +215,16 @@ public class KetQuaQGUI extends JFrame {
 			}
 		});
 		btQuayLai.setIcon(new ImageIcon("src\\images\\btQuayLai.png"));
-		btQuayLai.setBounds(49, 274, 120, 35);
 		contentPane.add(btQuayLai);
+		
+		JButton btnXuatFileExcel = new JButton("XUẤT FILE EXCEL");
+		btnXuatFileExcel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				btnXuatFileExcelLaiActionPerformed( evt);
+			}
+		});
+		btnXuatFileExcel.setBounds(210, 274, 120, 35);
+		contentPane.add(btnXuatFileExcel);
 		
 	}	
 	
@@ -232,5 +242,16 @@ public class KetQuaQGUI extends JFrame {
         mainForm.setVisible(true);
         mainForm.setLocationRelativeTo(null);
         this.dispose();
+	}
+	
+	private void btnXuatFileExcelLaiActionPerformed(ActionEvent evt) {
+		KetQuaBUS ketQuaBUS = new KetQuaBUS();
+		String maLop = comboBox.getSelectedItem().toString();
+		if(ketQuaBUS.xuatFileExcel(maLop) != 0) {
+			JOptionPane.showMessageDialog(this, "Xuất file excel thành công ! ");
+			hienThiDuLieu();
+		}else {
+			JOptionPane.showMessageDialog(this, "Xuất file excel thành công ! ");
+		}
 	}
 }

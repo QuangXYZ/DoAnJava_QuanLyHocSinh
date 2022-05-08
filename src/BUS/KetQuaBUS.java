@@ -43,5 +43,9 @@ public class KetQuaBUS {
         public int xoaKetQua(String ms){
             return ketQuaDAO.xoaKetQua(ms);
         }
+        
+    public int xuatFileExcel(String maLop){
+            return ketQuaDAO.xuatFileExcel(maLop);
+    }
 	
 }

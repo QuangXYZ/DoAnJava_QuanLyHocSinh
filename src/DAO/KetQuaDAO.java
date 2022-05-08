@@ -2,21 +2,34 @@ package DAO;
 
 import DTO.HocSinh;
 import DTO.KetQuaDTO;
-import DTO.QuanLiDiemHS;
-import GUI.KetQuaQGUI;
 
+import it.firegloves.mempoi.MemPOI;
+import it.firegloves.mempoi.builder.MempoiBuilder;
+import it.firegloves.mempoi.domain.MempoiSheet;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import BUS.KetQuaBUS;
+import org.apache.poi.examples.xslf.Tutorial4;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.regexp.recompile;
+
 import sql.MyConnection;
+
 
 public class KetQuaDAO {
 	private Connection connection = null;
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
+    private PreparedStatement preparedStatement = null, preparedStatement2 = null, preparedStatement3 = null, preparedStatement4 = null, preparedStatement5 = null, preparedStatement6 = null;
+    private ResultSet resultSet = null, resultSet2 = null, resultSet3 = null, resultSet4 = null, resultSet5 = null, resultSet6 = null;
     
     public ArrayList<KetQuaDTO> docKetQuaHocLuc(String maLop){
     	ArrayList<KetQuaDTO> dsKetQuaHocLuc = new ArrayList<KetQuaDTO>();
@@ -273,4 +286,121 @@ public class KetQuaDAO {
         }
         return result;
     }
+    
+    public int xuatFileExcel(String maLop)   {
+    	int result = 0;
+    	try {
+			String sql2 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Khá' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
+			String sql = ("select HS.MAHS, HS.HOTEN, HS.LOP, KQ.DIEMTB, KQ.HOCLUC from HOCSINH HS, KETQUA KQ where HS.MAHS = KQ.MAHS AND  HS.LOP= '" + maLop +"'");
+			String sql3 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;;");
+			String sql4 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Giỏi' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
+			String sql5 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Trung bình' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
+			String sql6 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Yếu' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
+			
+			connection = MyConnection.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			preparedStatement2 = connection.prepareStatement(sql2);
+			resultSet2 = preparedStatement2.executeQuery();
+			preparedStatement3 = connection.prepareStatement(sql3);			
+			resultSet3 = preparedStatement3.executeQuery();
+			preparedStatement4 = connection.prepareStatement(sql4);			
+			resultSet4 = preparedStatement4.executeQuery();
+			preparedStatement5 = connection.prepareStatement(sql5);			
+			resultSet5 = preparedStatement5.executeQuery();
+			preparedStatement6 = connection.prepareStatement(sql6);			
+			resultSet6 = preparedStatement6.executeQuery();
+
+			 XSSFWorkbook wb = new XSSFWorkbook();
+			 XSSFSheet sheet = wb.createSheet("DanhSachHocSinh");
+			 
+			 XSSFRow header3 = sheet.createRow(0);
+			 header3.createCell(0).setCellValue("Tổng số học sinh:");
+			 while(resultSet3.next()) {
+				 header3.createCell(2).setCellValue(resultSet3.getString(1)); 
+			 }
+			 
+			 XSSFRow header2 = sheet.createRow(1);
+			 header2.createCell(0).setCellValue("Số lượng hoc sinh khá:");
+			 while(resultSet2.next()) {
+				 header2.createCell(3).setCellValue(resultSet2.getString(1)); 
+			 }
+			 
+			 XSSFRow header4 = sheet.createRow(2);
+			 header4.createCell(0).setCellValue("Số lượng học sinh giỏi:");
+			 while(resultSet4.next()) {
+				 header4.createCell(3).setCellValue(resultSet4.getString(1)); 
+			 }
+			 
+			 XSSFRow header5 = sheet.createRow(3);
+			 header5.createCell(0).setCellValue("Số lượng học sinh trung bình:");
+			 while(resultSet5.next()) {
+				 header5.createCell(3).setCellValue(resultSet5.getString(1)); 
+			 }
+			 
+			 XSSFRow header6 = sheet.createRow(4);
+			 header6.createCell(0).setCellValue("Số lượng học sinh yếu:");
+			 while(resultSet6.next()) {
+				 header6.createCell(3).setCellValue(resultSet6.getString(1)); 
+			 }
+			 
+			 XSSFRow header = sheet.createRow(6);
+			 header.createCell(0).setCellValue("MAHS");
+			 header.createCell(1).setCellValue("HỌ Và Tên");
+			 header.createCell(3).setCellValue("LỚP");
+			 header.createCell(4).setCellValue("ĐIỂM TRUNG BÌNH");
+			 header.createCell(6).setCellValue("HỌC LỰC");
+			 
+			 int index = 7;
+			 while(resultSet.next()) {
+				 XSSFRow row = sheet.createRow(index);
+				 row.createCell(0).setCellValue(resultSet.getString(1));
+				 row.createCell(1).setCellValue(resultSet.getString(2));
+				 row.createCell(3).setCellValue(resultSet.getString(3));
+				 row.createCell(4).setCellValue(resultSet.getString(4));
+				 row.createCell(6).setCellValue(resultSet.getString(5));
+				 index++;
+			 }
+			 
+			 FileOutputStream fileOut = new FileOutputStream(maLop+".xlsx");
+			 wb.write(fileOut);
+			 fileOut.close();
+				 			 
+				 preparedStatement.close();
+				 resultSet.close();
+			 } catch (SQLException ex) {
+				Logger.getLogger(Tutorial4.class.getName()).log(Level.SEVERE,null,ex);
+			} catch (FileNotFoundException ex) {
+				Logger.getLogger(Tutorial4.class.getName()).log(Level.SEVERE,null,ex);
+			} catch (IOException e) {
+				System.out.println("lỗi: " + e);
+			}
+    	
+    	return result;
+    	//https://www.youtube.com/watch?v=ktwMW13FrQM&ab_channel=Murtaza%27sWorkshop-RoboticsandAI
+    }
+    
+    /*public int xuatFileExcel(String maLop)   {
+    	int result = 0;
+    	try {			
+			String sql = ("select HS.MAHS, HS.HOTEN, HS.LOP, KQ.DIEMTB, KQ.HOCLUC from HOCSINH HS, KETQUA KQ where HS.MAHS = KQ.MAHS AND  HS.LOP= '" + maLop +"'");
+			connection = MyConnection.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			
+			 File file = new File("petycash.xlsx");
+
+			 MemPOI memPOI = MempoiBuilder.aMemPOI()
+	                    .withFile(file)
+	                    .addMempoiSheet(new MempoiSheet(preparedStatement))
+	                    .build();
+			 CompletableFuture<String> fut = memPOI.prepareMempoiReportToFile();
+			 String absoluteFileName = fut.get();
+			 	
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }	 
+				 
+    	
+    	return result;
+    }*/
 }
