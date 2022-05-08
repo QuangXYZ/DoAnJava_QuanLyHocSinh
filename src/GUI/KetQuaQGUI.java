@@ -217,13 +217,15 @@ public class KetQuaQGUI extends JFrame {
 		btQuayLai.setIcon(new ImageIcon("src\\images\\btQuayLai.png"));
 		contentPane.add(btQuayLai);
 		
-		JButton btnXuatFileExcel = new JButton("XUẤT FILE EXCEL");
+		JButton btnXuatFileExcel = new JButton("XUẤT EXCEL");
+		btnXuatFileExcel.setBackground(new Color(176, 224, 230));
+		btnXuatFileExcel.setIcon(new ImageIcon("src\\images\\import.png"));
 		btnXuatFileExcel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				btnXuatFileExcelLaiActionPerformed( evt);
 			}
 		});
-		btnXuatFileExcel.setBounds(210, 274, 120, 35);
+		btnXuatFileExcel.setBounds(210, 274, 131, 35);
 		contentPane.add(btnXuatFileExcel);
 		
 	}	
