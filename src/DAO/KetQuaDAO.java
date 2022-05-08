@@ -346,7 +346,7 @@ public class KetQuaDAO {
 			 
 			 XSSFRow header = sheet.createRow(6);
 			 header.createCell(0).setCellValue("MAHS");
-			 header.createCell(1).setCellValue("HỌ Và Tên");
+			 header.createCell(1).setCellValue("HỌ VÀ TÊN");
 			 header.createCell(3).setCellValue("LỚP");
 			 header.createCell(4).setCellValue("ĐIỂM TRUNG BÌNH");
 			 header.createCell(6).setCellValue("HỌC LỰC");

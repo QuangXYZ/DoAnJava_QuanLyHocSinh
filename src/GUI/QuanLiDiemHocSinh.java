@@ -312,7 +312,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 			
 			
 			
-			float trungBinh = (toan + anh + van + hoa + ly + sinh)/6;
+			float trungBinh = (float)Math.round(((toan + anh + van + hoa + ly + sinh)/6)*100) / 100;
 			KetQuaDTO ketQuaDTO = new KetQuaDTO();
 			ketQuaDTO.setMSHS(tfMSHS.getText());
 			ketQuaDTO.setDiemTrungBinh(trungBinh);
