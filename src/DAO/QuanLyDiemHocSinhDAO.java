@@ -183,5 +183,10 @@ public class QuanLyDiemHocSinhDAO {
 	  				
 	  				return listMSHS;
 	  		}
+	  		
+	  		public float tinhTrungBinh(float a, float b, float c, float d, float e, float f) {
+	  			float trungBinh = (float)Math.round(((a + b + c + d + e + f)/6)*100) / 100;		
+	  			return trungBinh;
+	  		}
 
 }
