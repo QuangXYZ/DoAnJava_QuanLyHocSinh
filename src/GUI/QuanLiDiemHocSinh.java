@@ -351,23 +351,62 @@ public class QuanLiDiemHocSinh extends JFrame {
 		private void btSuaActionPerformed(ActionEvent evt) {
 			if (tfToan.getText().equals("")||tfMSHS.getText().equals("")||tfAnh.getText().equals("")||tfVan.getText().equals("")||tfSinh.getText().equals("")||tfLi.getText().equals("")||tfHoa.getText().equals("")){
 	            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+	        }else {
+				try {
+				QuanLiDiemHS diemHS = new  QuanLiDiemHS();
+				diemHS.setToan(Float.parseFloat(tfToan.getText()));
+				diemHS.setAnh(Float.parseFloat(tfAnh.getText()));
+				diemHS.setVan(Float.parseFloat(tfVan.getText()));
+				diemHS.setSinh(Float.parseFloat(tfSinh.getText()));
+				diemHS.setLy(Float.parseFloat(tfLi.getText()));
+				diemHS.setHoa(Float.parseFloat(tfHoa.getText()));
+				diemHS.setMSHS(tfMSHS.getText());
+				
+				//Tính điểm trung bình 
+				float toan = 0, anh = 0, van = 0, sinh = 0, ly = 0, hoa = 0;
+				
+				toan = Float.parseFloat(tfToan.getText());
+				anh = Float.parseFloat(tfAnh.getText());
+				van = Float.parseFloat(tfVan.getText());
+				sinh = Float.parseFloat(tfSinh.getText());
+				hoa = Float.parseFloat(tfHoa.getText());
+				ly = Float.parseFloat(tfLi.getText());
+				
+				if(toan < 0 || toan > 10 || anh < 0 || anh > 10 || van < 0 || van > 10 || sinh < 0 || sinh > 10 || hoa < 0 || hoa > 10 || ly < 0 || ly > 10) {
+					JOptionPane.showMessageDialog(this, "Nhập sai dữ liệu! ");
+					return;
+				}
+				
+				QuanLiDiemHocSinhBUS diemHocSinhBUS = new QuanLiDiemHocSinhBUS();
+				if(diemHocSinhBUS.suaDiemHocSinh(diemHS) != 0) {
+					JOptionPane.showMessageDialog(this, "Sửa thành công ! ");
+					hienThiDuLieu();
+				}else {
+					JOptionPane.showMessageDialog(this, "Sửa không thành công ! ");
+				}
+				
+				float trungBinh = diemHocSinhBUS.tinhTrungBinh(toan, anh, van, sinh, ly, hoa);
+				//float trungBinh = (float)Math.round(((toan + anh + van + hoa + ly + sinh)/6)*100) / 100;
+				KetQuaDTO ketQuaDTO = new KetQuaDTO();
+				ketQuaDTO.setMSHS(tfMSHS.getText());
+				ketQuaDTO.setDiemTrungBinh(trungBinh);
+				if(trungBinh >= 8) {
+					ketQuaDTO.setHocLuc("Giỏi");
+				}else if(trungBinh >= 7 && trungBinh <= 8) {
+					ketQuaDTO.setHocLuc("Khá");
+				}else if(trungBinh >= 5 && trungBinh <= 7) {
+					ketQuaDTO.setHocLuc("Trung bình");
+				} else {
+					ketQuaDTO.setHocLuc("Yếu");
+				}
+				
+				KetQuaBUS ketQuaBUS = new KetQuaBUS();
+				ketQuaBUS.suaKetQuaHocLuc(ketQuaDTO);
+				
+				}catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(this,  "Nhập sai dữ liệu");
+				}
 	        }
-			QuanLiDiemHS diemHS = new  QuanLiDiemHS();
-			diemHS.setToan(Float.parseFloat(tfToan.getText()));
-			diemHS.setAnh(Float.parseFloat(tfAnh.getText()));
-			diemHS.setVan(Float.parseFloat(tfVan.getText()));
-			diemHS.setSinh(Float.parseFloat(tfSinh.getText()));
-			diemHS.setLy(Float.parseFloat(tfLi.getText()));
-			diemHS.setHoa(Float.parseFloat(tfHoa.getText()));
-			diemHS.setMSHS(tfMSHS.getText());
-			QuanLiDiemHocSinhBUS diemHocSinhBUS = new QuanLiDiemHocSinhBUS();
-			if(diemHocSinhBUS.suaDiemHocSinh(diemHS) != 0) {
-				JOptionPane.showMessageDialog(this, "Sửa thành công ! ");
-				hienThiDuLieu();
-			}else {
-				JOptionPane.showMessageDialog(this, "Sửa không thành công ! ");
-			}
-			
 		}
 		
 		private void btnTimKiemActionPerformed(ActionEvent evt) {

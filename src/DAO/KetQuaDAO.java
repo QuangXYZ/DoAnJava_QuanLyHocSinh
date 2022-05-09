@@ -2,7 +2,7 @@ package DAO;
 
 import DTO.HocSinh;
 import DTO.KetQuaDTO;
-
+import DTO.QuanLiDiemHS;
 import it.firegloves.mempoi.MemPOI;
 import it.firegloves.mempoi.builder.MempoiBuilder;
 import it.firegloves.mempoi.domain.MempoiSheet;
@@ -91,6 +91,31 @@ public class KetQuaDAO {
         }
         return result;
     }  
+	
+	public int suaKetQuaHocLuc(KetQuaDTO ketQuaDTO) {
+    	int result = 0;
+		try {
+			connection = MyConnection.getConnection();
+			String sql = ("update KETQUA set DIEMTB = ?, HOCLUC = ?" + "where MAHS = ?");
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(3, ketQuaDTO.getMSHS());
+			preparedStatement.setFloat(1, ketQuaDTO.getDiemTrungBinh());
+			preparedStatement.setString(2, ketQuaDTO.getHocLuc());
+			result = preparedStatement.executeUpdate();
+		 }catch (SQLException e) {
+			 e.printStackTrace();
+		 }
+		
+		 finally{
+			 try {
+				 connection.close();
+				 preparedStatement.close();
+			 } catch (SQLException e) {
+				 e.printStackTrace();
+			 }
+		 }
+		 return result;	
+	}
 	
 	public ArrayList<KetQuaDTO> doDuLieuComboBox() {
 		ArrayList<KetQuaDTO> dsMaLop = new ArrayList<KetQuaDTO>();

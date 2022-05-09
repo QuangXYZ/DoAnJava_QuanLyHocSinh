@@ -15,6 +15,10 @@ public class KetQuaBUS {
 	public int themKetQuaHocLuc(KetQuaDTO ketQuaDTO) {
 		return ketQuaDAO.themKetQuaHocLuc(ketQuaDTO);
 	}
+	
+	public int suaKetQuaHocLuc(KetQuaDTO ketQuaDTO) {
+		return ketQuaDAO.suaKetQuaHocLuc(ketQuaDTO);
+	}
 
 	
 	public ArrayList<KetQuaDTO> doDuLieuComboBox() {
