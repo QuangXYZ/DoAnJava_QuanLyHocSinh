@@ -65,9 +65,9 @@ public class QuanLyDiemHocSinhDAO {
 				preparedStatement.setFloat(5, diemHS.getSinh());
 				preparedStatement.setFloat(6, diemHS.getLy());
 				preparedStatement.setFloat(7, diemHS.getHoa());				
-				result = preparedStatement.executeUpdate();;//lớn hơn 0 thì thêm được
+				result = preparedStatement.executeUpdate();//Sử dụng cho cậu lệnh sql update, trả về giá trị 0 cho các câu sql không có kết quả gì
 			}catch (SQLException e) {
-	            e.printStackTrace();
+	            e.printStackTrace();//in ra vị trí xảy ra ngoại lệ
 	        }
 	        finally{
 	            try {

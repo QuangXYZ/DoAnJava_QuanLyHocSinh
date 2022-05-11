@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 import org.apache.poi.examples.xslf.Tutorial4;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -30,9 +32,9 @@ public class KetQuaDAO {
         try {			
 			String sql = ("select HS.MAHS, HS.HOTEN, HS.LOP, KQ.DIEMTB, KQ.HOCLUC from HOCSINH HS, KETQUA KQ where HS.MAHS = KQ.MAHS AND  HS.LOP= '" + maLop +"'");
 			connection = MyConnection.getConnection();
-			preparedStatement = connection.prepareStatement(sql);
-			resultSet = preparedStatement.executeQuery();
-			while(resultSet.next()) {
+			preparedStatement = connection.prepareStatement(sql);// gửi sql đến cơ sở dữ liệu và thực thi 
+			resultSet = preparedStatement.executeQuery();//resultSet: truy cập dữ liệu trả về từ csdl,executeQuery: sử dụng cho câu lệnh sql select 
+			while(resultSet.next()) {// di chuyển con trỏ đến dòng kế, 
 				KetQuaDTO KQ = new KetQuaDTO();
 				HocSinh hocSinh = new HocSinh();
 				KQ.setMSHS(resultSet.getString(1));
@@ -49,11 +51,11 @@ public class KetQuaDAO {
         }
          finally{
             try {
-                connection.close();
+                connection.close();//thực hiện đóng kết nối
                 preparedStatement.close();
                 resultSet.close();
             } catch (SQLException ex) {
-                Logger.getLogger(KetQuaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(KetQuaDAO.class.getName()).log(Level.SEVERE, null, ex);//phương pháp, nó cung cấp một phương tiện xử lý ngoại lệ (ghi nhật ký)
             }
         }
         return dsKetQuaHocLuc;
@@ -71,13 +73,14 @@ public class KetQuaDAO {
 			preparedStatement.setFloat(2, ketQuaDTO.getDiemTrungBinh());
 			preparedStatement.setString(3, ketQuaDTO.getHocLuc());
 				
-			result = preparedStatement.executeUpdate();//lá»›n hÆ¡n 0 thÃ¬ thÃªm Ä‘Æ°á»£c
+			result = preparedStatement.executeUpdate();//Sử dụng cho cậu lệnh sql update, trả về giá trị 0 cho các câu sql không có kết quả gì
+			
 		}catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace();//in ra vị trí xảy ra ngoại lệ
         }
         finally{
             try {
-                connection.close();
+                connection.close();//Thực hiện đóng kết nối
                 preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -118,11 +121,8 @@ public class KetQuaDAO {
 			String sql = ("select DISTINCT LOP from HOCSINH;  ");
 			preparedStatement = connection.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery();
-			//kq.comboBox.removeAllItems();//xóa tất cả các mục được hiển thị trong comboBox
-
+			
 			while(resultSet.next()) {
-					//đổ dữ liệu vào conboBox
-					//kq.comboBox.addItem(resultSet.getString("LOP"));
 				KetQuaDTO maLopHS = new KetQuaDTO();
 				HocSinh hocSinh = new HocSinh();
 				hocSinh.setLop(resultSet.getString(1));
@@ -306,8 +306,8 @@ public class KetQuaDAO {
         return result;
     }
     
-    public int xuatFileExcel(String maLop)   {
-    	int result = 0;
+    public void xuatFileExcel(String maLop)   {
+    	
     	try {
 			String sql2 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Khá' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
 			String sql = ("select HS.MAHS, HS.HOTEN, HS.LOP, KQ.DIEMTB, KQ.HOCLUC from HOCSINH HS, KETQUA KQ where HS.MAHS = KQ.MAHS AND  HS.LOP= '" + maLop +"'");
@@ -380,22 +380,24 @@ public class KetQuaDAO {
 				 row.createCell(6).setCellValue(resultSet.getString(5));
 				 index++;
 			 }
-			 
+			 //đặt tên file excel khi xuất
 			 FileOutputStream fileOut = new FileOutputStream(maLop+".xlsx");
 			 wb.write(fileOut);
 			 fileOut.close();
-				 			 
+				JOptionPane.showMessageDialog(null, "Xuất file excel thành công ! ");			 
 				 preparedStatement.close();
 				 resultSet.close();
 			 } catch (SQLException ex) {
+				JOptionPane.showMessageDialog(null, "Xuất file excel không thành công ! ");
 				Logger.getLogger(Tutorial4.class.getName()).log(Level.SEVERE,null,ex);
 			} catch (FileNotFoundException ex) {
+				JOptionPane.showMessageDialog(null, "Xuất file excel không thành công ! ");
 				Logger.getLogger(Tutorial4.class.getName()).log(Level.SEVERE,null,ex);
 			} catch (IOException e) {
-				System.out.println("lỗi: " + e);
+				JOptionPane.showMessageDialog(null, "Xuất file excel không thành công ! ");
+				e.printStackTrace();
 			}
     	
-    	return result;
     	//https://www.youtube.com/watch?v=ktwMW13FrQM&ab_channel=Murtaza%27sWorkshop-RoboticsandAI
     }
     
