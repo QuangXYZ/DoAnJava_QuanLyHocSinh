@@ -329,10 +329,11 @@ public class KetQuaDAO {
 			resultSet5 = preparedStatement5.executeQuery();
 			preparedStatement6 = connection.prepareStatement(sql6);			
 			resultSet6 = preparedStatement6.executeQuery();
-
+			 // tạo đối tượng XSSFWorkbook
 			 XSSFWorkbook wb = new XSSFWorkbook();
+			 //Tạo một sheet và đặt tên bảng tính
 			 XSSFSheet sheet = wb.createSheet("DanhSachHocSinh");
-			 
+			 //Tạo đối tượng XSSFRow, tham số đầu vào là chỉ số hàng
 			 XSSFRow header3 = sheet.createRow(0);
 			 header3.createCell(0).setCellValue("Tổng số học sinh:");
 			 while(resultSet3.next()) {
@@ -382,7 +383,7 @@ public class KetQuaDAO {
 			 }
 			 //đặt tên file excel khi xuất
 			 FileOutputStream fileOut = new FileOutputStream(maLop+".xlsx");
-			 wb.write(fileOut);
+			 wb.write(fileOut);//Thực hiện lưu thông tin với đối tượng fileOut
 			 fileOut.close();
 				JOptionPane.showMessageDialog(null, "Xuất file excel thành công ! ");			 
 				 preparedStatement.close();
