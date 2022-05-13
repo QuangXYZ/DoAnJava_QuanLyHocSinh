@@ -13,15 +13,15 @@ public class QuanLyDiemHocSinhDAO {
 	    private Connection connection = null;
 	    private PreparedStatement preparedStatement = null;
 	    private ResultSet resultSet = null;
-	    //SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-	    ArrayList<QuanLiDiemHS> dsDiemHocSinh = new ArrayList<QuanLiDiemHS>();
+	    
 	    public ArrayList<QuanLiDiemHS> docDiemHocSinh(){
+	    	ArrayList<QuanLiDiemHS> dsDiemHocSinh = new ArrayList<QuanLiDiemHS>();
 	        try {
 	        	connection = MyConnection.getConnection();
 				String sql = ("SELECT HS.MAHS, HS.HOTEN, DHS.TOAN, DHS.ANH, DHS.VAN, DHS.SINH, DHS.LI, DHS.HOA FROM HOCSINH HS, DIEMHOCSINH DHS WHERE HS.MAHS = DHS.MAHS");
-				preparedStatement = connection.prepareStatement(sql);
-				resultSet = preparedStatement.executeQuery();
-				while(resultSet.next()) {
+				preparedStatement = connection.prepareStatement(sql);// gửi sql đến cơ sở dữ liệu và thực thi 
+				resultSet = preparedStatement.executeQuery();//resultSet: truy cập dữ liệu trả về từ csdl,executeQuery: sử dụng cho câu lệnh sql select 
+				while(resultSet.next()) {// di chuyển con trỏ đến dòng kế,
 					QuanLiDiemHS diemHS = new QuanLiDiemHS();
 					HocSinh hocSinh = new HocSinh();
 					diemHS.setMSHS(resultSet.getString(1));
@@ -41,7 +41,7 @@ public class QuanLyDiemHocSinhDAO {
 	        }
 	         finally{
 	            try {
-	                connection.close();
+	                connection.close();//thực hiện đóng kết nối
 	                preparedStatement.close();
 	                resultSet.close();
 	            } catch (SQLException ex) {
@@ -71,7 +71,7 @@ public class QuanLyDiemHocSinhDAO {
 	        }
 	        finally{
 	            try {
-	                connection.close();
+	                connection.close();//thực hiện đóng kết nối
 	                preparedStatement.close();
 	            } catch (SQLException e) {
 	                e.printStackTrace();
@@ -163,7 +163,7 @@ public class QuanLyDiemHocSinhDAO {
 			 return dsDiemHS;
 			}
 	    
-	  //lay ma hoc sinh trong bang DIEMHOCSINH sql
+	  //lay ma hoc sinh trong bang DIEMHOCSINH sql dùng kiểm tra cho chức năng tìm kiếm, có tồn tại mã học sinh trong bảng điểm
 	  		public  ArrayList<String> layMaHocSinh(){
 	  			ArrayList<String> listMSHS = new ArrayList<>();						
 	  				try {				

@@ -57,8 +57,157 @@ public class KetQuaQGUI extends JFrame {
 		});
 	}
 	
+	public KetQuaQGUI() {
+		setTitle("THỐNG KÊ");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 695, 520);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(224, 255, 255));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		//dùng add lbThongKe
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 691, 49);
+		panel.setBackground(new Color(65, 105, 225));
+		contentPane.add(panel);
+		
+		JLabel lbThongKe = new JLabel("THỐNG KÊ");
+		lbThongKe.setForeground(new Color(173, 255, 47));
+		lbThongKe.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lbThongKe.setBounds(10, 0, 661, 45);
+		panel.add(lbThongKe);
+		
+		comboBox = new JComboBox<String>();
+		comboBox.setBounds(184, 80, 96, 35);
+		
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				comboBoxActionPerformed(evt);
+			}
+			private void comboBoxActionPerformed(ActionEvent evt) {
+				hienThiDuLieu();
+			}
+		});
+		contentPane.add(comboBox);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 330, 661, 143);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null},
+			},
+			new String[] {
+				" MAHS", "HỌ VÀ TÊN", "LỚP", "ĐIỂM TRUNG BÌNH", "HỌC LỰC"
+			}
+		));
+		table.getColumnModel().getColumn(1).setPreferredWidth(195);
+		table.getColumnModel().getColumn(3).setPreferredWidth(105);
+		scrollPane.setViewportView(table);
+		
+		JLabel lbChonTenLop = new JLabel("Chọn tên lớp");
+		lbChonTenLop.setBounds(54, 78, 120, 35);
+		lbChonTenLop.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		contentPane.add(lbChonTenLop);
+		
+		JLabel lbTongSoHocSinh = new JLabel("Tổng số học sinh");
+		lbTongSoHocSinh.setBounds(358, 80, 183, 35);
+		contentPane.add(lbTongSoHocSinh);
+		
+		JLabel lbSoLuongHSGioi = new JLabel("Số lượng học sinh Giỏi");
+		lbSoLuongHSGioi.setBounds(54, 143, 151, 38);
+		contentPane.add(lbSoLuongHSGioi);
+		
+		JLabel lbSoLuongHSKha = new JLabel("Số lượng học sinh khá");
+		lbSoLuongHSKha.setBounds(54, 205, 151, 35);
+		contentPane.add(lbSoLuongHSKha);
+		
+		JLabel lbSoLuongHSTrungBinh = new JLabel("Số lượng học sinh trung bình");
+		lbSoLuongHSTrungBinh.setBounds(358, 143, 183, 38);
+		contentPane.add(lbSoLuongHSTrungBinh);
+		
+		JLabel lbSoLuongHSYeu = new JLabel("Số lượng học sinh yếu");
+		lbSoLuongHSYeu.setBounds(358, 205, 183, 35);
+		contentPane.add(lbSoLuongHSYeu);
+		
+		tfTongSoHocSinh = new JTextField();
+		tfTongSoHocSinh.setBounds(575, 80, 50, 35);
+		contentPane.add(tfTongSoHocSinh);
+		tfTongSoHocSinh.setColumns(10);
+		tfTongSoHocSinh.setEditable(false);
+		
+		tfSoLuongHSGioi = new JTextField();
+		tfSoLuongHSGioi.setBounds(229, 145, 51, 35);
+		contentPane.add(tfSoLuongHSGioi);
+		tfSoLuongHSGioi.setColumns(10);
+		tfSoLuongHSGioi.setEditable(false);
+		
+		tfSoLuongHSKha = new JTextField();
+		tfSoLuongHSKha.setBounds(229, 205, 51, 35);
+		contentPane.add(tfSoLuongHSKha);
+		tfSoLuongHSKha.setColumns(10);
+		tfSoLuongHSKha.setEditable(false);
+				
+		tfSoLuongHSTrungBinh = new JTextField();
+		tfSoLuongHSTrungBinh.setBounds(575, 145, 51, 35);
+		contentPane.add(tfSoLuongHSTrungBinh);
+		tfSoLuongHSTrungBinh.setColumns(10);
+		tfSoLuongHSTrungBinh.setEditable(false);
+		
+		tfSoLuongHSYeu = new JTextField();
+		tfSoLuongHSYeu.setBounds(575, 205, 51, 35);
+		tfSoLuongHSYeu.setColumns(10);
+		contentPane.add(tfSoLuongHSYeu);
+		tfSoLuongHSYeu.setEditable(false);
+		
+		JButton btQuayLai = new JButton("QUAY lẠI");
+		btQuayLai.setBounds(49, 274, 120, 35);
+		btQuayLai.setBackground(new Color(176, 224, 230));
+		btQuayLai.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				btnQuayLaiActionPerformed( evt);
+			}
+		});
+		btQuayLai.setIcon(new ImageIcon("src\\images\\btQuayLai.png"));
+		contentPane.add(btQuayLai);
+		
+		JButton btnXuatFileExcel = new JButton("XUẤT EXCEL");
+		btnXuatFileExcel.setBackground(new Color(176, 224, 230));
+		btnXuatFileExcel.setIcon(new ImageIcon("src\\images\\import.png"));
+		btnXuatFileExcel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				btnXuatFileExcelLaiActionPerformed( evt);
+			}
+		});
+		btnXuatFileExcel.setBounds(210, 274, 131, 35);
+		contentPane.add(btnXuatFileExcel);
+		
+	}	
 	
-	 
+	public void doDuLieuComboBox() {
+		KetQuaBUS ketQuaBUS = new KetQuaBUS();
+		ArrayList<KetQuaDTO> dsMaLop = ketQuaBUS.doDuLieuComboBox();
+		for(KetQuaDTO ds: dsMaLop) {
+			comboBox.addItem(ds.getHocSinh().getLop());//add danh sách mã lớp vào comboBox
+		}
+	}
+	
+	private void btnQuayLaiActionPerformed(ActionEvent evt) {
+		FrMainForm mainForm;
+        mainForm = new FrMainForm();
+        mainForm.setVisible(true);
+        mainForm.setLocationRelativeTo(null);
+        this.dispose();
+	}
+	
+	private void btnXuatFileExcelLaiActionPerformed(ActionEvent evt) {
+		KetQuaBUS ketQuaBUS = new KetQuaBUS();
+		String maLop = comboBox.getSelectedItem().toString();//Lấy mã lớp từ comboBox
+		ketQuaBUS.xuatFileExcel(maLop);
+	}
 	
 	public void hienThiDuLieu() {
 		KetQuaBUS ketQuaBUS = new KetQuaBUS();
@@ -96,159 +245,5 @@ public class KetQuaQGUI extends JFrame {
 		for(KetQuaDTO sl: tongSoHocSinh) {
 			tfTongSoHocSinh.setText(sl.getTongSoHocSinh());
 		}
-	}
-	
-	
-	
-	
-	public KetQuaQGUI() {
-		setTitle("TH\u1ED0NG K\u00CA");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 695, 520);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(224, 255, 255));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel lbChonTenLop = new JLabel("Ch\u1ECDn T\u00EAn L\u1EDBp: ");
-		lbChonTenLop.setBounds(54, 78, 120, 35);
-		lbChonTenLop.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(lbChonTenLop);
-		
-		comboBox = new JComboBox<String>();
-		comboBox.setBounds(184, 80, 96, 35);
-		//comboBox.setActionCommand("Select Table");
-		comboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				comboBoxActionPerformed(evt);
-			}
-			private void comboBoxActionPerformed(ActionEvent evt) {
-				hienThiDuLieu();
-			}
-		});
-		contentPane.add(comboBox);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 330, 661, 143);
-		contentPane.add(scrollPane);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				" MAHS", "            H\u1ECC V\u00C0 T\u00CAN", "L\u1EDAP", "\u0110I\u1EC2M TRUNG B\u00CCNH", "H\u1ECCC L\u1EF0C"
-			}
-		));
-		table.getColumnModel().getColumn(1).setPreferredWidth(195);
-		table.getColumnModel().getColumn(3).setPreferredWidth(105);
-		scrollPane.setViewportView(table);
-		
-		JLabel lbSoLuongHSGioi = new JLabel("Số lượng học sinh Giỏi");
-		lbSoLuongHSGioi.setBounds(54, 143, 151, 38);
-		contentPane.add(lbSoLuongHSGioi);
-		
-		JLabel lbSoLuongHSKha = new JLabel("Số lượng học sinh khá");
-		lbSoLuongHSKha.setBounds(54, 205, 151, 35);
-		contentPane.add(lbSoLuongHSKha);
-		
-		tfSoLuongHSGioi = new JTextField();
-		tfSoLuongHSGioi.setBounds(229, 145, 51, 35);
-		contentPane.add(tfSoLuongHSGioi);
-		tfSoLuongHSGioi.setColumns(10);
-		tfSoLuongHSGioi.setEditable(false);
-		
-		tfSoLuongHSKha = new JTextField();
-		tfSoLuongHSKha.setBounds(229, 205, 51, 35);
-		contentPane.add(tfSoLuongHSKha);
-		tfSoLuongHSKha.setColumns(10);
-		tfSoLuongHSKha.setEditable(false);
-		
-		JLabel lbSoLuongHSTrungBinh = new JLabel("Số lượng học sinh trung bình");
-		lbSoLuongHSTrungBinh.setBounds(358, 143, 183, 38);
-		contentPane.add(lbSoLuongHSTrungBinh);
-		
-		tfSoLuongHSTrungBinh = new JTextField();
-		tfSoLuongHSTrungBinh.setBounds(575, 145, 51, 35);
-		contentPane.add(tfSoLuongHSTrungBinh);
-		tfSoLuongHSTrungBinh.setColumns(10);
-		tfSoLuongHSTrungBinh.setEditable(false);
-		
-		JLabel lbSoLuongHSYeu = new JLabel("Số lượng học sinh yếu");
-		lbSoLuongHSYeu.setBounds(358, 205, 183, 35);
-		contentPane.add(lbSoLuongHSYeu);
-		
-		tfSoLuongHSYeu = new JTextField();
-		tfSoLuongHSYeu.setBounds(575, 205, 51, 35);
-		tfSoLuongHSYeu.setColumns(10);
-		contentPane.add(tfSoLuongHSYeu);
-		tfSoLuongHSYeu.setEditable(false);
-		
-		JLabel lbTongSoHocSinh = new JLabel("Tổng số học sinh");
-		lbTongSoHocSinh.setBounds(358, 80, 183, 35);
-		contentPane.add(lbTongSoHocSinh);
-		
-		tfTongSoHocSinh = new JTextField();
-		tfTongSoHocSinh.setBounds(575, 80, 50, 35);
-		contentPane.add(tfTongSoHocSinh);
-		tfTongSoHocSinh.setColumns(10);
-		tfTongSoHocSinh.setEditable(false);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 691, 49);
-		panel.setBackground(new Color(65, 105, 225));
-		contentPane.add(panel);
-		
-		JLabel lblNewLabel = new JLabel("THỐNG KÊ");
-		lblNewLabel.setForeground(new Color(173, 255, 47));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblNewLabel.setBounds(10, 0, 661, 45);
-		panel.add(lblNewLabel);
-		
-		JButton btQuayLai = new JButton("QUAY lẠI");
-		btQuayLai.setBounds(49, 274, 120, 35);
-		btQuayLai.setBackground(new Color(176, 224, 230));
-		btQuayLai.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				btnQuayLaiActionPerformed( evt);
-			}
-		});
-		btQuayLai.setIcon(new ImageIcon("src\\images\\btQuayLai.png"));
-		contentPane.add(btQuayLai);
-		
-		JButton btnXuatFileExcel = new JButton("XUẤT EXCEL");
-		btnXuatFileExcel.setBackground(new Color(176, 224, 230));
-		btnXuatFileExcel.setIcon(new ImageIcon("src\\images\\import.png"));
-		btnXuatFileExcel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				btnXuatFileExcelLaiActionPerformed( evt);
-			}
-		});
-		btnXuatFileExcel.setBounds(210, 274, 131, 35);
-		contentPane.add(btnXuatFileExcel);
-		
-	}	
-	
-	public void doDuLieuComboBox() {
-		KetQuaBUS ketQuaBUS = new KetQuaBUS();
-		ArrayList<KetQuaDTO> dsMaLop = ketQuaBUS.doDuLieuComboBox();
-		for(KetQuaDTO ds: dsMaLop) {
-			comboBox.addItem(ds.getHocSinh().getLop());
-		}
-	}
-	
-	private void btnQuayLaiActionPerformed(ActionEvent evt) {
-		FrMainForm mainForm;
-        mainForm = new FrMainForm();
-        mainForm.setVisible(true);
-        mainForm.setLocationRelativeTo(null);
-        this.dispose();
-	}
-	
-	private void btnXuatFileExcelLaiActionPerformed(ActionEvent evt) {
-		KetQuaBUS ketQuaBUS = new KetQuaBUS();
-		String maLop = comboBox.getSelectedItem().toString();
-		ketQuaBUS.xuatFileExcel(maLop);
 	}
 }

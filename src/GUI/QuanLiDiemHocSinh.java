@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,18 +15,12 @@ import javax.swing.table.DefaultTableModel;
 
 import BUS.KetQuaBUS;
 import BUS.QuanLiDiemHocSinhBUS;
-import DTO.HocSinh;
 import DTO.KetQuaDTO;
 import DTO.QuanLiDiemHS;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
@@ -45,18 +38,6 @@ public class QuanLiDiemHocSinh extends JFrame {
 	private JTextField tfMSHS;
 	private JTable table = new JTable();
 	static DefaultTableModel model ;
-	
-	public void hienThiDuLieu() {
-		QuanLiDiemHocSinhBUS quanLiDiemHocSinhBUS = new QuanLiDiemHocSinhBUS();
-		ArrayList<QuanLiDiemHS> dsDiemHS = quanLiDiemHocSinhBUS.docDiemHocSinh();
-		model = (DefaultTableModel) table.getModel();
-		model.setRowCount(0);
-		for(QuanLiDiemHS dsDiem: dsDiemHS) {
-			Object[] row = new Object[] {dsDiem.getMSHS(), dsDiem.getHocSinh().getHoTen(), dsDiem.getToan(), dsDiem.getAnh(), dsDiem.getVan(),dsDiem.getSinh(), dsDiem.getLy(), dsDiem.getHoa()};
-			model.addRow(row);
-		}
-	}
-	
 	
 	public QuanLiDiemHocSinh() {
 		
@@ -172,16 +153,12 @@ public class QuanLiDiemHocSinh extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 335, 782, 262);
 		contentPane.add(scrollPane);
-		
-		
-		
-		
-		//table_1 = new JTable();
+				
 		table.setModel(new DefaultTableModel(
 				new Object[][] {
 				},
 				new String[] {
-					"MAHS", "HỌ VÀ TÊN", "TOAN", "VĂN", "ANH", "SINH", "LÍ", "HÓA"
+					"MAHS", "HỌ VÀ TÊN", "TOÁN", "VĂN", "ANH", "SINH", "LÍ", "HÓA"
 				}
 			));
 			table.getColumnModel().getColumn(0).setPreferredWidth(69);
@@ -198,16 +175,13 @@ public class QuanLiDiemHocSinh extends JFrame {
 			panel.setBounds(0, 0, 802, 47);
 			panel.setBackground(new Color(100, 149, 237));
 			contentPane.add(panel);
-			/*label.setVerticalAlignment(JLabel.TOP);
-				label.setVerticalTextPosition(JLabel.TOP);
-				panel.setAlignmentY(TOP_ALIGNMENT);*/
+			
 			JLabel lblNewLabel_7 = new JLabel("QUẢN LÍ ĐIỂM HỌC SINH");
 			lblNewLabel_7.setForeground(new Color(173, 255, 47));
 			lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 30));
 			panel.add(lblNewLabel_7);
 			
 			//Xử lí sự kiện button Nhập Lại
-
 			btnNhapLai.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
 					btnNhapLaiActionPerformed(evt);
@@ -475,6 +449,18 @@ public class QuanLiDiemHocSinh extends JFrame {
             mainForm.setLocationRelativeTo(null);
             this.dispose();
 		}
+		
+		public void hienThiDuLieu() {
+			QuanLiDiemHocSinhBUS quanLiDiemHocSinhBUS = new QuanLiDiemHocSinhBUS();
+			ArrayList<QuanLiDiemHS> dsDiemHS = quanLiDiemHocSinhBUS.docDiemHocSinh();
+			model = (DefaultTableModel) table.getModel();
+			model.setRowCount(0);
+			for(QuanLiDiemHS dsDiem: dsDiemHS) {
+				Object[] row = new Object[] {dsDiem.getMSHS(), dsDiem.getHocSinh().getHoTen(), dsDiem.getToan(), dsDiem.getAnh(), dsDiem.getVan(),dsDiem.getSinh(), dsDiem.getLy(), dsDiem.getHoa()};
+				model.addRow(row);
+			}
+		}
+		
 		
 		
 		/**
