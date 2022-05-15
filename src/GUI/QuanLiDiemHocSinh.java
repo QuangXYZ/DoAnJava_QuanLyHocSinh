@@ -45,8 +45,15 @@ public class QuanLiDiemHocSinh extends JFrame {
 	private JTextField tfVan;
 	private JTextField tfMSHS;
 	private JTable table = new JTable();
+<<<<<<< HEAD
 	static DefaultTableModel model;
 
+=======
+<<<<<<< HEAD
+	static DefaultTableModel model;
+
+=======
+>>>>>>> 544840c97efca0f97e0b0de9ed150e3c04291684
 	static DefaultTableModel model ;
 	
 	public void hienThiDuLieu() {
