@@ -324,7 +324,7 @@ public class QLHSView extends javax.swing.JFrame {
 
         getContentPane().add(cbLop, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 306, 257, 27));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hinh-nen-mau-xanh-ngoc-luc-bao (1).jpg"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backgroundQLHS.jpg"))); // NOI18N
         jLabel8.setText("jLabel8");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(-7, 62, 650, 540));
 
