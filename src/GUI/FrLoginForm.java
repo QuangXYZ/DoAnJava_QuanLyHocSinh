@@ -63,8 +63,8 @@ public class FrLoginForm extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        lbLogin.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        lbLogin.setForeground(new java.awt.Color(0, 0, 204));
+        lbLogin.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lbLogin.setForeground(new java.awt.Color(0, 0, 153));
         lbLogin.setText("LOG IN");
         getContentPane().add(lbLogin);
         lbLogin.setBounds(220, 20, 137, 50);

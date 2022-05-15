@@ -81,10 +81,11 @@ public class FrMainForm extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("TRANG CHỦ");
 
-        lbChao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbChao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbChao.setForeground(new java.awt.Color(255, 255, 255));
         lbChao.setText("XIN CHÀO ");
 
+        lbLogouot.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbLogouot.setForeground(new java.awt.Color(255, 255, 255));
         lbLogouot.setText("LOG OUT");
         lbLogouot.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,11 +107,11 @@ public class FrMainForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(49, 49, 49)
                 .addComponent(lbChao, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbLogouot, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbLogouot, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
