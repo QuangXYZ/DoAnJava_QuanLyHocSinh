@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import DTO.User;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import sql.MyConnection;
 
 /**
@@ -32,6 +33,10 @@ public class FrLoginForm extends javax.swing.JFrame {
         lbUserName.setIcon(new ImageIcon(new ImageIcon("src//images//user.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         lbPassword.setIcon(new ImageIcon(new ImageIcon("src//images//padlock.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         this.getContentPane().setBackground(new java.awt.Color(200, 255, 255));
+        JLabel background = new JLabel();
+        background.setBounds(0, 0, this.getWidth(), this.getHeight());
+        background.setIcon(new ImageIcon(new ImageIcon("src//images//BackgroundLogin.jpg").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+        this.add(background);
     }
 
     /**
@@ -53,22 +58,35 @@ public class FrLoginForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN");
         setAutoRequestFocus(false);
+        setMinimumSize(new java.awt.Dimension(580, 350));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         lbLogin.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lbLogin.setForeground(new java.awt.Color(0, 0, 153));
         lbLogin.setText("LOG IN");
+        getContentPane().add(lbLogin);
+        lbLogin.setBounds(226, 20, 137, 70);
 
         lbUserName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lbUserName.setText("USER NAME : ");
+        getContentPane().add(lbUserName);
+        lbUserName.setBounds(50, 110, 134, 32);
 
         lbPassword.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lbPassword.setText("PASSWORD :");
+        getContentPane().add(lbPassword);
+        lbPassword.setBounds(50, 180, 134, 30);
 
         tfUserName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfUserNameActionPerformed(evt);
             }
         });
+        getContentPane().add(tfUserName);
+        tfUserName.setBounds(220, 110, 296, 32);
+        getContentPane().add(tfPassword);
+        tfPassword.setBounds(220, 180, 296, 30);
 
         btnLogin.setBackground(new java.awt.Color(27, 185, 19));
         btnLogin.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -79,51 +97,8 @@ public class FrLoginForm extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(228, 228, 228)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbUserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfPassword)
-                            .addComponent(tfUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(73, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(217, 217, 217))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(lbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
-        );
+        getContentPane().add(btnLogin);
+        btnLogin.setBounds(228, 251, 111, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

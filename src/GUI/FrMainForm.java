@@ -7,11 +7,13 @@ package GUI;
 
 import BUS.UserBUS;
 import static GUI.FrLoginForm.Username;
+import java.awt.Color;
 import static java.awt.Color.*;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,8 +40,15 @@ public class FrMainForm extends javax.swing.JFrame {
         jLabel1.setIcon(new ImageIcon(new ImageIcon("src//images//home.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
         jButton7.setIcon(new ImageIcon(new ImageIcon("src//images//analytics.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
         lbLogouot.setIcon(new ImageIcon(new ImageIcon("src//images//log-out.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-        this.getContentPane().setBackground(new java.awt.Color(240, 225, 213));
-        jPanel2.setBackground(new java.awt.Color(240, 225, 213));
+        
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0, 0));
+    
+        
+        
+        JLabel background = new JLabel();
+        background.setBounds(0, jPanel1.getHeight(), this.getWidth(), this.getHeight()-jPanel1.getHeight());
+        background.setIcon(new ImageIcon(new ImageIcon("src//images//backgroundMain.jpg").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+        this.add(background);
     }
 
     /**
@@ -67,6 +76,10 @@ public class FrMainForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Trang chủ");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMinimumSize(new java.awt.Dimension(790, 703));
+        setPreferredSize(new java.awt.Dimension(790, 703));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -116,6 +129,9 @@ public class FrMainForm extends javax.swing.JFrame {
                     .addComponent(lbLogouot, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 790, 107);
 
         jPanel2.setForeground(new java.awt.Color(0, 153, 204));
         jPanel2.setLayout(new java.awt.GridLayout(3, 3, 20, 20));
@@ -246,30 +262,14 @@ public class FrMainForm extends javax.swing.JFrame {
         });
         jPanel2.add(jButton7);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 79, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(71, 151, 640, 490);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    Color colorBtn = new java.awt.Color(0, 145, 220, 100);
     void changeColorEnter(JButton btn){
-        btn.setBackground(BLACK);
+        btn.setBackground(colorBtn);
         btn.setForeground(WHITE);
     }
     void changeColorExit(JButton btn){
