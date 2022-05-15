@@ -12,7 +12,6 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,11 +39,7 @@ public class FrMainForm extends javax.swing.JFrame {
         jButton7.setIcon(new ImageIcon(new ImageIcon("src//images//analytics.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
         lbLogouot.setIcon(new ImageIcon(new ImageIcon("src//images//log-out.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         this.getContentPane().setBackground(new java.awt.Color(240, 225, 213));
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0, 0));
-        JLabel background = new JLabel();
-        background.setBounds(0, jPanel1.getHeight(), this.getWidth(), this.getHeight()-jPanel1.getHeight());
-        background.setIcon(new ImageIcon(new ImageIcon("src//images//BackgroundMain.jpg").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
-        this.add(background);
+        jPanel2.setBackground(new java.awt.Color(240, 225, 213));
     }
 
     /**
@@ -72,8 +67,6 @@ public class FrMainForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Trang chủ");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMinimumSize(new java.awt.Dimension(790, 703));
-        getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -81,10 +74,11 @@ public class FrMainForm extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("TRANG CHỦ");
 
-        lbChao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbChao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbChao.setForeground(new java.awt.Color(255, 255, 255));
         lbChao.setText("XIN CHÀO ");
 
+        lbLogouot.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbLogouot.setForeground(new java.awt.Color(255, 255, 255));
         lbLogouot.setText("LOG OUT");
         lbLogouot.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,11 +100,11 @@ public class FrMainForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(49, 49, 49)
                 .addComponent(lbChao, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbLogouot, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbLogouot, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,10 +117,6 @@ public class FrMainForm extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 790, 107);
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(0, 153, 204));
         jPanel2.setLayout(new java.awt.GridLayout(3, 3, 20, 20));
 
@@ -256,8 +246,24 @@ public class FrMainForm extends javax.swing.JFrame {
         });
         jPanel2.add(jButton7);
 
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(71, 151, 640, 490);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 79, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
