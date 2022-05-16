@@ -8,8 +8,11 @@ package GUI;
 import BUS.LopHocBUS;
 import DTO.HocSinh;
 import DTO.LopHoc;
+import java.awt.Image;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -45,6 +48,14 @@ public class QLLOPView extends javax.swing.JFrame {
     }
     public QLLOPView() {
         initComponents();
+        addBtn.setIcon(new ImageIcon(new ImageIcon("src//images//plus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        delBtn.setIcon(new ImageIcon(new ImageIcon("src//images//delete.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        editBtn.setIcon(new ImageIcon(new ImageIcon("src//images//edit.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        backBtn.setIcon(new ImageIcon(new ImageIcon("src//images//previous.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        JLabel background = new JLabel();
+        background.setBounds(0, 0, this.getWidth(), this.getHeight());
+        background.setIcon(new ImageIcon(new ImageIcon("src//images//backgroundQLLOP.jpg").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+        this.add(background);
         loadDataTable();
     }
 
@@ -76,9 +87,15 @@ public class QLLOPView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("QUẢN LÝ LỚP HỌC");
+        setMinimumSize(new java.awt.Dimension(755, 510));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 102, 0));
         jLabel1.setText("QUẢN LÝ LỚP HỌC");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(270, 40, 215, 46);
 
         tbLop.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,12 +108,18 @@ public class QLLOPView extends javax.swing.JFrame {
                 "MaLop", "TenLop"
             }
         ));
+        tbLop.setGridColor(new java.awt.Color(0, 0, 204));
+        tbLop.setSelectionBackground(new java.awt.Color(255, 153, 0));
+        tbLop.setSelectionForeground(new java.awt.Color(0, 0, 204));
         tbLop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbLopMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbLop);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 310, 160, 117);
 
         tbHocSinh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,19 +132,38 @@ public class QLLOPView extends javax.swing.JFrame {
                 "MSHS", "Họ và Tên", "Giới tính", "Ngày sinh"
             }
         ));
+        tbHocSinh.setGridColor(new java.awt.Color(0, 0, 204));
+        tbHocSinh.setSelectionBackground(new java.awt.Color(255, 153, 0));
+        tbHocSinh.setSelectionForeground(new java.awt.Color(0, 0, 204));
         jScrollPane2.setViewportView(tbHocSinh);
 
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(180, 310, 540, 117);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Mã Lớp :");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(100, 120, 82, 28);
 
         tfMSLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfMSLopActionPerformed(evt);
             }
         });
+        getContentPane().add(tfMSLop);
+        tfMSLop.setBounds(240, 120, 320, 28);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Tên Lớp :");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(98, 168, 82, 28);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Tổng số học sinh :");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(20, 430, 126, 26);
+        getContentPane().add(tfTenLop);
+        tfTenLop.setBounds(241, 168, 320, 28);
 
         addBtn.setBackground(new java.awt.Color(255, 255, 255));
         addBtn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -133,6 +175,8 @@ public class QLLOPView extends javax.swing.JFrame {
                 addBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(addBtn);
+        addBtn.setBounds(90, 240, 110, 36);
 
         delBtn.setBackground(new java.awt.Color(255, 255, 255));
         delBtn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -142,6 +186,8 @@ public class QLLOPView extends javax.swing.JFrame {
                 delBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(delBtn);
+        delBtn.setBounds(250, 240, 107, 36);
 
         editBtn.setBackground(new java.awt.Color(255, 255, 255));
         editBtn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -151,6 +197,8 @@ public class QLLOPView extends javax.swing.JFrame {
                 editBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(editBtn);
+        editBtn.setBounds(400, 240, 110, 36);
 
         backBtn.setBackground(new java.awt.Color(255, 255, 255));
         backBtn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -160,84 +208,13 @@ public class QLLOPView extends javax.swing.JFrame {
                 backBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(backBtn);
+        backBtn.setBounds(550, 240, 120, 36);
 
+        siso.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         siso.setText("0");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(241, 241, 241))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tfMSLop, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                            .addComponent(tfTenLop))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(siso, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(delBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfMSLop, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(delBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(siso, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
-        );
+        getContentPane().add(siso);
+        siso.setBounds(160, 430, 40, 26);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

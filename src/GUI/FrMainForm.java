@@ -267,7 +267,7 @@ public class FrMainForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    Color colorBtn = new java.awt.Color(0, 145, 220, 100);
+    Color colorBtn = new java.awt.Color(0, 145, 220, 255);
     void changeColorEnter(JButton btn){
         btn.setBackground(colorBtn);
         btn.setForeground(WHITE);

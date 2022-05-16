@@ -88,9 +88,9 @@ public class QLHSView extends javax.swing.JFrame {
         backBtn.setIcon(new ImageIcon(new ImageIcon("src//images//previous.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         RefreshMenu.setIcon(new ImageIcon(new ImageIcon("src//images//refresh.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         searchMenu.setIcon(new ImageIcon(new ImageIcon("src//images//search.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-         JLabel background = new JLabel();
+        JLabel background = new JLabel();
         background.setBounds(0, 0, this.getWidth(), this.getHeight());
-        background.setIcon(new ImageIcon(new ImageIcon("src//images//BackgroundLogin.jpg").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+        background.setIcon(new ImageIcon(new ImageIcon("src//images//backgroundQLHS.jpg").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
         this.add(background);
         loadDataCBLop();
         loadDataTable();

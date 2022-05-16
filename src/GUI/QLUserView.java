@@ -12,6 +12,7 @@ import static java.awt.Color.GRAY;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -48,7 +49,10 @@ public class QLUserView extends javax.swing.JFrame {
         btnBack.setIcon(new ImageIcon(new ImageIcon("src//images//previous.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         btnSearch.setIcon(new ImageIcon(new ImageIcon("src//images//search.png").getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH)));
         btnClear.setIcon(new ImageIcon(new ImageIcon("src//images//cleaning.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        this.getContentPane().setBackground(new java.awt.Color(200, 255, 255));
+        JLabel background = new JLabel();
+        background.setBounds(0, 0, this.getWidth(), this.getHeight());
+        background.setIcon(new ImageIcon(new ImageIcon("src//images//backgroundQLUser.jpg").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+        this.add(background);
 
         loadDataTable();
         
@@ -84,18 +88,28 @@ public class QLUserView extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(640, 460));
+        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setForeground(new java.awt.Color(255, 153, 0));
         jLabel1.setText("   QUẢN LÝ TÀI KHOẢN ");
         jLabel1.setToolTipText("");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 0)));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(182, 21, 276, 51);
 
         jLabel2.setText("USERNAME :");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(237, 103, 99, 26);
 
         jLabel3.setText("PASSWORD :");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(237, 170, 99, 25);
 
         jLabel4.setText("ACCOUNT TYPE :  ");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(237, 233, 122, 24);
 
         buttonGroup1.add(rdStandard);
         rdStandard.setText("Standard");
@@ -104,9 +118,22 @@ public class QLUserView extends javax.swing.JFrame {
                 rdStandardActionPerformed(evt);
             }
         });
+        getContentPane().add(rdStandard);
+        rdStandard.setBounds(369, 234, 100, 23);
 
         buttonGroup1.add(rdAdmin);
         rdAdmin.setText(" Administrator");
+        rdAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdAdminActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rdAdmin);
+        rdAdmin.setBounds(480, 230, 120, 23);
+        getContentPane().add(tfUser);
+        tfUser.setBounds(369, 103, 190, 26);
+        getContentPane().add(tfPass);
+        tfPass.setBounds(369, 170, 190, 25);
 
         tbUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -116,14 +143,18 @@ public class QLUserView extends javax.swing.JFrame {
                 "USER LIST"
             }
         ));
-        tbUsers.setSelectionBackground(new java.awt.Color(255, 204, 0));
-        tbUsers.setSelectionForeground(new java.awt.Color(0, 0, 153));
+        tbUsers.setGridColor(new java.awt.Color(153, 0, 153));
+        tbUsers.setSelectionBackground(new java.awt.Color(0, 153, 153));
+        tbUsers.setSelectionForeground(new java.awt.Color(255, 204, 0));
         tbUsers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbUsersMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbUsers);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(33, 103, 169, 237);
 
         tfSearch.setForeground(java.awt.Color.gray);
         tfSearch.setText("Search");
@@ -140,6 +171,8 @@ public class QLUserView extends javax.swing.JFrame {
                 tfSearchActionPerformed(evt);
             }
         });
+        getContentPane().add(tfSearch);
+        tfSearch.setBounds(33, 358, 130, 27);
 
         btnSearch.setBackground(new java.awt.Color(255, 204, 153));
         btnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -148,6 +181,8 @@ public class QLUserView extends javax.swing.JFrame {
                 btnSearchActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSearch);
+        btnSearch.setBounds(169, 358, 33, 27);
 
         btnAdd.setBackground(new java.awt.Color(255, 204, 153));
         btnAdd.setText("THÊM");
@@ -157,6 +192,8 @@ public class QLUserView extends javax.swing.JFrame {
                 btnAddActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAdd);
+        btnAdd.setBounds(237, 302, 111, 33);
 
         btnEdit.setBackground(new java.awt.Color(255, 204, 153));
         btnEdit.setText("SỬA");
@@ -166,6 +203,8 @@ public class QLUserView extends javax.swing.JFrame {
                 btnEditActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEdit);
+        btnEdit.setBounds(496, 302, 111, 33);
 
         btnDel.setBackground(new java.awt.Color(255, 204, 153));
         btnDel.setText("XÓA");
@@ -175,6 +214,8 @@ public class QLUserView extends javax.swing.JFrame {
                 btnDelActionPerformed(evt);
             }
         });
+        getContentPane().add(btnDel);
+        btnDel.setBounds(366, 302, 112, 33);
 
         btnBack.setBackground(new java.awt.Color(255, 204, 153));
         btnBack.setText("QUAY LẠI");
@@ -184,6 +225,8 @@ public class QLUserView extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBack);
+        btnBack.setBounds(366, 353, 111, 33);
 
         btnClear.setBackground(new java.awt.Color(255, 204, 153));
         btnClear.setText("CLEAR");
@@ -193,90 +236,8 @@ public class QLUserView extends javax.swing.JFrame {
                 btnClearActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(tfPass, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rdStandard)
-                                .addGap(18, 18, 18)
-                                .addComponent(rdAdmin))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(29, 29, 29))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfSearch)
-                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rdStandard)
-                            .addComponent(rdAdmin))
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
+        getContentPane().add(btnClear);
+        btnClear.setBounds(237, 353, 111, 33);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -413,6 +374,10 @@ public class QLUserView extends javax.swing.JFrame {
         resetForm();
         loadDataTable();
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void rdAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdAdminActionPerformed
 
     /**
      * @param args the command line arguments
