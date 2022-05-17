@@ -33,6 +33,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Image;
 
 public class QuanLiDiemHocSinh extends JFrame {
 	private JPanel contentPane;
@@ -64,72 +65,82 @@ public class QuanLiDiemHocSinh extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 816, 644);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(224, 255, 255));
+		//contentPane.setBackground(new Color(224, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel background = new JLabel();
+        background.setBounds(0, 0, 816, 607);
+        background.setIcon(new ImageIcon(new ImageIcon("src//images//backgroundQLDHS.jpg").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+        //getContentPane().add(background);
+        contentPane.add(background);
+		/*
+		 * BufferedImage myImage = ImageIO.read(...); JFrame myJFrame = new
+		 * JFrame("Image pane"); myJFrame.setContentPane(new ImagePanel(myImage));
+		 */
+		
 		JLabel lblNewLabel = new JLabel("Điểm Toán");
 		lblNewLabel.setBounds(441, 234, 90, 30);
-		contentPane.add(lblNewLabel);
+		background.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Điểm Anh");
 		lblNewLabel_1.setBounds(126, 128, 90, 30);
-		contentPane.add(lblNewLabel_1);
+		background.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Điểm Văn");
 		lblNewLabel_2.setBounds(126, 181, 90, 30);
-		contentPane.add(lblNewLabel_2);
+		background.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Điểm Sinh");
 		lblNewLabel_3.setBounds(126, 234, 90, 30);
-		contentPane.add(lblNewLabel_3);
+		background.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Điểm Lí");
 		lblNewLabel_4.setBounds(441, 128, 90, 30);
-		contentPane.add(lblNewLabel_4);
+		background.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Điểm Hóa");
 		lblNewLabel_5.setBounds(441, 181, 90, 30);
-		contentPane.add(lblNewLabel_5);
+		background.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("MAHS");
 		lblNewLabel_6.setBounds(126, 78, 90, 30);
-		contentPane.add(lblNewLabel_6);
+		background.add(lblNewLabel_6);
 		
 		tfToan = new JTextField();
 		tfToan.setBounds(569, 234, 96, 31);
-		contentPane.add(tfToan);
+		background.add(tfToan);
 		tfToan.setColumns(10);
 		
 		tfSinh = new JTextField();
 		tfSinh.setBounds(242, 235, 96, 30);
-		contentPane.add(tfSinh);
+		background.add(tfSinh);
 		tfSinh.setColumns(10);
 		
 		tfLi = new JTextField();
 		tfLi.setBounds(569, 129, 96, 30);
-		contentPane.add(tfLi);
+		background.add(tfLi);
 		tfLi.setColumns(10);
 		
 		tfMSHS = new JTextField();
 		tfMSHS.setBounds(242, 78, 96, 31);
-		contentPane.add(tfMSHS);
+		background.add(tfMSHS);
 		tfMSHS.setColumns(10);
 		
 		tfHoa = new JTextField();
 		tfHoa.setBounds(569, 180, 96, 33);
-		contentPane.add(tfHoa);
+		background.add(tfHoa);
 		tfHoa.setColumns(10);
 		
 		tfAnh = new JTextField();
 		tfAnh.setBounds(241, 129, 96, 30);
-		contentPane.add(tfAnh);
+		background.add(tfAnh);
 		tfAnh.setColumns(10);
 		
 		tfVan = new JTextField();
 		tfVan.setBounds(241, 182, 96, 30);
-		contentPane.add(tfVan);
+		background.add(tfVan);
 		tfVan.setColumns(10);
 		
 
@@ -137,41 +148,41 @@ public class QuanLiDiemHocSinh extends JFrame {
 		btnNhapLai.setBounds(10, 295, 119, 30);
 		btnNhapLai.setIcon(new ImageIcon("src\\images\\btNhapLai.png"));
 		btnNhapLai.setBackground(new Color(176, 224, 230));
-		contentPane.add(btnNhapLai);
+		background.add(btnNhapLai);
 		
 		JButton btnThem = new JButton("THÊM");
 		btnThem.setBounds(142, 295, 119, 30);
 		btnThem.setIcon(new ImageIcon("src\\images\\btThem.png"));
 		btnThem.setBackground(new Color(176, 224, 230));
-		contentPane.add(btnThem);
+		background.add(btnThem);
 		
 		JButton btXoa = new JButton("XÓA");
 		btXoa.setBounds(275, 295, 119, 30);
 		btXoa.setIcon(new ImageIcon("src\\images\\btXoa.png"));
 		btXoa.setBackground(new Color(176, 224, 230));
-		contentPane.add(btXoa);
+		background.add(btXoa);
 		
 		JButton btSua = new JButton("SỬA");
 		btSua.setBounds(412, 295, 119, 30);
 		btSua.setIcon(new ImageIcon("src\\images\\btSua.png"));
 		btSua.setBackground(new Color(176, 224, 230));
-		contentPane.add(btSua);
+		background.add(btSua);
 		
 		JButton btnTimKiem = new JButton("TÌM KIẾM");
 		btnTimKiem.setBounds(544, 295, 119, 30);
 		btnTimKiem.setIcon(new ImageIcon("src\\images\\btTim.png"));
 		btnTimKiem.setBackground(new Color(176, 224, 230));
-		contentPane.add(btnTimKiem);
+		background.add(btnTimKiem);
 		
 		JButton btnQuayLai = new JButton("QUAY LẠI");
 		btnQuayLai.setIcon(new ImageIcon("src\\images\\btQuayLai.png"));
 		btnQuayLai.setBackground(new Color(176, 224, 230));
 		btnQuayLai.setBounds(673, 295, 119, 30);
-		contentPane.add(btnQuayLai);
+		background.add(btnQuayLai);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 335, 782, 262);
-		contentPane.add(scrollPane);
+		background.add(scrollPane);
 		
 		
 		
@@ -197,7 +208,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 			JPanel panel = new JPanel();
 			panel.setBounds(0, 0, 802, 47);
 			panel.setBackground(new Color(100, 149, 237));
-			contentPane.add(panel);
+			background.add(panel);
 			/*label.setVerticalAlignment(JLabel.TOP);
 				label.setVerticalTextPosition(JLabel.TOP);
 				panel.setAlignmentY(TOP_ALIGNMENT);*/

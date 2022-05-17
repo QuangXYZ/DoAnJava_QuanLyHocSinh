@@ -81,6 +81,7 @@ public class QLHSView extends javax.swing.JFrame {
     }
 
     public QLHSView() {
+    	setResizable(false);
         initComponents();
         addBtn.setIcon(new ImageIcon(new ImageIcon("src//images//plus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         delBtn.setIcon(new ImageIcon(new ImageIcon("src//images//delete.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
