@@ -3,6 +3,7 @@ package GUI;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -102,19 +103,28 @@ public class KetQuaQGUI extends JFrame {
 	
 	
 	public KetQuaQGUI() {
-		setTitle("TH\u1ED0NG K\u00CA");
+		setTitle("THỐNG KÊ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 695, 520);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(224, 255, 255));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		/*
+		 * contentPane.setBackground(new Color(224, 255, 255));
+		 * contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		 */
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lbChonTenLop = new JLabel("Ch\u1ECDn T\u00EAn L\u1EDBp: ");
+		
+		  JLabel background = new JLabel(); background.setBounds(0, 0, 816, 607);
+		  background.setIcon(new ImageIcon(new
+		  ImageIcon("src//images//brThongKe.jpg").getImage().getScaledInstance(
+		  background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+		  contentPane.add(background);
+		 
+		JLabel lbChonTenLop = new JLabel("Chọn tên lớp: ");
 		lbChonTenLop.setBounds(54, 78, 120, 35);
-		lbChonTenLop.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(lbChonTenLop);
+		
+		background.add(lbChonTenLop);
 		
 		comboBox = new JComboBox<String>();
 		comboBox.setBounds(184, 80, 96, 35);
@@ -127,18 +137,18 @@ public class KetQuaQGUI extends JFrame {
 				hienThiDuLieu();
 			}
 		});
-		contentPane.add(comboBox);
+		background.add(comboBox);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 330, 661, 143);
-		contentPane.add(scrollPane);
+		background.add(scrollPane);
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				" MAHS", "            H\u1ECC V\u00C0 T\u00CAN", "L\u1EDAP", "\u0110I\u1EC2M TRUNG B\u00CCNH", "H\u1ECCC L\u1EF0C"
+				" MAHS", "HỌ VÀ TÊN", "LỚP", "ĐIỂM TRUNG BÌNH", "HỌC LỰC"
 			}
 		));
 		table.getColumnModel().getColumn(1).setPreferredWidth(195);
@@ -147,58 +157,58 @@ public class KetQuaQGUI extends JFrame {
 		
 		JLabel lbSoLuongHSGioi = new JLabel("Số lượng học sinh Giỏi");
 		lbSoLuongHSGioi.setBounds(54, 143, 151, 38);
-		contentPane.add(lbSoLuongHSGioi);
+		background.add(lbSoLuongHSGioi);
 		
 		JLabel lbSoLuongHSKha = new JLabel("Số lượng học sinh khá");
 		lbSoLuongHSKha.setBounds(54, 205, 151, 35);
-		contentPane.add(lbSoLuongHSKha);
+		background.add(lbSoLuongHSKha);
 		
 		tfSoLuongHSGioi = new JTextField();
 		tfSoLuongHSGioi.setBounds(229, 145, 51, 35);
-		contentPane.add(tfSoLuongHSGioi);
+		background.add(tfSoLuongHSGioi);
 		tfSoLuongHSGioi.setColumns(10);
 		tfSoLuongHSGioi.setEditable(false);
 		
 		tfSoLuongHSKha = new JTextField();
 		tfSoLuongHSKha.setBounds(229, 205, 51, 35);
-		contentPane.add(tfSoLuongHSKha);
+		background.add(tfSoLuongHSKha);
 		tfSoLuongHSKha.setColumns(10);
 		tfSoLuongHSKha.setEditable(false);
 		
 		JLabel lbSoLuongHSTrungBinh = new JLabel("Số lượng học sinh trung bình");
 		lbSoLuongHSTrungBinh.setBounds(358, 143, 183, 38);
-		contentPane.add(lbSoLuongHSTrungBinh);
+		background.add(lbSoLuongHSTrungBinh);
 		
 		tfSoLuongHSTrungBinh = new JTextField();
 		tfSoLuongHSTrungBinh.setBounds(575, 145, 51, 35);
-		contentPane.add(tfSoLuongHSTrungBinh);
+		background.add(tfSoLuongHSTrungBinh);
 		tfSoLuongHSTrungBinh.setColumns(10);
 		tfSoLuongHSTrungBinh.setEditable(false);
 		
 		JLabel lbSoLuongHSYeu = new JLabel("Số lượng học sinh yếu");
 		lbSoLuongHSYeu.setBounds(358, 205, 183, 35);
-		contentPane.add(lbSoLuongHSYeu);
+		background.add(lbSoLuongHSYeu);
 		
 		tfSoLuongHSYeu = new JTextField();
 		tfSoLuongHSYeu.setBounds(575, 205, 51, 35);
 		tfSoLuongHSYeu.setColumns(10);
-		contentPane.add(tfSoLuongHSYeu);
+		background.add(tfSoLuongHSYeu);
 		tfSoLuongHSYeu.setEditable(false);
 		
 		JLabel lbTongSoHocSinh = new JLabel("Tổng số học sinh");
 		lbTongSoHocSinh.setBounds(358, 80, 183, 35);
-		contentPane.add(lbTongSoHocSinh);
+		background.add(lbTongSoHocSinh);
 		
 		tfTongSoHocSinh = new JTextField();
 		tfTongSoHocSinh.setBounds(575, 80, 50, 35);
-		contentPane.add(tfTongSoHocSinh);
+		background.add(tfTongSoHocSinh);
 		tfTongSoHocSinh.setColumns(10);
 		tfTongSoHocSinh.setEditable(false);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 691, 49);
 		panel.setBackground(new Color(65, 105, 225));
-		contentPane.add(panel);
+		background.add(panel);
 		
 		JLabel lblNewLabel = new JLabel("THỐNG KÊ");
 		lblNewLabel.setForeground(new Color(173, 255, 47));
@@ -215,7 +225,7 @@ public class KetQuaQGUI extends JFrame {
 			}
 		});
 		btQuayLai.setIcon(new ImageIcon("src\\images\\btQuayLai.png"));
-		contentPane.add(btQuayLai);
+		background.add(btQuayLai);
 		
 		JButton btnXuatFileExcel = new JButton("XUẤT EXCEL");
 		btnXuatFileExcel.setBackground(new Color(176, 224, 230));
@@ -226,7 +236,7 @@ public class KetQuaQGUI extends JFrame {
 			}
 		});
 		btnXuatFileExcel.setBounds(210, 274, 131, 35);
-		contentPane.add(btnXuatFileExcel);
+		background.add(btnXuatFileExcel);
 		
 	}	
 	
