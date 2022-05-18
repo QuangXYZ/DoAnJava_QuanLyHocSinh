@@ -5,7 +5,8 @@
 package GUI;
 
 
-import BUS.LoginBUS;
+
+import BUS.UserBUS;
 import java.sql.*;
 
 
@@ -69,7 +70,7 @@ public class FrLoginForm extends javax.swing.JFrame {
         lbLogin.setBounds(226, 20, 137, 70);
 
         lbUserName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lbUserName.setText("USER NAME : ");
+        lbUserName.setText("USERNAME : ");
         getContentPane().add(lbUserName);
         lbUserName.setBounds(50, 110, 134, 32);
 
@@ -78,6 +79,7 @@ public class FrLoginForm extends javax.swing.JFrame {
         getContentPane().add(lbPassword);
         lbPassword.setBounds(50, 180, 134, 30);
 
+        tfUserName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tfUserName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfUserNameActionPerformed(evt);
@@ -85,6 +87,8 @@ public class FrLoginForm extends javax.swing.JFrame {
         });
         getContentPane().add(tfUserName);
         tfUserName.setBounds(220, 110, 296, 32);
+
+        tfPassword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         getContentPane().add(tfPassword);
         tfPassword.setBounds(220, 180, 296, 30);
 
@@ -115,8 +119,8 @@ public class FrLoginForm extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here: 
         if (checkValidForm()) {
-            LoginBUS lgBUS = new LoginBUS();
-            if (lgBUS.checkLogin(tfUserName.getText(), new String (tfPassword.getPassword()))){  
+            UserBUS userBUS = new UserBUS();
+            if (userBUS.checkLogin(tfUserName.getText(), new String (tfPassword.getPassword()))){  
                 Username = tfUserName.getText();
                 FrMainForm mainForm;
                     mainForm = new FrMainForm();

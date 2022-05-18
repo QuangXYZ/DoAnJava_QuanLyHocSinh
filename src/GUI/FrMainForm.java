@@ -136,9 +136,11 @@ public class FrMainForm extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(0, 153, 204));
         jPanel2.setLayout(new java.awt.GridLayout(3, 3, 20, 20));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton1.setText("HỌC SINH");
+        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton1MouseEntered(evt);
@@ -154,9 +156,11 @@ public class FrMainForm extends javax.swing.JFrame {
         });
         jPanel2.add(jButton1);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setBackground(new java.awt.Color(255, 153, 153));
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton2.setText("GIÁO VIÊN");
+        jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton2MouseEntered(evt);
@@ -172,9 +176,11 @@ public class FrMainForm extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2);
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setBackground(new java.awt.Color(255, 153, 153));
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton3.setText("ĐIỂM");
+        jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton3MouseEntered(evt);
@@ -190,9 +196,11 @@ public class FrMainForm extends javax.swing.JFrame {
         });
         jPanel2.add(jButton3);
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
+        jButton4.setBackground(new java.awt.Color(255, 153, 153));
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton4.setText("LỚP");
+        jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton4MouseEntered(evt);
@@ -208,9 +216,11 @@ public class FrMainForm extends javax.swing.JFrame {
         });
         jPanel2.add(jButton4);
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
+        jButton5.setBackground(new java.awt.Color(255, 153, 153));
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton5.setText("TÀI KHOẢN");
+        jButton5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton5MouseEntered(evt);
@@ -226,9 +236,11 @@ public class FrMainForm extends javax.swing.JFrame {
         });
         jPanel2.add(jButton5);
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 255));
+        jButton6.setBackground(new java.awt.Color(255, 153, 153));
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton6.setText("THOÁT");
+        jButton6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton6MouseEntered(evt);
@@ -244,9 +256,11 @@ public class FrMainForm extends javax.swing.JFrame {
         });
         jPanel2.add(jButton6);
 
-        jButton7.setBackground(new java.awt.Color(255, 255, 255));
+        jButton7.setBackground(new java.awt.Color(255, 153, 153));
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton7.setText("THỐNG KÊ");
+        jButton7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton7MouseEntered(evt);
@@ -268,13 +282,14 @@ public class FrMainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     Color colorBtn = new java.awt.Color(0, 145, 220, 255);
+    Color colorBtn1 = new java.awt.Color(255, 153, 153, 255);
     void changeColorEnter(JButton btn){
         btn.setBackground(colorBtn);
-        btn.setForeground(WHITE);
+        btn.setForeground(colorBtn1);
     }
     void changeColorExit(JButton btn){
-        btn.setBackground(WHITE);
-        btn.setForeground(BLACK);
+        btn.setBackground(colorBtn1);
+        btn.setForeground(colorBtn);
     }
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
         // TODO add your handling code here:
@@ -411,6 +426,13 @@ public class FrMainForm extends javax.swing.JFrame {
                     qluv = new QLUserView(); 
                     qluv.setVisible(true);
                     qluv.setLocationRelativeTo(null);
+                    this.dispose();
+        }
+        else {
+            ChangePasswordForm changePasswordForm;
+                    changePasswordForm = new ChangePasswordForm(); 
+                    changePasswordForm.setVisible(true);
+                    changePasswordForm.setLocationRelativeTo(null);
                     this.dispose();
         }
         

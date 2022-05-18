@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -146,6 +147,24 @@ public class UserDAO {
                 Logger.getLogger(HocSinhDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        return false;
+    }
+    public boolean checkLogin(String Username,String Password){
+         try{     
+            Connection con = MyConnection.getConnection();
+            System.out.println("Connect success");
+            Statement s=con.createStatement();
+            ResultSet rs =s.executeQuery("SELECT * FROM USERS");
+            while(rs.next()){
+                if (rs.getString(1).equals(Username)&&rs.getString(2).equals(Password)){
+                    con.close();
+                    return true;
+                    
+                }
+            }
+        } catch(Exception e){
+            System.out.println("Connect Error "+e);
+        } 
         return false;
     }
 }

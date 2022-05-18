@@ -31,6 +31,9 @@ public class UserBUS {
     public boolean checkAdmin(String Username){
         return userDAO.checkAdmin(Username);
     }
+     public boolean checkLogin(String Username,String Password){
+        return userDAO.checkLogin(Username,Password);    
+    }
     
     
 }

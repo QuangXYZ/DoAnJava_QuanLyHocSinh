@@ -91,7 +91,7 @@ public class QLHSView extends javax.swing.JFrame {
         searchMenu.setIcon(new ImageIcon(new ImageIcon("src//images//search.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         JLabel background = new JLabel();
         background.setBounds(0, 0, this.getWidth(), this.getHeight());
-        background.setIcon(new ImageIcon(new ImageIcon("src//images//backgroundQLHS.jpg").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+        background.setIcon(new ImageIcon(new ImageIcon("src//images//backgroundQLHS.png").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
         this.add(background);
         loadDataCBLop();
         loadDataTable();
@@ -320,8 +320,8 @@ public class QLHSView extends javax.swing.JFrame {
         background.setBackground(new java.awt.Color(51, 51, 51));
         background.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 0));
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("QUẢN LÝ HỌC SINH");
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);

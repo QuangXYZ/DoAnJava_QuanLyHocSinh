@@ -119,7 +119,7 @@ public class QLUserView extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rdStandard);
-        rdStandard.setBounds(369, 234, 100, 23);
+        rdStandard.setBounds(510, 230, 100, 23);
 
         buttonGroup1.add(rdAdmin);
         rdAdmin.setText(" Administrator");
@@ -129,7 +129,7 @@ public class QLUserView extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rdAdmin);
-        rdAdmin.setBounds(480, 230, 120, 23);
+        rdAdmin.setBounds(370, 230, 120, 23);
         getContentPane().add(tfUser);
         tfUser.setBounds(369, 103, 190, 26);
         getContentPane().add(tfPass);
