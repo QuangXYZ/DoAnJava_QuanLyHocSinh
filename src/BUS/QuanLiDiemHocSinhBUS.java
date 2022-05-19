@@ -14,8 +14,8 @@ public class QuanLiDiemHocSinhBUS {
 		return diemHocSinhDAO.themDiemHocSinh(diemHS);
 	}
 	
-	public int xoaDiemHocSinh(QuanLiDiemHS diemHS) {
-		return diemHocSinhDAO.xoaDiemHocSinh(diemHS);
+	public int xoaDiemHocSinh(QuanLiDiemHS mshs) {
+		return diemHocSinhDAO.xoaDiemHocSinh(mshs);
 	}
 	
 	public int suaDiemHocSinh(QuanLiDiemHS diemHS) {

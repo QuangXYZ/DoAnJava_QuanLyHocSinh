@@ -81,14 +81,14 @@ public class QuanLyDiemHocSinhDAO {
 	        return result;
 	    }  
 	    
-	    public int xoaDiemHocSinh(QuanLiDiemHS diemHS) {
+	    public int xoaDiemHocSinh(QuanLiDiemHS mshs) {
 	    	int result = 0;
 			try {
 				connection = MyConnection.getConnection();
 				String sql = ("delete from DIEMHOCSINH where MAHS = ?");
 				preparedStatement = connection.prepareStatement(sql);
 				
-				preparedStatement.setString(1, diemHS.getMSHS());
+				preparedStatement.setString(1, mshs.getMSHS());
 				
 				result = preparedStatement.executeUpdate();
 			 }catch (SQLException e) {
@@ -170,11 +170,11 @@ public class QuanLyDiemHocSinhDAO {
 	  				try {				
 	  				connection = MyConnection.getConnection();
 	  				Statement stmt=connection.createStatement();
-	  				ResultSet rs = stmt.executeQuery("select MAHS from HOCSINH  ");
+	  				ResultSet rs = stmt.executeQuery("select MAHS from DIEMHOCSINH  ");
 	  		
 	  				while(rs.next())
 	  	            {
-	  					String maHocSinh = new String(rs.getString("MAHS"));               
+	  					String maHocSinh = new String(rs.getString(1));               
 	  					listMSHS.add(maHocSinh);
 	  	            }
 	  					

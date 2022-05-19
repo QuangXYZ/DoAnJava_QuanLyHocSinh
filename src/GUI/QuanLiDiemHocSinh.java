@@ -344,10 +344,10 @@ public class QuanLiDiemHocSinh extends JFrame {
 	
 	
 	private void btXoaActionPerformed(ActionEvent evt) {
-		QuanLiDiemHS diemHS = new  QuanLiDiemHS();
-		diemHS.setMSHS(tfMSHS.getText());
+		QuanLiDiemHS mshs = new  QuanLiDiemHS();
+		mshs.setMSHS(tfMSHS.getText());
 		QuanLiDiemHocSinhBUS diemHocSinhBUS = new QuanLiDiemHocSinhBUS();
-		if(diemHocSinhBUS.xoaDiemHocSinh(diemHS) != 0) {
+		if(diemHocSinhBUS.xoaDiemHocSinh(mshs) != 0) {
 			JOptionPane.showMessageDialog(this, "Xóa thành công ! ");
 			hienThiDuLieu();
 		}else {
