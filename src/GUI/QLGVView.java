@@ -67,7 +67,7 @@ public class QLGVView extends javax.swing.JFrame {
         ArrayList<LopHoc> arr = new ArrayList<>();
         arr = lh.getAllLopHoc();
         for (LopHoc l : arr){
-            cbLop.addItem(l.getTenLop());
+            cbLop.addItem(l.getMaLop());
         }
         
     }

@@ -76,7 +76,7 @@ public class QLHSView extends javax.swing.JFrame {
         ArrayList<LopHoc> arr = new ArrayList<>();
         arr = lh.getAllLopHoc();
         for (LopHoc l : arr) {
-            cbLop.addItem(l.getTenLop());
+            cbLop.addItem(l.getMaLop());
         }
 
     }
@@ -167,7 +167,7 @@ public class QLHSView extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(46, 224, 65, 17);
 
-        rbNam.setBackground(new java.awt.Color(200, 255, 255));
+        rbNam.setBackground(new java.awt.Color(0, 0, 0, 0));
         buttonGroup1.add(rbNam);
         rbNam.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rbNam.setText("NAM");
