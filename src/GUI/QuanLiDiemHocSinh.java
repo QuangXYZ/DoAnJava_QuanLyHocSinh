@@ -16,18 +16,14 @@ import javax.swing.table.DefaultTableModel;
 
 import BUS.KetQuaBUS;
 import BUS.QuanLiDiemHocSinhBUS;
-import DTO.HocSinh;
+
 import DTO.KetQuaDTO;
 import DTO.QuanLiDiemHS;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
@@ -66,9 +62,9 @@ public class QuanLiDiemHocSinh extends JFrame {
 		setBounds(100, 100, 816, 644);
 		contentPane = new JPanel();
 		//contentPane.setBackground(new Color(224, 255, 255));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(null);//không dùng trình quản lí bố cục
 		
 		JLabel background = new JLabel();
         background.setBounds(0, 0, 816, 607);

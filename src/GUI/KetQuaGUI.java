@@ -29,7 +29,7 @@ import javax.swing.ImageIcon;
 
 
 
-public class KetQuaQGUI extends JFrame {
+public class KetQuaGUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -46,7 +46,7 @@ public class KetQuaQGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					KetQuaQGUI frame = new KetQuaQGUI();
+					KetQuaGUI frame = new KetQuaGUI();
 					
 					frame.doDuLieuComboBox();
 					//frame.hienThiDuLieu();
@@ -102,7 +102,7 @@ public class KetQuaQGUI extends JFrame {
 	
 	
 	
-	public KetQuaQGUI() {
+	public KetQuaGUI() {
 		setTitle("THỐNG KÊ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 695, 520);

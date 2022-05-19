@@ -400,8 +400,8 @@ public class FrMainForm extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        KetQuaQGUI kqqgui ;
-                    kqqgui = new KetQuaQGUI();
+        KetQuaGUI kqqgui ;
+                    kqqgui = new KetQuaGUI();
                     kqqgui.doDuLieuComboBox();
                     kqqgui.setVisible(true);
                     kqqgui.setLocationRelativeTo(null);
