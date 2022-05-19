@@ -14,8 +14,9 @@ public class QuanLyDiemHocSinhDAO {
 	    private PreparedStatement preparedStatement = null;
 	    private ResultSet resultSet = null;
 	    //SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-	    ArrayList<QuanLiDiemHS> dsDiemHocSinh = new ArrayList<QuanLiDiemHS>();
+	    
 	    public ArrayList<QuanLiDiemHS> docDiemHocSinh(){
+	    	ArrayList<QuanLiDiemHS> dsDiemHocSinh = new ArrayList<QuanLiDiemHS>();
 	        try {
 	        	connection = MyConnection.getConnection();
 				String sql = ("SELECT HS.MAHS, HS.HOTEN, DHS.TOAN, DHS.ANH, DHS.VAN, DHS.SINH, DHS.LI, DHS.HOA FROM HOCSINH HS, DIEMHOCSINH DHS WHERE HS.MAHS = DHS.MAHS");

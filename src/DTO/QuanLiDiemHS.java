@@ -1,6 +1,6 @@
 package DTO;
 
-import java.util.Date;
+
 
 public class QuanLiDiemHS /*extends HocSinh*/ {
 	private float toan, anh, van, ly, sinh, hoa;

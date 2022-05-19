@@ -44,9 +44,9 @@ public class KetQuaBUS {
 	public ArrayList<KetQuaDTO> layTongSoHocSinh(String maLop){
 		return ketQuaDAO.layTongSoHocSinh(maLop);
 	}
-        public int xoaKetQua(String ms){
+    public int xoaKetQua(KetQuaDTO ms){
             return ketQuaDAO.xoaKetQua(ms);
-        }
+    }
         
     public void xuatFileExcel(String maLop){
              ketQuaDAO.xuatFileExcel(maLop);

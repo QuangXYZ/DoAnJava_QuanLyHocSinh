@@ -277,13 +277,14 @@ public class KetQuaDAO {
         }
         return soLuongHocSinh;
     }
-    public int xoaKetQua(String ms){
+    public int xoaKetQua(KetQuaDTO ms){
         int result = 0;  
         String sqlDelete = "delete from KETQUA where MAHS = ?";
         try {      
                 connection = MyConnection.getConnection();
                 preparedStatement = connection.prepareStatement(sqlDelete);
-                preparedStatement.setString(1,ms);
+                //preparedStatement.setString(1,ms);
+                preparedStatement.setString(1, ms.getMSHS());
                 result = preparedStatement.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();

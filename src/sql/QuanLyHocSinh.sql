@@ -43,7 +43,7 @@ insert into GIAOVIEN(MAGV,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('1234
 insert into GIAOVIEN(MAGV,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('1235','Đặng Huỳnh Như Y','30/07/2002','Nam','Hà Nội','DCT1206','\\src\\images\\NhuY.jpg');
 insert into GIAOVIEN(MAGV,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values ('1236','Trần Minh Quân','30/07/2002','Nam','Hà Nội','DCT1206','\\src\\images\\Quan.jpg');
 create table DIEMHOCSINH (
-	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     MAHS nchar(20) not null UNIQUE,
     TOAN FLOAT(4),
     ANH FLOAT(4),
@@ -53,7 +53,6 @@ create table DIEMHOCSINH (
     HOA FLOAT(4),
     FOREIGN KEY(MAHS) REFERENCES HOCSINH(MAHS)
 );
-
 
 
 create table LOPHOC(
@@ -69,7 +68,7 @@ insert into LOPHOC(MALOP,TENLOP) values ('105','DCT1205');
 insert into LOPHOC(MALOP,TENLOP) values ('106','DCT1206');
 
 create table KETQUA (
-	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     MAHS nchar(20) not null UNIQUE,
     DIEMTB FLOAT(2),
     HOCLUC nchar(20),

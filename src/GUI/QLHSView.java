@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import DTO.HocSinh;
+import DTO.KetQuaDTO;
 import DTO.LopHoc;
 import DTO.QuanLiDiemHS;
 import sql.MyConnection;
@@ -478,7 +479,8 @@ public class QLHSView extends javax.swing.JFrame {
         if (i >= 0) {
             QuanLiDiemHocSinhBUS  qldhsbus = new QuanLiDiemHocSinhBUS();
             KetQuaBUS kqbus= new KetQuaBUS();
-            kqbus.xoaKetQua(model.getValueAt(i, 1).toString());
+            //kqbus.xoaKetQua(model.getValueAt(i, 1).toString());
+            kqbus.xoaKetQua(new KetQuaDTO(model.getValueAt(i, 1).toString()));
             qldhsbus.xoaDiemHocSinh(new QuanLiDiemHS(model.getValueAt(i, 1).toString()));
             if (hsBUS.deleteHocSinh(model.getValueAt(i, 1).toString()) != 0) {
                 JOptionPane.showMessageDialog(this, "Xóa thành công");

@@ -353,6 +353,11 @@ public class QuanLiDiemHocSinh extends JFrame {
 		}else {
 			JOptionPane.showMessageDialog(this, "Xóa không thành công ! ");
 		}
+		
+		KetQuaDTO ketQuaDTO = new KetQuaDTO();
+		ketQuaDTO.setMSHS(tfMSHS.getText());
+		KetQuaBUS ketQuaBUS = new KetQuaBUS();
+		ketQuaBUS.xoaKetQua(ketQuaDTO);
 	}
 		
 		private void btSuaActionPerformed(ActionEvent evt) {
