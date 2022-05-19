@@ -262,9 +262,13 @@ public class QLLOPView extends javax.swing.JFrame {
                 int qes=JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn? Tất cả học sinh sẽ được thay đổi sang lớp mới", "Question",JOptionPane.YES_NO_OPTION);
                 if(qes==JOptionPane.YES_OPTION){
                     LopHoc lh = new LopHoc(tfMSLop.getText(), tfTenLop.getText());
-                    int j =lhBUS.updateLopHoc(lh,model.getValueAt(i, 1).toString());
-                    System.out.println(model.getValueAt(i, 1).toString());
-                    if (j!=0) JOptionPane.showMessageDialog(this, "Sửa thành công");
+                    lhBUS.addLopHoc(lh);
+                    System.out.println(lh.getMaLop());
+                    int j =lhBUS.updateLopHoc(lh,model.getValueAt(i, 0).toString());                   
+                    if (j!=0) {
+                        JOptionPane.showMessageDialog(this, "Sửa thành công");
+                        lhBUS.delLopHoc(new LopHoc(model.getValueAt(i, 0).toString(),""));
+                    }
                     else JOptionPane.showMessageDialog(this, "Sửa không thành công");
                 }
                 else return;
@@ -273,7 +277,7 @@ public class QLLOPView extends javax.swing.JFrame {
         else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn lớp để sửa");
         }
-       
+       loadDataTable();
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -296,7 +300,7 @@ public class QLLOPView extends javax.swing.JFrame {
             DefaultTableModel model1 = (DefaultTableModel)tbHocSinh.getModel();
             ArrayList<HocSinh> dshs = new ArrayList<>();
             LopHocBUS lhBUS = new LopHocBUS();
-            dshs = lhBUS.getAllHocSinh(model.getValueAt(i, 1).toString());
+            dshs = lhBUS.getAllHocSinh(model.getValueAt(i, 0).toString());
             model1.setRowCount(0);
             for (int j=0;j<dshs.size();j++){
             model1.addRow(new Object[]{dshs.get(j).getMSHS(),dshs.get(j).getHoTen(),dshs.get(j).getGioiTinh(),formatDate.format(dshs.get(j).getNgaySinh())});       

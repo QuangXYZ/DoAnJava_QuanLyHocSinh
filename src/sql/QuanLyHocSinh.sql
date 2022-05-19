@@ -1,6 +1,5 @@
 create database QLHS;
 use QLHS;
-
 create table USERS(
 	USERNAME nchar(20) not null primary key,
     USERPASSWORD nchar(20),
@@ -60,12 +59,12 @@ create table LOPHOC(
     TENLOP nchar(20)
 );
 
-insert into LOPHOC(MALOP,TENLOP) values ('101','DCT1201');
-insert into LOPHOC(MALOP,TENLOP) values ('102','DCT1202');
-insert into LOPHOC(MALOP,TENLOP) values ('103','DCT1203');
-insert into LOPHOC(MALOP,TENLOP) values ('104','DCT1204');
-insert into LOPHOC(MALOP,TENLOP) values ('105','DCT1205');
-insert into LOPHOC(MALOP,TENLOP) values ('106','DCT1206');
+insert into LOPHOC(MALOP,TENLOP) values ('DCT1201','Lop 1');
+insert into LOPHOC(MALOP,TENLOP) values ('DCT1202','Lop 2');
+insert into LOPHOC(MALOP,TENLOP) values ('DCT1203','Lop 3');
+insert into LOPHOC(MALOP,TENLOP) values ('DCT1204','Lop 4');
+insert into LOPHOC(MALOP,TENLOP) values ('DCT1205','Lop 5');
+insert into LOPHOC(MALOP,TENLOP) values ('DCT1206','Lop 5');
 
 create table KETQUA (
 	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
