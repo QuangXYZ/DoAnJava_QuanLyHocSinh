@@ -41,7 +41,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 	private JTextField tfVan;
 	private JTextField tfMSHS;
 	private JTable table = new JTable();
-	static DefaultTableModel model ;
+	DefaultTableModel model ;
 	
 	public void hienThiDuLieu() {
 		QuanLiDiemHocSinhBUS quanLiDiemHocSinhBUS = new QuanLiDiemHocSinhBUS();
@@ -282,18 +282,9 @@ public class QuanLiDiemHocSinh extends JFrame {
 			JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         } else {
 			try {
-			QuanLiDiemHS diemHS = new  QuanLiDiemHS();
-			diemHS.setMSHS(tfMSHS.getText());
-			diemHS.setToan(Float.parseFloat(tfToan.getText()));
-			diemHS.setAnh(Float.parseFloat(tfAnh.getText()));
-			diemHS.setVan(Float.parseFloat(tfVan.getText()));
-			diemHS.setSinh(Float.parseFloat(tfSinh.getText()));
-			diemHS.setLy(Float.parseFloat(tfLi.getText()));
-			diemHS.setHoa(Float.parseFloat(tfHoa.getText()));
-			
 			//Tính điểm trung bình 
 			float toan = 0, anh = 0, van = 0, sinh = 0, ly = 0, hoa = 0;
-			
+				
 			toan = Float.parseFloat(tfToan.getText());
 			anh = Float.parseFloat(tfAnh.getText());
 			van = Float.parseFloat(tfVan.getText());
@@ -305,6 +296,15 @@ public class QuanLiDiemHocSinh extends JFrame {
 				JOptionPane.showMessageDialog(this, "Nhập sai dữ liệu! ");
 				return;
 			}
+				
+			QuanLiDiemHS diemHS = new  QuanLiDiemHS();
+			diemHS.setMSHS(tfMSHS.getText());
+			diemHS.setToan(toan);
+			diemHS.setAnh(anh);
+			diemHS.setVan(van);
+			diemHS.setSinh(sinh);
+			diemHS.setLy(ly);
+			diemHS.setHoa(hoa);
 			
 			QuanLiDiemHocSinhBUS diemHocSinhBUS = new QuanLiDiemHocSinhBUS();
 			if(diemHocSinhBUS.themDiemHocSinh(diemHS) != 0) {
@@ -312,22 +312,18 @@ public class QuanLiDiemHocSinh extends JFrame {
 				hienThiDuLieu();
 			}else {
 				JOptionPane.showMessageDialog(this, "Thêm không thành công ! ");
-			}
-			
-	
-			
-			
+			}		
 			
 			float trungBinh = diemHocSinhBUS.tinhTrungBinh(toan, anh, van, sinh, ly, hoa);
-			//float trungBinh = (float)Math.round(((toan + anh + van + hoa + ly + sinh)/6)*100) / 100;
+			
 			KetQuaDTO ketQuaDTO = new KetQuaDTO();
 			ketQuaDTO.setMSHS(tfMSHS.getText());
 			ketQuaDTO.setDiemTrungBinh(trungBinh);
 			if(trungBinh >= 8) {
 				ketQuaDTO.setHocLuc("Giỏi");
-			}else if(trungBinh >= 7 && trungBinh <= 8) {
+			}else if(trungBinh >= 7 && trungBinh < 8) {
 				ketQuaDTO.setHocLuc("Khá");
-			}else if(trungBinh >= 5 && trungBinh <= 7) {
+			}else if(trungBinh >= 5 && trungBinh < 7) {
 				ketQuaDTO.setHocLuc("Trung bình");
 			} else {
 				ketQuaDTO.setHocLuc("Yếu");
@@ -365,15 +361,6 @@ public class QuanLiDiemHocSinh extends JFrame {
 	            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
 	        }else {
 				try {
-				QuanLiDiemHS diemHS = new  QuanLiDiemHS();
-				diemHS.setToan(Float.parseFloat(tfToan.getText()));
-				diemHS.setAnh(Float.parseFloat(tfAnh.getText()));
-				diemHS.setVan(Float.parseFloat(tfVan.getText()));
-				diemHS.setSinh(Float.parseFloat(tfSinh.getText()));
-				diemHS.setLy(Float.parseFloat(tfLi.getText()));
-				diemHS.setHoa(Float.parseFloat(tfHoa.getText()));
-				diemHS.setMSHS(tfMSHS.getText());
-				
 				//Tính điểm trung bình 
 				float toan = 0, anh = 0, van = 0, sinh = 0, ly = 0, hoa = 0;
 				
@@ -383,12 +370,21 @@ public class QuanLiDiemHocSinh extends JFrame {
 				sinh = Float.parseFloat(tfSinh.getText());
 				hoa = Float.parseFloat(tfHoa.getText());
 				ly = Float.parseFloat(tfLi.getText());
-				
+					
 				if(toan < 0 || toan > 10 || anh < 0 || anh > 10 || van < 0 || van > 10 || sinh < 0 || sinh > 10 || hoa < 0 || hoa > 10 || ly < 0 || ly > 10) {
 					JOptionPane.showMessageDialog(this, "Nhập sai dữ liệu! ");
 					return;
 				}
 				
+				QuanLiDiemHS diemHS = new  QuanLiDiemHS();
+				diemHS.setMSHS(tfMSHS.getText());
+				diemHS.setToan(toan);
+				diemHS.setAnh(anh);
+				diemHS.setVan(van);
+				diemHS.setSinh(sinh);
+				diemHS.setLy(ly);
+				diemHS.setHoa(hoa);
+								
 				QuanLiDiemHocSinhBUS diemHocSinhBUS = new QuanLiDiemHocSinhBUS();
 				if(diemHocSinhBUS.suaDiemHocSinh(diemHS) != 0) {
 					JOptionPane.showMessageDialog(this, "Sửa thành công ! ");
@@ -426,8 +422,8 @@ public class QuanLiDiemHocSinh extends JFrame {
             do {
                 MAHS = JOptionPane.showInputDialog(this, "Nhập mã học sinh", "MAHS", JOptionPane.OK_OPTION);
                 if (MAHS.equals("")) {
-                    int confirm = JOptionPane.showConfirmDialog(this, "Xin hãy nhập mã số học sinh", "Mã số trống", JOptionPane.YES_NO_OPTION);
-                    if (confirm != 0) {
+                    int Confirm = JOptionPane.showConfirmDialog(this, "Xin hãy nhập mã số học sinh", "Mã số trống", JOptionPane.YES_NO_OPTION);
+                    if (Confirm != 0) {
                         break;
                     }
                 }
@@ -488,7 +484,6 @@ public class QuanLiDiemHocSinh extends JFrame {
             this.dispose();
 		}
 		
-		
 		/**
 		 * Launch the application.
 		 */
@@ -505,5 +500,5 @@ public class QuanLiDiemHocSinh extends JFrame {
 					}
 				}
 			});
-		}
+		}	
 }
