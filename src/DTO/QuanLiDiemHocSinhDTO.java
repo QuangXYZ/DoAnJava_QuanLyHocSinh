@@ -2,17 +2,17 @@ package DTO;
 
 
 
-public class QuanLiDiemHS /*extends HocSinh*/ {
+public class QuanLiDiemHocSinhDTO /*extends HocSinh*/ {
 	private float toan, anh, van, ly, sinh, hoa;
 	private String MSHS;
-	private HocSinh hocSinh;
+	private HocSinhDTO hocSinh;
 	
-	public QuanLiDiemHS() {
-		hocSinh = new HocSinh();
+	public QuanLiDiemHocSinhDTO() {
+		hocSinh = new HocSinhDTO();
 	}
 	
 
-	public QuanLiDiemHS(String mSHS,float toan, float anh, float van, float ly, float sinh, float hoa) {
+	public QuanLiDiemHocSinhDTO(String mSHS,float toan, float anh, float van, float ly, float sinh, float hoa) {
 		this.toan = toan;
 		this.anh = anh;
 		this.van = van;
@@ -21,7 +21,7 @@ public class QuanLiDiemHS /*extends HocSinh*/ {
 		this.hoa = hoa;
 		this.MSHS = mSHS;
 	}
-        public QuanLiDiemHS(String mSHS) {
+        public QuanLiDiemHocSinhDTO(String mSHS) {
 		toan = 0;
                 anh = 0;
                 ly = 0;
@@ -34,12 +34,12 @@ public class QuanLiDiemHS /*extends HocSinh*/ {
 	
 	
 
-	public HocSinh getHocSinh() {
+	public HocSinhDTO getHocSinh() {
 		return hocSinh;
 	}
 
 
-	public void setHocSinh(HocSinh hs) {
+	public void setHocSinh(HocSinhDTO hs) {
 		this.hocSinh = hs;
 	}
 

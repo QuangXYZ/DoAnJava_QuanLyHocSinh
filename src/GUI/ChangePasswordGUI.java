@@ -6,8 +6,8 @@
 package GUI;
 
 import BUS.UserBUS;
-import DTO.User;
-import static GUI.FrLoginForm.Username;
+import DTO.UserDTO;
+import static GUI.LoginGUI.Username;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Label;
@@ -21,12 +21,12 @@ import javax.swing.JTextField;
  *
  * @author Tit
  */
-public class ChangePasswordForm extends javax.swing.JFrame {
+public class ChangePasswordGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form ChangePasswordForm
      */
-    public ChangePasswordForm() {
+    public ChangePasswordGUI() {
         initComponents();
         lbImg.setIcon(new ImageIcon(new ImageIcon("src//images//cyber-security.png").getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_SMOOTH)));
        
@@ -212,7 +212,7 @@ public class ChangePasswordForm extends javax.swing.JFrame {
         }
         if (checkValidForm()) {
             if (tfPasswordNew.getText().equals(tfPasswordNew2.getText())){
-                if (usBUS.delUser(Username)!=0  && usBUS.addUser(new User(Username,tfPasswordNew.getText(),1))!=0)
+                if (usBUS.delUser(Username)!=0  && usBUS.addUser(new UserDTO(Username,tfPasswordNew.getText(),1))!=0)
                 JOptionPane.showMessageDialog(this, "Đổi thành công");
                 else JOptionPane.showMessageDialog(this, "Đổi ko thành công");
             }
@@ -232,8 +232,8 @@ public class ChangePasswordForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        FrMainForm mainForm;
-                    mainForm = new FrMainForm();
+        HomeGUI mainForm;
+                    mainForm = new HomeGUI();
                     mainForm.setVisible(true);
                     mainForm.setLocationRelativeTo(null);
                     this.dispose();
@@ -274,20 +274,21 @@ resetBorder(tfPasswordNew);
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChangePasswordGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChangePasswordGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChangePasswordGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChangePasswordGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChangePasswordForm().setVisible(true);
+                new ChangePasswordGUI().setVisible(true);
             }
         });
     }

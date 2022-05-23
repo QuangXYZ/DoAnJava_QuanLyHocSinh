@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import DTO.HocSinh;
+import DTO.HocSinhDTO;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,8 +24,8 @@ public class HocSinhDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-    ArrayList<HocSinh> dshs = new ArrayList<>();
-    public ArrayList<HocSinh> getAllHocSinh(){
+    ArrayList<HocSinhDTO> dshs = new ArrayList<>();
+    public ArrayList<HocSinhDTO> getAllHocSinh(){
         try {
             String sqlSelectAll = "select * from HOCSINH";
             connection = MyConnection.getConnection();
@@ -33,7 +33,7 @@ public class HocSinhDAO {
             resultSet = preparedStatement.executeQuery();
                  
          while(resultSet.next()){
-            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dshs.add(new HocSinhDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {
@@ -52,7 +52,7 @@ public class HocSinhDAO {
         }
         return dshs;
     }
-    public int addHocSinh(HocSinh hs){
+    public int addHocSinh(HocSinhDTO hs){
         int result = 0;
         String sqlInsert = "insert into HOCSINH(MAHS,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values (?,?,?,?,?,?,?);";
 
@@ -101,7 +101,7 @@ public class HocSinhDAO {
         }
         return result;
     }
-     public int updateHocSinh(HocSinh hs){
+     public int updateHocSinh(HocSinhDTO hs){
     int result = 0;
     String sqlUpdate = "update HOCSINH set HOTEN = ?, NGAYSINH = ?, GIOITINH = ?, QUEQUAN = ?, LOP = ?, IMG = ? where MAHS = ?";
 
@@ -131,7 +131,7 @@ public class HocSinhDAO {
     }
      
      
-    public ArrayList<HocSinh> searchHocSinhMSHS(String MSHS){
+    public ArrayList<HocSinhDTO> searchHocSinhMSHS(String MSHS){
         try {
             String sqlSelectAll = "select * from HOCSINH";
             connection = MyConnection.getConnection();
@@ -139,7 +139,7 @@ public class HocSinhDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
             if (resultSet.getString(1).contains(MSHS))   
-            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dshs.add(new HocSinhDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {
@@ -158,7 +158,7 @@ public class HocSinhDAO {
         }
         return dshs;
     }
-     public ArrayList<HocSinh> searchHocSinhHoTen(String HoTen){
+     public ArrayList<HocSinhDTO> searchHocSinhHoTen(String HoTen){
         try {
             String sqlSelectAll = "select * from HOCSINH";
             connection = MyConnection.getConnection();
@@ -167,7 +167,7 @@ public class HocSinhDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
             if (resultSet.getString(2).contains(HoTen))
-            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dshs.add(new HocSinhDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {
@@ -186,7 +186,7 @@ public class HocSinhDAO {
         }
         return dshs;
     }
-     public ArrayList<HocSinh> searchHocSinhNgaySinh(String NgaySinh){
+     public ArrayList<HocSinhDTO> searchHocSinhNgaySinh(String NgaySinh){
         try {
             String sqlSelectAll = "select * from HOCSINH";
             connection = MyConnection.getConnection();
@@ -195,7 +195,7 @@ public class HocSinhDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
             if (resultSet.getString(3).contains(NgaySinh))
-            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dshs.add(new HocSinhDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {
@@ -214,7 +214,7 @@ public class HocSinhDAO {
         }
         return dshs;
     }
-     public ArrayList<HocSinh> searchHocSinhGioiTinh(String GioiTinh){
+     public ArrayList<HocSinhDTO> searchHocSinhGioiTinh(String GioiTinh){
         try {
             String sqlSelectAll = "select * from HOCSINH ";
             connection = MyConnection.getConnection();
@@ -222,7 +222,7 @@ public class HocSinhDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
              if (resultSet.getString(4).contains(GioiTinh))
-            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dshs.add(new HocSinhDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {
@@ -241,7 +241,7 @@ public class HocSinhDAO {
         }
         return dshs;
     }
-     public ArrayList<HocSinh> searchHocSinhQueQuan(String QueQuan){
+     public ArrayList<HocSinhDTO> searchHocSinhQueQuan(String QueQuan){
         try {
             String sqlSelectAll = "select * from HOCSINH ";
             connection = MyConnection.getConnection();
@@ -249,7 +249,7 @@ public class HocSinhDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
              if (resultSet.getString(5).contains(QueQuan))
-            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dshs.add(new HocSinhDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {
@@ -268,7 +268,7 @@ public class HocSinhDAO {
         }
         return dshs;
     }
-     public ArrayList<HocSinh> searchHocSinhLop(String Lop){
+     public ArrayList<HocSinhDTO> searchHocSinhLop(String Lop){
         try {
             String sqlSelectAll = "select * from HOCSINH ";
             connection = MyConnection.getConnection();
@@ -276,7 +276,7 @@ public class HocSinhDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
              if (resultSet.getString(6).contains(Lop))
-            dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dshs.add(new HocSinhDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {

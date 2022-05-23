@@ -6,7 +6,7 @@
 package GUI;
 
 import BUS.UserBUS;
-import DTO.User;
+import DTO.UserDTO;
 import static java.awt.Color.BLACK;
 import static java.awt.Color.GRAY;
 import java.awt.Image;
@@ -20,12 +20,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Tit
  */
-public class QLUserView extends javax.swing.JFrame {
+public class UserGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form QLUserView
      */
-    ArrayList<User> dsUser = new ArrayList<>();
+    ArrayList<UserDTO> dsUser = new ArrayList<>();
     DefaultTableModel model;
     void loadDataTable(){
         
@@ -41,7 +41,7 @@ public class QLUserView extends javax.swing.JFrame {
     
         
         
-    public QLUserView() {
+    public UserGUI() {
         initComponents();
         btnAdd.setIcon(new ImageIcon(new ImageIcon("src//images//plus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         btnDel.setIcon(new ImageIcon(new ImageIcon("src//images//delete.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
@@ -250,7 +250,7 @@ public class QLUserView extends javax.swing.JFrame {
         // TODO add your handling code here:
         model = (DefaultTableModel) tbUsers.getModel();
         int i = tbUsers.getSelectedRow();
-        for (User u : dsUser){
+        for (UserDTO u : dsUser){
             if (u.getUserName().equals(model.getValueAt(i,0))) {
                 tfUser.setText(u.getUserName());
                 tfPass.setText(u.getPassWord());
@@ -270,11 +270,11 @@ public class QLUserView extends javax.swing.JFrame {
         if (tfPass.getText().equals("")||tfUser.getText().equals("")||(rdAdmin.isSelected() == false && rdStandard.isSelected() == false)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         } else {
-            for (User u : dsUser) if (u.getUserName().equals(tfUser.getText())) {
+            for (UserDTO u : dsUser) if (u.getUserName().equals(tfUser.getText())) {
                 JOptionPane.showMessageDialog(this, "Tài khoản "+tfUser.getText()+" đã tồn tại !");
                 return;
             }
-                User us = new User(tfUser.getText(),tfPass.getText(),rdAdmin.isSelected() ? 0:1);
+                UserDTO us = new UserDTO(tfUser.getText(),tfPass.getText(),rdAdmin.isSelected() ? 0:1);
                 UserBUS hsBUS = new UserBUS();
                 if (hsBUS.addUser(us) != 0) {
                     JOptionPane.showMessageDialog(this, "Thêm thành công");
@@ -309,8 +309,8 @@ public class QLUserView extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        FrMainForm mainForm;
-        mainForm = new FrMainForm();
+        HomeGUI mainForm;
+        mainForm = new HomeGUI();
         mainForm.setVisible(true);
         mainForm.setLocationRelativeTo(null);
         this.dispose();
@@ -324,7 +324,7 @@ public class QLUserView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");return;}
         
         if (i >= 0) {
-            User us = new User(tfUser.getText(),tfPass.getText(),rdAdmin.isSelected() ? 0:1);
+            UserDTO us = new UserDTO(tfUser.getText(),tfPass.getText(),rdAdmin.isSelected() ? 0:1);
             if (usBUS.delUser(model.getValueAt(i, 0).toString())!=0&&usBUS.addUser(us)!=0){
                 JOptionPane.showMessageDialog(this, "Sửa thành công");
             }
@@ -360,7 +360,7 @@ public class QLUserView extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         UserBUS usBUS = new UserBUS();
-        ArrayList<User> Users = usBUS.search(tfSearch.getText());
+        ArrayList<UserDTO> Users = usBUS.search(tfSearch.getText());
         model = (DefaultTableModel) tbUsers.getModel();
         model.setRowCount(0);
         for (int i = 0; i < Users.size(); i++) {
@@ -396,20 +396,21 @@ public class QLUserView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QLUserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QLUserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QLUserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QLUserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QLUserView().setVisible(true);
+                new UserGUI().setVisible(true);
             }
         });
     }

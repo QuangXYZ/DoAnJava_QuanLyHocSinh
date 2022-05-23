@@ -2,19 +2,19 @@ package DTO;
 
 import java.util.Date;
 
-public class GiaoVien extends Nguoi {
+public class GiaoVienDTO extends NguoiDTO {
 	
 	private String MSGV;
 	private String lop;
 	private String img;
 	
-	public GiaoVien() {
+	public GiaoVienDTO() {
 		
 	}
 	
 	
 
-	public GiaoVien(String MSGV,String hoTen,Date ngaySinh, String gioiTinh, String queQuan,  String lop,String img) {
+	public GiaoVienDTO(String MSGV,String hoTen,Date ngaySinh, String gioiTinh, String queQuan,  String lop,String img) {
 		super(hoTen, gioiTinh, queQuan, ngaySinh);
 		this.MSGV = MSGV;
 		this.lop = lop;

@@ -249,8 +249,8 @@ public class KetQuaGUI extends JFrame {
 	}
 	
 	private void btnQuayLaiActionPerformed(ActionEvent evt) {
-		FrMainForm mainForm;
-        mainForm = new FrMainForm();
+		HomeGUI mainForm;
+        mainForm = new HomeGUI();
         mainForm.setVisible(true);
         mainForm.setLocationRelativeTo(null);
         this.dispose();

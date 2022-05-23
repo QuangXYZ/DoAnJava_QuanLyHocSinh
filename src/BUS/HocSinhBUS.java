@@ -6,7 +6,7 @@
 package BUS;
 
 import DAO.HocSinhDAO;
-import DTO.HocSinh;
+import DTO.HocSinhDTO;
 import java.util.ArrayList;
 
 /**
@@ -15,34 +15,34 @@ import java.util.ArrayList;
  */
 public class HocSinhBUS {
     HocSinhDAO hsDAO = new HocSinhDAO();
-    public ArrayList<HocSinh> getAllHocSinh() {  
+    public ArrayList<HocSinhDTO> getAllHocSinh() {  
         return hsDAO.getAllHocSinh();
     }
-    public int addHocSinh(HocSinh hs) {  
+    public int addHocSinh(HocSinhDTO hs) {  
         return hsDAO.addHocSinh(hs);
     }
     public int deleteHocSinh(String mshs) {  
         return hsDAO.deleteHocSinh(mshs);
     }
-    public int updateHocSinh(HocSinh hs) {  
+    public int updateHocSinh(HocSinhDTO hs) {  
         return hsDAO.updateHocSinh(hs);
     }
-    public ArrayList<HocSinh> searchHocSinhMSHS(String MSHS) {  
+    public ArrayList<HocSinhDTO> searchHocSinhMSHS(String MSHS) {  
         return hsDAO.searchHocSinhMSHS(MSHS);
     }
-    public ArrayList<HocSinh> searchHocSinhHoTen(String HoTen) {  
+    public ArrayList<HocSinhDTO> searchHocSinhHoTen(String HoTen) {  
         return hsDAO.searchHocSinhHoTen(HoTen);
     }
-    public ArrayList<HocSinh> searchHocSinhNgaySinh(String NgaySinh) {  
+    public ArrayList<HocSinhDTO> searchHocSinhNgaySinh(String NgaySinh) {  
         return hsDAO.searchHocSinhNgaySinh(NgaySinh);
     }
-    public ArrayList<HocSinh> searchHocSinhQueQuan(String QueQuan) {  
+    public ArrayList<HocSinhDTO> searchHocSinhQueQuan(String QueQuan) {  
         return hsDAO.searchHocSinhQueQuan(QueQuan);
     }
-    public ArrayList<HocSinh> searchHocSinhLop(String Lop) {  
+    public ArrayList<HocSinhDTO> searchHocSinhLop(String Lop) {  
         return hsDAO.searchHocSinhLop(Lop);
     }
-    public ArrayList<HocSinh> searchHocSinhGioiTinh(String GioiTinh) {  
+    public ArrayList<HocSinhDTO> searchHocSinhGioiTinh(String GioiTinh) {  
         return hsDAO.searchHocSinhGioiTinh(GioiTinh);
     }
     

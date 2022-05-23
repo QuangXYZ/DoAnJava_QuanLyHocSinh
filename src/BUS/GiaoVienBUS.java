@@ -6,7 +6,7 @@
 package BUS;
 
 import DAO.GiaoVienDAO;
-import DTO.GiaoVien;
+import DTO.GiaoVienDTO;
 import java.util.ArrayList;
 
 /**
@@ -15,34 +15,34 @@ import java.util.ArrayList;
  */
 public class GiaoVienBUS {
     GiaoVienDAO gvDAO = new GiaoVienDAO();
-    public ArrayList<GiaoVien> getAllGiaoVien() {  
+    public ArrayList<GiaoVienDTO> getAllGiaoVien() {  
         return gvDAO.getAllGiaoVien();
     }
-    public int addGiaoVien(GiaoVien gv) {  
+    public int addGiaoVien(GiaoVienDTO gv) {  
         return gvDAO.addGiaoVien(gv);
     }
     public int deleteGiaoVien(String msgv) {  
         return gvDAO.deleteGiaoVien(msgv);
     }
-    public int updateGiaoVien(GiaoVien gv) {  
+    public int updateGiaoVien(GiaoVienDTO gv) {  
         return gvDAO.updateGiaoVien(gv);
     }
-    public ArrayList<GiaoVien> searchGiaoVienMSGV(String MSGV) {  
+    public ArrayList<GiaoVienDTO> searchGiaoVienMSGV(String MSGV) {  
         return gvDAO.searchGiaoVienMSGV(MSGV);
     }
-    public ArrayList<GiaoVien> searchGiaoVienHoTen(String HoTen) {  
+    public ArrayList<GiaoVienDTO> searchGiaoVienHoTen(String HoTen) {  
         return gvDAO.searchGiaoVienHoTen(HoTen);
     }
-    public ArrayList<GiaoVien> searchGiaoVienNgaySinh(String NgaySinh) {  
+    public ArrayList<GiaoVienDTO> searchGiaoVienNgaySinh(String NgaySinh) {  
         return gvDAO.searchGiaoVienNgaySinh(NgaySinh);
     }
-    public ArrayList<GiaoVien> searchGiaoVienQueQuan(String QueQuan) {  
+    public ArrayList<GiaoVienDTO> searchGiaoVienQueQuan(String QueQuan) {  
         return gvDAO.searchGiaoVienQueQuan(QueQuan);
     }
-    public ArrayList<GiaoVien> searchGiaoVienLop(String Lop) {  
+    public ArrayList<GiaoVienDTO> searchGiaoVienLop(String Lop) {  
         return gvDAO.searchGiaoVienLop(Lop);
     }
-    public ArrayList<GiaoVien> searchGiaoVienGioiTinh(String GioiTinh) {  
+    public ArrayList<GiaoVienDTO> searchGiaoVienGioiTinh(String GioiTinh) {  
         return gvDAO.searchGiaoVienGioiTinh(GioiTinh);
     }
 }

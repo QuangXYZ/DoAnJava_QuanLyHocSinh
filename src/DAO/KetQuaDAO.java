@@ -1,6 +1,6 @@
 package DAO;
 
-import DTO.HocSinh;
+import DTO.HocSinhDTO;
 import DTO.KetQuaDTO;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class KetQuaDAO {
 			resultSet = preparedStatement.executeQuery();//resultSet: truy cập dữ liệu trả về từ csdl,executeQuery: sử dụng cho câu lệnh sql select 
 			while(resultSet.next()) {// di chuyển con trỏ đến dòng kế, 
 				KetQuaDTO KQ = new KetQuaDTO();
-				HocSinh hocSinh = new HocSinh();
+				HocSinhDTO hocSinh = new HocSinhDTO();
 				KQ.setMSHS(resultSet.getString(1));
 				hocSinh.setHoTen(resultSet.getString(2));
 				hocSinh.setLop(resultSet.getString(3));
@@ -117,7 +117,7 @@ public class KetQuaDAO {
 			
 			while(resultSet.next()) {
 				KetQuaDTO maLopHS = new KetQuaDTO();
-				HocSinh hocSinh = new HocSinh();
+				HocSinhDTO hocSinh = new HocSinhDTO();
 				hocSinh.setLop(resultSet.getString(1));
 				maLopHS.setHocSinh(hocSinh);
 				dsMaLop.add(maLopHS);

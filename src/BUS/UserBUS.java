@@ -6,7 +6,7 @@
 package BUS;
 
 import DAO.UserDAO;
-import DTO.User;
+import DTO.UserDTO;
 import java.util.ArrayList;
 
 /**
@@ -15,17 +15,17 @@ import java.util.ArrayList;
  */
 public class UserBUS {
     UserDAO userDAO = new UserDAO();
-    public ArrayList<User> getAllUser(){
+    public ArrayList<UserDTO> getAllUser(){
         return userDAO.getAllUser();
     }
-    public int addUser(User us){
+    public int addUser(UserDTO us){
         return userDAO.addUser(us);
     }
 
     public int delUser(String Username) {
         return userDAO.delUser(Username);       
     }
-    public ArrayList<User> search(String Username){
+    public ArrayList<UserDTO> search(String Username){
         return userDAO.search(Username);
     }
     public boolean checkAdmin(String Username){

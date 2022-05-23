@@ -3,7 +3,7 @@ package DTO;
 public class KetQuaDTO {
 	private float diemTrungBinh;
 	private String hocLuc, MSHS, slHocSinhGioi, slHocSinhKha, slHocSinhTrungBinh, slHocsinhYeu, tongSoHocSinh;
-	private HocSinh hocSinh;
+	private HocSinhDTO hocSinh;
 	
 	public KetQuaDTO() {
 		
@@ -22,11 +22,11 @@ public class KetQuaDTO {
 	
 	
 
-	public HocSinh getHocSinh() {
+	public HocSinhDTO getHocSinh() {
 		return hocSinh;
 	}
 
-	public void setHocSinh(HocSinh hocSinh) {
+	public void setHocSinh(HocSinhDTO hocSinh) {
 		this.hocSinh = hocSinh;
 	}
 

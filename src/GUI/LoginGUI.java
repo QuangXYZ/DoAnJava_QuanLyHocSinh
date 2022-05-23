@@ -12,7 +12,7 @@ import java.sql.*;
 
 
 import javax.swing.JOptionPane;
-import DTO.User;
+import DTO.UserDTO;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -22,13 +22,13 @@ import sql.MyConnection;
  *
  * @author Tit
  */
-public class FrLoginForm extends javax.swing.JFrame {
+public class LoginGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form FrMainForm
      */
     static String Username;
-    public FrLoginForm() {
+    public LoginGUI() {
         initComponents();
         lbLogin.setIcon(new ImageIcon(new ImageIcon("src//images//login.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
         lbUserName.setIcon(new ImageIcon(new ImageIcon("src//images//user.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
@@ -122,8 +122,8 @@ public class FrLoginForm extends javax.swing.JFrame {
             UserBUS userBUS = new UserBUS();
             if (userBUS.checkLogin(tfUserName.getText(), new String (tfPassword.getPassword()))){  
                 Username = tfUserName.getText();
-                FrMainForm mainForm;
-                    mainForm = new FrMainForm();
+                HomeGUI mainForm;
+                    mainForm = new HomeGUI();
                     mainForm.setVisible(true);
                     mainForm.setLocationRelativeTo(null);
                     this.dispose();
@@ -160,21 +160,23 @@ public class FrLoginForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrLoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrLoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrLoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrLoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrLoginForm().setVisible(true);
+                new LoginGUI().setVisible(true);
             }
         });
     }

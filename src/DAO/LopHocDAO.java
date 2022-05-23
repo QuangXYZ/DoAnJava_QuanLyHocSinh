@@ -5,8 +5,8 @@
  */
 package DAO;
 
-import DTO.HocSinh;
-import DTO.LopHoc;
+import DTO.HocSinhDTO;
+import DTO.LopHocDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,11 +26,11 @@ public class LopHocDAO {
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-    ArrayList<LopHoc> dslh = new ArrayList<>();
-    ArrayList<HocSinh> dshs = new ArrayList<>();
+    ArrayList<LopHocDTO> dslh = new ArrayList<>();
+    ArrayList<HocSinhDTO> dshs = new ArrayList<>();
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 
-    public ArrayList<LopHoc> getAllLopHoc(){
+    public ArrayList<LopHocDTO> getAllLopHoc(){
         try {
             String sqlSelectAll = "select * from LOPHOC";
             connection = MyConnection.getConnection();
@@ -38,7 +38,7 @@ public class LopHocDAO {
             resultSet = preparedStatement.executeQuery();
                  
          while(resultSet.next()){
-            dslh.add(new LopHoc(resultSet.getString(1),resultSet.getString(2)));        
+            dslh.add(new LopHocDTO(resultSet.getString(1),resultSet.getString(2)));        
          }
          
         } catch (SQLException ex) {
@@ -55,7 +55,7 @@ public class LopHocDAO {
         }
         return dslh;
     }
-    public ArrayList<HocSinh> getAllHocSinh(String tenLop){
+    public ArrayList<HocSinhDTO> getAllHocSinh(String tenLop){
         try {
             String sqlSelectAll = "select * from HOCSINH where LOP = ?";
             connection = MyConnection.getConnection();
@@ -65,7 +65,7 @@ public class LopHocDAO {
                  
          while(resultSet.next()){
                 try {        
-                    dshs.add(new HocSinh(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));
+                    dshs.add(new HocSinhDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));
                 } catch (ParseException ex) {
                     Logger.getLogger(LopHocDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -86,7 +86,7 @@ public class LopHocDAO {
         }
         return dshs;
     }
-    public int addLopHoc(LopHoc lh){
+    public int addLopHoc(LopHocDTO lh){
         int result = 0;
         String sqlInsert = "insert into LOPHOC(MALOP,TENLOP) values (?,?);";
 
@@ -110,7 +110,7 @@ public class LopHocDAO {
         return result;
     }
     
-    public int delLopHoc(LopHoc lh){
+    public int delLopHoc(LopHocDTO lh){
         int result = 0;  
         int result2 =0;
         String sqlDelete = "delete from LOPHOC where MALOP = ?;";
@@ -136,7 +136,7 @@ public class LopHocDAO {
         }
         return result;
     }
-    public int updateLopHoc(LopHoc lh,String lh2){
+    public int updateLopHoc(LopHocDTO lh,String lh2){
         int result = 0;  
        
         

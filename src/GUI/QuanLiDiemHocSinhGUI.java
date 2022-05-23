@@ -18,7 +18,7 @@ import BUS.KetQuaBUS;
 import BUS.QuanLiDiemHocSinhBUS;
 
 import DTO.KetQuaDTO;
-import DTO.QuanLiDiemHS;
+import DTO.QuanLiDiemHocSinhDTO;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -31,7 +31,7 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Image;
 
-public class QuanLiDiemHocSinh extends JFrame {
+public class QuanLiDiemHocSinhGUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField tfToan;
 	private JTextField tfSinh;
@@ -45,17 +45,17 @@ public class QuanLiDiemHocSinh extends JFrame {
 	
 	public void hienThiDuLieu() {
 		QuanLiDiemHocSinhBUS quanLiDiemHocSinhBUS = new QuanLiDiemHocSinhBUS();
-		ArrayList<QuanLiDiemHS> dsDiemHS = quanLiDiemHocSinhBUS.docDiemHocSinh();
+		ArrayList<QuanLiDiemHocSinhDTO> dsDiemHS = quanLiDiemHocSinhBUS.docDiemHocSinh();
 		model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
-		for(QuanLiDiemHS dsDiem: dsDiemHS) {
+		for(QuanLiDiemHocSinhDTO dsDiem: dsDiemHS) {
 			Object[] row = new Object[] {dsDiem.getMSHS(), dsDiem.getHocSinh().getHoTen(), dsDiem.getToan(), dsDiem.getAnh(), dsDiem.getVan(),dsDiem.getSinh(), dsDiem.getLy(), dsDiem.getHoa()};
 			model.addRow(row);
 		}
 	}
 	
 	
-	public QuanLiDiemHocSinh() {
+	public QuanLiDiemHocSinhGUI() {
 		
 		setTitle("QUAN LÍ ĐIỂM HỌC SINH");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -298,7 +298,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 			}
 			
 				
-			QuanLiDiemHS diemHS = new  QuanLiDiemHS();
+			QuanLiDiemHocSinhDTO diemHS = new  QuanLiDiemHocSinhDTO();
 			diemHS.setMSHS(tfMSHS.getText());
 			diemHS.setToan(toan);
 			diemHS.setAnh(anh);
@@ -347,7 +347,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 	
 	
 	private void btXoaActionPerformed(ActionEvent evt) {
-		QuanLiDiemHS mshs = new  QuanLiDiemHS();
+		QuanLiDiemHocSinhDTO mshs = new  QuanLiDiemHocSinhDTO();
 		mshs.setMSHS(tfMSHS.getText());
 		QuanLiDiemHocSinhBUS diemHocSinhBUS = new QuanLiDiemHocSinhBUS();
 		if(diemHocSinhBUS.xoaDiemHocSinh(mshs) != 0) {
@@ -383,7 +383,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 					return;
 				}
 				
-				QuanLiDiemHS diemHS = new  QuanLiDiemHS();
+				QuanLiDiemHocSinhDTO diemHS = new  QuanLiDiemHocSinhDTO();
 				diemHS.setMSHS(tfMSHS.getText());
 				diemHS.setToan(toan);
 				diemHS.setAnh(anh);
@@ -450,7 +450,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 			}
 			
 			
-            ArrayList<QuanLiDiemHS> dsDiemHS  = diemHocSinhBUS.timDiemHocSinh(MAHS);
+            ArrayList<QuanLiDiemHocSinhDTO> dsDiemHS  = diemHocSinhBUS.timDiemHocSinh(MAHS);
 			model = (DefaultTableModel)table.getModel();
 			model.setRowCount(0);
 			for(int i=0; i<dsDiemHS.size(); i++) {
@@ -484,8 +484,8 @@ public class QuanLiDiemHocSinh extends JFrame {
 			}
 		
 		private void btnQuayLaiActionPerformed(ActionEvent evt) {
-			FrMainForm mainForm;
-            mainForm = new FrMainForm();
+			HomeGUI mainForm;
+            mainForm = new HomeGUI();
             mainForm.setVisible(true);
             mainForm.setLocationRelativeTo(null);
             this.dispose();
@@ -498,7 +498,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						QuanLiDiemHocSinh frame = new QuanLiDiemHocSinh();
+						QuanLiDiemHocSinhGUI frame = new QuanLiDiemHocSinhGUI();
 						//frame.hienThiDuLieu();
 						//frame.doDuLieuComboBox();
 						frame.setVisible(true);

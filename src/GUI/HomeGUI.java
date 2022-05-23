@@ -6,7 +6,7 @@
 package GUI;
 
 import BUS.UserBUS;
-import static GUI.FrLoginForm.Username;
+import static GUI.LoginGUI.Username;
 import java.awt.Color;
 import static java.awt.Color.*;
 import java.awt.Image;
@@ -20,14 +20,14 @@ import javax.swing.JOptionPane;
  *
  * @author Tit
  */
-public class FrMainForm extends javax.swing.JFrame {
+public class HomeGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form FrMainForm
      */
     
     
-    public FrMainForm() {
+    public HomeGUI() {
        
         initComponents();
         lbChao.setText("Xin chào "+Username+" !");
@@ -77,7 +77,6 @@ public class FrMainForm extends javax.swing.JFrame {
         setTitle("Trang chủ");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(790, 703));
-        setPreferredSize(new java.awt.Dimension(790, 703));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -303,8 +302,8 @@ public class FrMainForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        QLHSView qlsv;
-                    qlsv = new QLHSView();
+        HocSinhGUI qlsv;
+                    qlsv = new HocSinhGUI();
                     qlsv.setVisible(true);
                     qlsv.setLocationRelativeTo(null);
                     this.dispose();
@@ -312,8 +311,8 @@ public class FrMainForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         QLGVView qlgv;
-                    qlgv = new QLGVView();
+         GiaoVienGUI qlgv;
+                    qlgv = new GiaoVienGUI();
                     qlgv.setVisible(true);
                     qlgv.setLocationRelativeTo(null);
                     this.dispose();
@@ -321,8 +320,8 @@ public class FrMainForm extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        QuanLiDiemHocSinh qlDiemHocSinh;
-                    qlDiemHocSinh = new QuanLiDiemHocSinh();
+        QuanLiDiemHocSinhGUI qlDiemHocSinh;
+                    qlDiemHocSinh = new QuanLiDiemHocSinhGUI();
                     qlDiemHocSinh.hienThiDuLieu();
                     qlDiemHocSinh.setVisible(true);
                     qlDiemHocSinh.setLocationRelativeTo(null);
@@ -381,8 +380,8 @@ public class FrMainForm extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        QLLOPView lop ;
-                    lop = new QLLOPView();
+        LopGUI lop ;
+                    lop = new LopGUI();
                     lop.setVisible(true);
                     lop.setLocationRelativeTo(null);
                     this.dispose();
@@ -422,15 +421,15 @@ public class FrMainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         UserBUS usBUS = new UserBUS();
         if (usBUS.checkAdmin(Username)) {
-            QLUserView qluv ;
-                    qluv = new QLUserView(); 
+            UserGUI qluv ;
+                    qluv = new UserGUI(); 
                     qluv.setVisible(true);
                     qluv.setLocationRelativeTo(null);
                     this.dispose();
         }
         else {
-            ChangePasswordForm changePasswordForm;
-                    changePasswordForm = new ChangePasswordForm(); 
+            ChangePasswordGUI changePasswordForm;
+                    changePasswordForm = new ChangePasswordGUI(); 
                     changePasswordForm.setVisible(true);
                     changePasswordForm.setLocationRelativeTo(null);
                     this.dispose();
@@ -450,8 +449,8 @@ public class FrMainForm extends javax.swing.JFrame {
 
     private void lbLogouotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogouotMouseClicked
         // TODO add your handling code here:
-        FrLoginForm loginForm ;
-                    loginForm = new FrLoginForm(); 
+        LoginGUI loginForm ;
+                    loginForm = new LoginGUI(); 
                     loginForm.setVisible(true);
                     loginForm.setLocationRelativeTo(null);
                     this.dispose();
@@ -474,20 +473,21 @@ public class FrMainForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrMainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrMainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrMainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrMainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrMainForm().setVisible(true);
+                new HomeGUI().setVisible(true);
             }
         });
     }

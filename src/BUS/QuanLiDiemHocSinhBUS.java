@@ -1,28 +1,28 @@
 package BUS;
 
 import DAO.QuanLyDiemHocSinhDAO;
-import DTO.QuanLiDiemHS;
+import DTO.QuanLiDiemHocSinhDTO;
 import java.util.ArrayList;
 
 public class QuanLiDiemHocSinhBUS {
 	QuanLyDiemHocSinhDAO diemHocSinhDAO = new QuanLyDiemHocSinhDAO();
-	public ArrayList<QuanLiDiemHS> docDiemHocSinh(){
+	public ArrayList<QuanLiDiemHocSinhDTO> docDiemHocSinh(){
 		return diemHocSinhDAO.docDiemHocSinh();
 	}
 	
-	public int themDiemHocSinh(QuanLiDiemHS diemHS) {
+	public int themDiemHocSinh(QuanLiDiemHocSinhDTO diemHS) {
 		return diemHocSinhDAO.themDiemHocSinh(diemHS);
 	}
 	
-	public int xoaDiemHocSinh(QuanLiDiemHS mshs) {
+	public int xoaDiemHocSinh(QuanLiDiemHocSinhDTO mshs) {
 		return diemHocSinhDAO.xoaDiemHocSinh(mshs);
 	}
 	
-	public int suaDiemHocSinh(QuanLiDiemHS diemHS) {
+	public int suaDiemHocSinh(QuanLiDiemHocSinhDTO diemHS) {
 		return diemHocSinhDAO.suaDiemHocSinh(diemHS);
 	}
 	
-	public ArrayList<QuanLiDiemHS> timDiemHocSinh(String mshs){
+	public ArrayList<QuanLiDiemHocSinhDTO> timDiemHocSinh(String mshs){
 		return diemHocSinhDAO.timDiemHocSinh(mshs);
 	}
 	

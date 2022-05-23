@@ -532,7 +532,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="-1" height="-1"/>
+          <AbsoluteConstraints x="0" y="0" width="640" height="-1"/>
         </Constraint>
       </Constraints>
 
@@ -540,7 +540,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="233" max="32767" attributes="0"/>
+                  <EmptySpace pref="229" max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="204" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
               </Group>

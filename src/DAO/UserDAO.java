@@ -6,7 +6,7 @@
 package DAO;
 
 
-import DTO.User;
+import DTO.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,8 +27,8 @@ public class UserDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     
-    ArrayList<User> dsUser = new ArrayList<>();
-    public ArrayList<User> getAllUser(){
+    ArrayList<UserDTO> dsUser = new ArrayList<>();
+    public ArrayList<UserDTO> getAllUser(){
         try {
             String sqlSelectAll = "select * from USERS";
             connection = MyConnection.getConnection();
@@ -36,7 +36,7 @@ public class UserDAO {
             resultSet = preparedStatement.executeQuery();
                  
          while(resultSet.next()){
-            dsUser.add(new User(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3)));      
+            dsUser.add(new UserDTO(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3)));      
              
          }
          
@@ -54,7 +54,7 @@ public class UserDAO {
         }
         return dsUser;
     }
-    public int addUser(User us){
+    public int addUser(UserDTO us){
         int result = 0;
         String sqlInsert = "insert into USERS(USERNAME,USERPASSWORD,USERLEVEL) values (?,?,?);";
 
@@ -99,7 +99,7 @@ public class UserDAO {
         }
         return result;
     }
-     public ArrayList<User> search(String Username){
+     public ArrayList<UserDTO> search(String Username){
         try {
             String sqlSelectAll = "select * from Users;";
             connection = MyConnection.getConnection();
@@ -107,7 +107,7 @@ public class UserDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
             if (resultSet.getString(1).contains(Username))  
-            dsUser.add(new User(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3)));             }
+            dsUser.add(new UserDTO(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3)));             }
          
         } catch (SQLException ex) {
             System.out.println("error "+ex );

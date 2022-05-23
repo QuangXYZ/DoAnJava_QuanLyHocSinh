@@ -9,13 +9,13 @@ package DTO;
  *
  * @author Tit
  */
-public class LopHoc {
+public class LopHocDTO {
     private String MaLop;
     private String TenLop;
 
-    public LopHoc() {
+    public LopHocDTO() {
     }
-    public LopHoc(String MaLop, String TenLop) {
+    public LopHocDTO(String MaLop, String TenLop) {
         this.MaLop = MaLop;
         this.TenLop = TenLop;
        

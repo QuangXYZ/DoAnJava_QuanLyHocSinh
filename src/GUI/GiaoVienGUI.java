@@ -24,11 +24,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import DTO.LopHoc;
-import DTO.GiaoVien;
+import DTO.LopHocDTO;
+import DTO.GiaoVienDTO;
 
 
-public class QLGVView extends javax.swing.JFrame {
+public class GiaoVienGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form QLGVView
@@ -38,7 +38,7 @@ public class QLGVView extends javax.swing.JFrame {
     String imgURL="none";
     File directory = new File("");
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-    ArrayList<GiaoVien> dsgv = new ArrayList<>();
+    ArrayList<GiaoVienDTO> dsgv = new ArrayList<>();
     DefaultTableModel model ;
     public void loadData(){
         try{   
@@ -64,14 +64,14 @@ public class QLGVView extends javax.swing.JFrame {
     
     public void loadDataCBLop(){
         LopHocBUS lh = new LopHocBUS();
-        ArrayList<LopHoc> arr = new ArrayList<>();
+        ArrayList<LopHocDTO> arr = new ArrayList<>();
         arr = lh.getAllLopHoc();
-        for (LopHoc l : arr){
+        for (LopHocDTO l : arr){
             cbLop.addItem(l.getMaLop());
         }
         
     }
-    public QLGVView() {
+    public GiaoVienGUI() {
         initComponents();
         addBtn.setIcon(new ImageIcon(new ImageIcon("src//images//plus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         delBtn.setIcon(new ImageIcon(new ImageIcon("src//images//delete.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
@@ -376,7 +376,7 @@ public class QLGVView extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(285, Short.MAX_VALUE)
+                .addContainerGap(272, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addGap(277, 277, 277))
         );
@@ -389,7 +389,7 @@ public class QLGVView extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 733, 68);
+        jPanel1.setBounds(0, 0, 720, 68);
 
         jMenu1.setText("Công cụ");
 
@@ -486,7 +486,7 @@ public class QLGVView extends javax.swing.JFrame {
         }
         else {
             try {
-                GiaoVien gv = new GiaoVien(tfMSGV.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),cbLop.getSelectedItem().toString(),imgURL);
+                GiaoVienDTO gv = new GiaoVienDTO(tfMSGV.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),cbLop.getSelectedItem().toString(),imgURL);
                 GiaoVienBUS hsBUS = new GiaoVienBUS();
                 if (hsBUS.updateGiaoVien(gv)!=0) JOptionPane.showMessageDialog(this, "Sửa thành công");
                 else JOptionPane.showMessageDialog(this, "Sửa không thành công");
@@ -505,7 +505,7 @@ public class QLGVView extends javax.swing.JFrame {
         }
         else {
             try {
-                GiaoVien gv = new GiaoVien(tfMSGV.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),cbLop.getSelectedItem().toString(),imgURL);
+                GiaoVienDTO gv = new GiaoVienDTO(tfMSGV.getText(),tfHoTen.getText(),formatDate.parse(tfNgaySinh.getText()),rbNam.isSelected()?"Nam":"Nu",cbQueQuan.getSelectedItem().toString(),cbLop.getSelectedItem().toString(),imgURL);
                 GiaoVienBUS hsBUS = new GiaoVienBUS();
                 if (hsBUS.addGiaoVien(gv)!=0) JOptionPane.showMessageDialog(this, "Thêm thành công");
                 else JOptionPane.showMessageDialog(this, "Thêm không thành công");
@@ -547,7 +547,7 @@ public class QLGVView extends javax.swing.JFrame {
             int height = imgLabel.getHeight();
             imgLabel.setIcon(new ImageIcon(img.getScaledInstance(width, height-20,  Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
-            Logger.getLogger(QLHSView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HocSinhGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_imgLabelMouseClicked
@@ -726,8 +726,8 @@ public class QLGVView extends javax.swing.JFrame {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        FrMainForm mainForm;
-        mainForm = new FrMainForm();
+        HomeGUI mainForm;
+        mainForm = new HomeGUI();
         mainForm.setVisible(true);
         mainForm.setLocationRelativeTo(null);
         this.dispose();
@@ -753,20 +753,21 @@ public class QLGVView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QLGVView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GiaoVienGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QLGVView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GiaoVienGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QLGVView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GiaoVienGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QLGVView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GiaoVienGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QLGVView().setVisible(true);
+                new GiaoVienGUI().setVisible(true);
             }
         });
     }

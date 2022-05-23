@@ -27,10 +27,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import DTO.HocSinh;
+import DTO.HocSinhDTO;
 import DTO.KetQuaDTO;
-import DTO.LopHoc;
-import DTO.QuanLiDiemHS;
+import DTO.LopHocDTO;
+import DTO.QuanLiDiemHocSinhDTO;
 import sql.MyConnection;
 import java.awt.Dimension;
 
@@ -38,7 +38,7 @@ import java.awt.Dimension;
  *
  * @author Tit
  */
-public class QLHSView extends javax.swing.JFrame {
+public class HocSinhGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form QLHSView
@@ -46,7 +46,7 @@ public class QLHSView extends javax.swing.JFrame {
     String imgURL = "none";
     File directory = new File("");
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-    ArrayList<HocSinh> dshs = new ArrayList<>();
+    ArrayList<HocSinhDTO> dshs = new ArrayList<>();
     DefaultTableModel model;
 
     public void loadData() {
@@ -73,15 +73,15 @@ public class QLHSView extends javax.swing.JFrame {
 
     public void loadDataCBLop() {
         LopHocBUS lh = new LopHocBUS();
-        ArrayList<LopHoc> arr = new ArrayList<>();
+        ArrayList<LopHocDTO> arr = new ArrayList<>();
         arr = lh.getAllLopHoc();
-        for (LopHoc l : arr) {
+        for (LopHocDTO l : arr) {
             cbLop.addItem(l.getMaLop());
         }
 
     }
 
-    public QLHSView() {
+    public HocSinhGUI() {
     	setResizable(false);
         initComponents();
         addBtn.setIcon(new ImageIcon(new ImageIcon("src//images//plus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
@@ -330,7 +330,7 @@ public class QLHSView extends javax.swing.JFrame {
         backgroundLayout.setHorizontalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                .addContainerGap(233, Short.MAX_VALUE)
+                .addContainerGap(229, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(205, 205, 205))
         );
@@ -343,7 +343,7 @@ public class QLHSView extends javax.swing.JFrame {
         );
 
         getContentPane().add(background);
-        background.setBounds(0, 0, 644, 66);
+        background.setBounds(0, 0, 640, 66);
 
         getContentPane().add(cbLop);
         cbLop.setBounds(162, 306, 257, 27);
@@ -451,11 +451,11 @@ public class QLHSView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         } else {
             try {
-                for (HocSinh hs : dshs) if (hs.getMSHS().equals(tfMSHS.getText())) {
+                for (HocSinhDTO hs : dshs) if (hs.getMSHS().equals(tfMSHS.getText())) {
                 JOptionPane.showMessageDialog(this, "Học sinh "+tfMSHS.getText()+" đã tồn tại !");
                 return;
             }
-                HocSinh hs = new HocSinh(tfMSHS.getText(), tfHoTen.getText(), formatDate.parse(tfNgaySinh.getText()), rbNam.isSelected() ? "Nam" : "Nu", cbQueQuan.getSelectedItem().toString(), cbLop.getSelectedItem().toString(), imgURL);
+                HocSinhDTO hs = new HocSinhDTO(tfMSHS.getText(), tfHoTen.getText(), formatDate.parse(tfNgaySinh.getText()), rbNam.isSelected() ? "Nam" : "Nu", cbQueQuan.getSelectedItem().toString(), cbLop.getSelectedItem().toString(), imgURL);
                 HocSinhBUS hsBUS = new HocSinhBUS();
                 if (hsBUS.addHocSinh(hs) != 0) {
                     JOptionPane.showMessageDialog(this, "Thêm thành công");
@@ -481,7 +481,7 @@ public class QLHSView extends javax.swing.JFrame {
             KetQuaBUS kqbus= new KetQuaBUS();
             //kqbus.xoaKetQua(model.getValueAt(i, 1).toString());
             kqbus.xoaKetQua(new KetQuaDTO(model.getValueAt(i, 1).toString()));
-            qldhsbus.xoaDiemHocSinh(new QuanLiDiemHS(model.getValueAt(i, 1).toString()));
+            qldhsbus.xoaDiemHocSinh(new QuanLiDiemHocSinhDTO(model.getValueAt(i, 1).toString()));
             if (hsBUS.deleteHocSinh(model.getValueAt(i, 1).toString()) != 0) {
                 JOptionPane.showMessageDialog(this, "Xóa thành công");
             } else {
@@ -507,7 +507,7 @@ public class QLHSView extends javax.swing.JFrame {
             int height = imgLabel.getHeight();
             imgLabel.setIcon(new ImageIcon(img.getScaledInstance(width -13, height-25, Image.SCALE_SMOOTH)));
         } catch (IOException ex) {
-            Logger.getLogger(QLHSView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HocSinhGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_imgLabelMouseClicked
@@ -544,7 +544,7 @@ public class QLHSView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         } else {
             try {
-                HocSinh hs = new HocSinh(tfMSHS.getText(), tfHoTen.getText(), formatDate.parse(tfNgaySinh.getText()), rbNam.isSelected() ? "Nam" : "Nu", cbQueQuan.getSelectedItem().toString(), cbLop.getSelectedItem().toString(), imgURL);
+                HocSinhDTO hs = new HocSinhDTO(tfMSHS.getText(), tfHoTen.getText(), formatDate.parse(tfNgaySinh.getText()), rbNam.isSelected() ? "Nam" : "Nu", cbQueQuan.getSelectedItem().toString(), cbLop.getSelectedItem().toString(), imgURL);
                 HocSinhBUS hsBUS = new HocSinhBUS();
                 if (hsBUS.updateHocSinh(hs) != 0) {
                     JOptionPane.showMessageDialog(this, "Sửa thành công");
@@ -561,8 +561,8 @@ public class QLHSView extends javax.swing.JFrame {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        FrMainForm mainForm;
-        mainForm = new FrMainForm();
+        HomeGUI mainForm;
+        mainForm = new HomeGUI();
         mainForm.setVisible(true);
         mainForm.setLocationRelativeTo(null);
         this.dispose();
@@ -732,14 +732,18 @@ public class QLHSView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QLHSView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HocSinhGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QLHSView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HocSinhGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QLHSView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HocSinhGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QLHSView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HocSinhGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -748,7 +752,7 @@ public class QLHSView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QLHSView().setVisible(true);
+                new HocSinhGUI().setVisible(true);
 
             }
         });

@@ -6,8 +6,8 @@
 package GUI;
 
 import BUS.LopHocBUS;
-import DTO.HocSinh;
-import DTO.LopHoc;
+import DTO.HocSinhDTO;
+import DTO.LopHocDTO;
 import java.awt.Image;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,12 +20,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Tit
  */
-public class QLLOPView extends javax.swing.JFrame {
+public class LopGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form QLLOPView
      */
-    ArrayList<LopHoc> dslh = new ArrayList<>();
+    ArrayList<LopHocDTO> dslh = new ArrayList<>();
     DefaultTableModel model ;
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
     public void loadData(){
@@ -46,7 +46,7 @@ public class QLLOPView extends javax.swing.JFrame {
         }
                   
     }
-    public QLLOPView() {
+    public LopGUI() {
         initComponents();
         addBtn.setIcon(new ImageIcon(new ImageIcon("src//images//plus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         delBtn.setIcon(new ImageIcon(new ImageIcon("src//images//delete.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
@@ -225,7 +225,7 @@ public class QLLOPView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
         }
         else {
-            LopHoc lh = new LopHoc(tfMSLop.getText(), tfTenLop.getText());
+            LopHocDTO lh = new LopHocDTO(tfMSLop.getText(), tfTenLop.getText());
             LopHocBUS lhBUS = new LopHocBUS();
             if (lhBUS.addLopHoc(lh)!=0) JOptionPane.showMessageDialog(this, "Thêm thành công");
                 else JOptionPane.showMessageDialog(this, "Thêm không thành công");
@@ -238,7 +238,7 @@ public class QLLOPView extends javax.swing.JFrame {
         int i = tbLop.getSelectedRow();
         LopHocBUS lhBUS = new LopHocBUS();
         if (i>=0){
-            LopHoc lh = new LopHoc(tfMSLop.getText(), tfTenLop.getText());
+            LopHocDTO lh = new LopHocDTO(tfMSLop.getText(), tfTenLop.getText());
             int j =lhBUS.delLopHoc(lh);
             if (j!=0) JOptionPane.showMessageDialog(this, "Xóa thành công "+j);
                 else JOptionPane.showMessageDialog(this, "Xóa không thành công "+j);
@@ -261,13 +261,13 @@ public class QLLOPView extends javax.swing.JFrame {
             else {
                 int qes=JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn? Tất cả học sinh sẽ được thay đổi sang lớp mới", "Question",JOptionPane.YES_NO_OPTION);
                 if(qes==JOptionPane.YES_OPTION){
-                    LopHoc lh = new LopHoc(tfMSLop.getText(), tfTenLop.getText());
+                    LopHocDTO lh = new LopHocDTO(tfMSLop.getText(), tfTenLop.getText());
                     lhBUS.addLopHoc(lh);
                     System.out.println(lh.getMaLop());
                     int j =lhBUS.updateLopHoc(lh,model.getValueAt(i, 0).toString());                   
                     if (j!=0) {
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
-                        lhBUS.delLopHoc(new LopHoc(model.getValueAt(i, 0).toString(),""));
+                        lhBUS.delLopHoc(new LopHocDTO(model.getValueAt(i, 0).toString(),""));
                     }
                     else JOptionPane.showMessageDialog(this, "Sửa không thành công");
                 }
@@ -282,8 +282,8 @@ public class QLLOPView extends javax.swing.JFrame {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        FrMainForm mainForm;
-        mainForm = new FrMainForm();
+        HomeGUI mainForm;
+        mainForm = new HomeGUI();
         mainForm.setVisible(true);
         mainForm.setLocationRelativeTo(null);
         this.dispose();
@@ -298,7 +298,7 @@ public class QLLOPView extends javax.swing.JFrame {
             tfMSLop.setText(model.getValueAt(i, 0).toString());
             tfTenLop.setText(model.getValueAt(i, 1).toString());
             DefaultTableModel model1 = (DefaultTableModel)tbHocSinh.getModel();
-            ArrayList<HocSinh> dshs = new ArrayList<>();
+            ArrayList<HocSinhDTO> dshs = new ArrayList<>();
             LopHocBUS lhBUS = new LopHocBUS();
             dshs = lhBUS.getAllHocSinh(model.getValueAt(i, 0).toString());
             model1.setRowCount(0);
@@ -330,20 +330,21 @@ public class QLLOPView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QLLOPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LopGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QLLOPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LopGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QLLOPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LopGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QLLOPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LopGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display tbLopm */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QLLOPView().setVisible(true);
+                new LopGUI().setVisible(true);
             }
         });
     }

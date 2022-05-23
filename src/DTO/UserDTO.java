@@ -1,15 +1,15 @@
 package DTO;
 
-public class User {
+public class UserDTO {
     private String UserName;
     private String PassWord;
     private int Level;
-    public User(String userName, String passWord, int level) {
+    public UserDTO(String userName, String passWord, int level) {
         UserName = userName;
         PassWord = passWord;
         Level = level;
     }
-    public User() {
+    public UserDTO() {
     }
     public String getUserName() {
         return UserName;

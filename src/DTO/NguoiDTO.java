@@ -4,19 +4,19 @@ import java.util.Date;
 
 import javax.xml.crypto.Data;
 
-public class Nguoi {
+public class NguoiDTO {
 
 	private String hoTen;
 	private String gioiTinh;
 	private String queQuan;
 	private Date ngaySinh;
 	
-	public Nguoi() {
+	public NguoiDTO() {
 		
 	}
 	
 	
-	public Nguoi(String hoTen, String gioiTinh, String queQuan, Date ngaySinh) {
+	public NguoiDTO(String hoTen, String gioiTinh, String queQuan, Date ngaySinh) {
 		this.hoTen = hoTen;
 		this.gioiTinh = gioiTinh;
 		this.queQuan = queQuan;

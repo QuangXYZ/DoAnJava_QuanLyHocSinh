@@ -7,8 +7,8 @@ package BUS;
 
 
 import DAO.LopHocDAO;
-import DTO.HocSinh;
-import DTO.LopHoc;
+import DTO.HocSinhDTO;
+import DTO.LopHocDTO;
 import java.util.ArrayList;
 
 /**
@@ -17,19 +17,19 @@ import java.util.ArrayList;
  */
 public class LopHocBUS {
     LopHocDAO lhDAO = new LopHocDAO();
-    public ArrayList<LopHoc> getAllLopHoc() {  
+    public ArrayList<LopHocDTO> getAllLopHoc() {  
         return lhDAO.getAllLopHoc();
     }
-    public ArrayList<HocSinh> getAllHocSinh(String tenLop) {  
+    public ArrayList<HocSinhDTO> getAllHocSinh(String tenLop) {  
         return lhDAO.getAllHocSinh(tenLop);
     }
-    public int addLopHoc(LopHoc lh){
+    public int addLopHoc(LopHocDTO lh){
         return lhDAO.addLopHoc(lh);
     }
-    public int delLopHoc(LopHoc lh){
+    public int delLopHoc(LopHocDTO lh){
         return lhDAO.delLopHoc(lh);
     }
-    public int updateLopHoc(LopHoc lh,String lh1){
+    public int updateLopHoc(LopHocDTO lh,String lh1){
         return lhDAO.updateLopHoc(lh,lh1);
     }
  

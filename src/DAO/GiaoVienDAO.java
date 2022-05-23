@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import DTO.GiaoVien;
+import DTO.GiaoVienDTO;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,8 +24,8 @@ public class GiaoVienDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-    ArrayList<GiaoVien> dsgv = new ArrayList<>();
-    public ArrayList<GiaoVien> getAllGiaoVien(){
+    ArrayList<GiaoVienDTO> dsgv = new ArrayList<>();
+    public ArrayList<GiaoVienDTO> getAllGiaoVien(){
         try {
             String sqlSelectAll = "select * from GIAOVIEN";
             connection = MyConnection.getConnection();
@@ -33,7 +33,7 @@ public class GiaoVienDAO {
             resultSet = preparedStatement.executeQuery();
                  
          while(resultSet.next()){
-            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dsgv.add(new GiaoVienDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {
@@ -52,7 +52,7 @@ public class GiaoVienDAO {
         }
         return dsgv;
     }
-    public int addGiaoVien(GiaoVien gv){
+    public int addGiaoVien(GiaoVienDTO gv){
         int result = 0;
         String sqlInsert = "insert into GIAOVIEN(MAGV,HOTEN,NGAYSINH,GIOITINH,QUEQUAN,LOP,IMG) values (?,?,?,?,?,?,?);";
 
@@ -101,7 +101,7 @@ public class GiaoVienDAO {
         }
         return result;
     }
-     public int updateGiaoVien(GiaoVien gv){
+     public int updateGiaoVien(GiaoVienDTO gv){
     int result = 0;
     String sqlUpdate = "update GIAOVIEN set HOTEN = ?, NGAYSINH = ?, GIOITINH = ?, QUEQUAN = ?, LOP = ?, IMG = ? where MAGV = ?";
 
@@ -129,7 +129,7 @@ public class GiaoVienDAO {
     }
     return result;
     }
-    public ArrayList<GiaoVien> searchGiaoVienMSGV(String MSGV){
+    public ArrayList<GiaoVienDTO> searchGiaoVienMSGV(String MSGV){
         try {
             String sqlSelectAll = "select * from GIAOVIEN";
             connection = MyConnection.getConnection();
@@ -137,7 +137,7 @@ public class GiaoVienDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
             if (resultSet.getString(1).contains(MSGV))   
-            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dsgv.add(new GiaoVienDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {
@@ -156,7 +156,7 @@ public class GiaoVienDAO {
         }
         return dsgv;
     }
-     public ArrayList<GiaoVien> searchGiaoVienHoTen(String HoTen){
+     public ArrayList<GiaoVienDTO> searchGiaoVienHoTen(String HoTen){
         try {
             String sqlSelectAll = "select * from GIAOVIEN";
             connection = MyConnection.getConnection();
@@ -165,7 +165,7 @@ public class GiaoVienDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
             if (resultSet.getString(2).contains(HoTen))
-            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dsgv.add(new GiaoVienDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {
@@ -184,7 +184,7 @@ public class GiaoVienDAO {
         }
         return dsgv;
     }
-     public ArrayList<GiaoVien> searchGiaoVienNgaySinh(String NgaySinh){
+     public ArrayList<GiaoVienDTO> searchGiaoVienNgaySinh(String NgaySinh){
         try {
             String sqlSelectAll = "select * from GIAOVIEN";
             connection = MyConnection.getConnection();
@@ -193,7 +193,7 @@ public class GiaoVienDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
             if (resultSet.getString(3).contains(NgaySinh))
-            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dsgv.add(new GiaoVienDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {
@@ -212,7 +212,7 @@ public class GiaoVienDAO {
         }
         return dsgv;
     }
-     public ArrayList<GiaoVien> searchGiaoVienGioiTinh(String GioiTinh){
+     public ArrayList<GiaoVienDTO> searchGiaoVienGioiTinh(String GioiTinh){
         try {
             String sqlSelectAll = "select * from GIAOVIEN ";
             connection = MyConnection.getConnection();
@@ -220,7 +220,7 @@ public class GiaoVienDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
              if (resultSet.getString(4).contains(GioiTinh))
-            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dsgv.add(new GiaoVienDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {
@@ -239,7 +239,7 @@ public class GiaoVienDAO {
         }
         return dsgv;
     }
-     public ArrayList<GiaoVien> searchGiaoVienQueQuan(String QueQuan){
+     public ArrayList<GiaoVienDTO> searchGiaoVienQueQuan(String QueQuan){
         try {
             String sqlSelectAll = "select * from GIAOVIEN ";
             connection = MyConnection.getConnection();
@@ -247,7 +247,7 @@ public class GiaoVienDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
              if (resultSet.getString(5).contains(QueQuan))
-            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dsgv.add(new GiaoVienDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {
@@ -266,7 +266,7 @@ public class GiaoVienDAO {
         }
         return dsgv;
     }
-     public ArrayList<GiaoVien> searchGiaoVienLop(String Lop){
+     public ArrayList<GiaoVienDTO> searchGiaoVienLop(String Lop){
         try {
             String sqlSelectAll = "select * from GIAOVIEN ";
             connection = MyConnection.getConnection();
@@ -274,7 +274,7 @@ public class GiaoVienDAO {
             resultSet = preparedStatement.executeQuery();
          while(resultSet.next()){
              if (resultSet.getString(6).contains(Lop))
-            dsgv.add(new GiaoVien(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
+            dsgv.add(new GiaoVienDTO(resultSet.getString(1),resultSet.getString(2),formatDate.parse(resultSet.getString(3)),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7)));        
          }
          
         } catch (SQLException ex) {

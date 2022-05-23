@@ -2,19 +2,19 @@ package DTO;
 
 import java.util.Date;
 
-public class HocSinh extends Nguoi {
+public class HocSinhDTO extends NguoiDTO {
 
 	private String MSHS;
 	private String lop;
 	private String img;
 	
-	public HocSinh() {
+	public HocSinhDTO() {
 		
 	}
 	
 	
 	
-	public HocSinh(String mSHS,String hoTen, Date ngaySinh,String gioiTinh, String queQuan, String lop,String img) {
+	public HocSinhDTO(String mSHS,String hoTen, Date ngaySinh,String gioiTinh, String queQuan, String lop,String img) {
 		super(hoTen, gioiTinh, queQuan, ngaySinh);
 		this.MSHS = mSHS;
 		this.lop = lop;

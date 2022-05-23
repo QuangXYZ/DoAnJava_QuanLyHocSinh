@@ -11,7 +11,7 @@ package GUI;
  */
 public class main {
     public static void main(String[] args) {
-        FrLoginForm main = new FrLoginForm();
+        LoginGUI main = new LoginGUI();
         main.setVisible(true);
         main.setLocationRelativeTo(null);
     }
