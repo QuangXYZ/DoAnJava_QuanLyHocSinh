@@ -296,6 +296,7 @@ public class QuanLiDiemHocSinh extends JFrame {
 				JOptionPane.showMessageDialog(this, "Nhập sai dữ liệu! ");
 				return;
 			}
+			
 				
 			QuanLiDiemHS diemHS = new  QuanLiDiemHS();
 			diemHS.setMSHS(tfMSHS.getText());
@@ -306,13 +307,24 @@ public class QuanLiDiemHocSinh extends JFrame {
 			diemHS.setLy(ly);
 			diemHS.setHoa(hoa);
 			
-			QuanLiDiemHocSinhBUS diemHocSinhBUS = new QuanLiDiemHocSinhBUS();
+			QuanLiDiemHocSinhBUS diemHocSinhBUS = new QuanLiDiemHocSinhBUS();			
+			String mshs=tfMSHS.getText();
+			if(diemHocSinhBUS.kiemTraMSHS(mshs) != 0) {
+				JOptionPane.showMessageDialog(this, "Học sinh đã có điểm ! ");
+				return;
+			} 
+			
+			if(diemHocSinhBUS.kiemTraMSHSBangHS(mshs) != 0) {
+				JOptionPane.showMessageDialog(this, "Mã số học sinh không tồn tại ! ");
+				return;
+			} 
+			
 			if(diemHocSinhBUS.themDiemHocSinh(diemHS) != 0) {
 				JOptionPane.showMessageDialog(this, "Thêm thành công ! ");
 				hienThiDuLieu();
 			}else {
 				JOptionPane.showMessageDialog(this, "Thêm không thành công ! ");
-			}		
+			}	
 			
 			float trungBinh = diemHocSinhBUS.tinhTrungBinh(toan, anh, van, sinh, ly, hoa);
 			

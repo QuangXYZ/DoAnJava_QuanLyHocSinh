@@ -30,6 +30,14 @@ public class QuanLiDiemHocSinhBUS {
 		return diemHocSinhDAO.layMaHocSinh();
 	}
 	
+	public int kiemTraMSHS(String mshs) {
+		return diemHocSinhDAO.kiemTraMSHS(mshs);
+	}
+	
+	public int kiemTraMSHSBangHS(String mshs) {
+		return diemHocSinhDAO.kiemTraMSHSBangHS(mshs);
+	}
+	
 	public float tinhTrungBinh(float a, float b, float c, float d, float e, float f) {
 		return diemHocSinhDAO.tinhTrungBinh(a, b, c, d, e, f);
 	}
