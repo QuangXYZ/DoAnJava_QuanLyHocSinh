@@ -314,11 +314,6 @@ public class QuanLiDiemHocSinh extends JFrame {
 				return;
 			} 
 			
-			if(diemHocSinhBUS.kiemTraMSHSBangHS(mshs) != 0) {
-				JOptionPane.showMessageDialog(this, "Mã số học sinh không tồn tại ! ");
-				return;
-			} 
-			
 			if(diemHocSinhBUS.themDiemHocSinh(diemHS) != 0) {
 				JOptionPane.showMessageDialog(this, "Thêm thành công ! ");
 				hienThiDuLieu();

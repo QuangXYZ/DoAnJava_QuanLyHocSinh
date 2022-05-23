@@ -184,46 +184,7 @@ public class QuanLyDiemHocSinhDAO {
 			return result;
 	    }
 	    
-	    //kiểm tra mshs có trong bảng học sinh hay không cho chức năng thêm học sinh
-	    public int kiemTraMSHSBangHS(String mshs) {
-	    	int result = 0;
-	    	ArrayList<String> dsMSHS = new ArrayList<String>();
-	    	dsMSHS = layMSHS();
-	    	int j =0;
-			for(String ds: dsMSHS) {
-				if(!ds.equals(mshs) ) {
-					j = 1;
-				}					
-			}
-			
-			if (j == 1) {
-				result = 1;
-			}
-			return result;
-	    }
-	    
-	    //lấy mshs trong bảng học sinh
-	    public  ArrayList<String> layMSHS(){
-  			ArrayList<String> listMSHS = new ArrayList<>();						
-  				try {				
-  				connection = MyConnection.getConnection();
-  				Statement stmt=connection.createStatement();
-  				ResultSet rs = stmt.executeQuery("select MAHS from HOCSINH  ");
-  		
-  				while(rs.next())
-  	            {
-  					String maHocSinh = new String(rs.getString(1));               
-  					listMSHS.add(maHocSinh);
-  	            }
-  					
-  				} catch (Exception e) {
-  					System.out.println(e);
-  				}
-  				
-  				return listMSHS;
-  		}
-	    
-	  //lay ma hoc sinh trong bang DIEMHOCSINH sql
+	    	  //lay ma hoc sinh trong bang DIEMHOCSINH sql
 	  		public  ArrayList<String> layMaHocSinh(){
 	  			ArrayList<String> listMSHS = new ArrayList<>();						
 	  				try {				
