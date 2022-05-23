@@ -305,7 +305,7 @@ public class KetQuaDAO {
     	try {
 			String sql2 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Khá' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
 			String sql = ("select HS.MAHS, HS.HOTEN, HS.LOP, KQ.DIEMTB, KQ.HOCLUC from HOCSINH HS, KETQUA KQ where HS.MAHS = KQ.MAHS AND  HS.LOP= '" + maLop +"'");
-			String sql3 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;;");
+			String sql3 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
 			String sql4 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Giỏi' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
 			String sql5 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Trung bình' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
 			String sql6 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Yếu' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
@@ -379,6 +379,7 @@ public class KetQuaDAO {
 			 FileOutputStream fileOut = new FileOutputStream(maLop+".xlsx");
 			 wb.write(fileOut);//Thực hiện lưu thông tin với đối tượng fileOut
 			 fileOut.close();
+			 wb.close();
 				JOptionPane.showMessageDialog(null, "Xuất file excel thành công ! ");			 
 				 preparedStatement.close();
 				 resultSet.close();
