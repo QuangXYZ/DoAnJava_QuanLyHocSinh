@@ -81,7 +81,7 @@ public class GiaoVienGUI extends javax.swing.JFrame {
         searchMenu.setIcon(new ImageIcon(new ImageIcon("src//images//search.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         JLabel background = new JLabel();
         background.setBounds(0, 0, this.getWidth(), this.getHeight());
-        background.setIcon(new ImageIcon(new ImageIcon("src//images//backgroundQLLOP.jpg").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
+        background.setIcon(new ImageIcon(new ImageIcon("src//images//backgroundQLGV.png").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
         this.add(background);
         loadDataCBLop();
         loadDataTable();

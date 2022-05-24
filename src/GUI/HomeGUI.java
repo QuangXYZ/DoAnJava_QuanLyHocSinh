@@ -135,7 +135,7 @@ public class HomeGUI extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(0, 153, 204));
         jPanel2.setLayout(new java.awt.GridLayout(3, 3, 20, 20));
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 153));
+        jButton1.setBackground(new java.awt.Color(255, 204, 204));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton1.setText("HỌC SINH");
@@ -155,7 +155,7 @@ public class HomeGUI extends javax.swing.JFrame {
         });
         jPanel2.add(jButton1);
 
-        jButton2.setBackground(new java.awt.Color(255, 153, 153));
+        jButton2.setBackground(new java.awt.Color(255, 204, 204));
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton2.setText("GIÁO VIÊN");
@@ -175,7 +175,7 @@ public class HomeGUI extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2);
 
-        jButton3.setBackground(new java.awt.Color(255, 153, 153));
+        jButton3.setBackground(new java.awt.Color(255, 204, 204));
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton3.setText("ĐIỂM");
@@ -195,7 +195,7 @@ public class HomeGUI extends javax.swing.JFrame {
         });
         jPanel2.add(jButton3);
 
-        jButton4.setBackground(new java.awt.Color(255, 153, 153));
+        jButton4.setBackground(new java.awt.Color(255, 204, 204));
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton4.setText("LỚP");
@@ -215,7 +215,7 @@ public class HomeGUI extends javax.swing.JFrame {
         });
         jPanel2.add(jButton4);
 
-        jButton5.setBackground(new java.awt.Color(255, 153, 153));
+        jButton5.setBackground(new java.awt.Color(255, 204, 204));
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton5.setText("TÀI KHOẢN");
@@ -235,7 +235,7 @@ public class HomeGUI extends javax.swing.JFrame {
         });
         jPanel2.add(jButton5);
 
-        jButton6.setBackground(new java.awt.Color(255, 153, 153));
+        jButton6.setBackground(new java.awt.Color(255, 204, 204));
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton6.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton6.setText("THOÁT");
@@ -255,7 +255,7 @@ public class HomeGUI extends javax.swing.JFrame {
         });
         jPanel2.add(jButton6);
 
-        jButton7.setBackground(new java.awt.Color(255, 153, 153));
+        jButton7.setBackground(new java.awt.Color(255, 204, 204));
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton7.setForeground(new java.awt.Color(0, 145, 220, 255));
         jButton7.setText("THỐNG KÊ");
@@ -281,7 +281,7 @@ public class HomeGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     Color colorBtn = new java.awt.Color(0, 145, 220, 255);
-    Color colorBtn1 = new java.awt.Color(255, 153, 153, 255);
+    Color colorBtn1 = new java.awt.Color(255, 204, 204, 255);
     void changeColorEnter(JButton btn){
         btn.setBackground(colorBtn);
         btn.setForeground(colorBtn1);
