@@ -166,9 +166,9 @@ public class QuanLyDiemHocSinhDAO {
 			}
 			 return dsDiemHS;
 			}
-	    // kiểm tra mshs có trong bảng diểm học sinh không cho chức năng thêm học sinh
+	    // kiểm tra mshs có trong bảng diểm học sinh không, cho chức năng thêm học sinh
 	    public int kiemTraMSHS(String mshs) {
-	    	int result = 0;
+	    	//int result = 0;
 	    	ArrayList<String> dsMSHS = new ArrayList<String>();
 	    	dsMSHS = layMaHocSinh();
 	    	int j =0;
@@ -178,10 +178,10 @@ public class QuanLyDiemHocSinhDAO {
 				}					
 			}
 			
-			if (j == 1) {
+			/*if (j == 1) {
 				result = 1;
-			}
-			return result;
+			}*/
+			return j;
 	    }
 	    
 	    	  //lay ma hoc sinh trong bang DIEMHOCSINH sql
@@ -209,5 +209,5 @@ public class QuanLyDiemHocSinhDAO {
 	  			float trungBinh = (float)Math.round(((a + b + c + d + e + f)/6)*100) / 100;		
 	  			return trungBinh;
 	  		}
-
+	  			  		
 }
