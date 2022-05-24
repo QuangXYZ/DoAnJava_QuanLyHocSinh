@@ -1,13 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/DAO/KetQuaDAO.java=UTF-8
 encoding//src/DAO/QuanLyDiemHocSinhDAO.java=UTF-8
-encoding//src/GUI/FrMainForm.java=UTF-8
 encoding//src/GUI/KetQuaGUI.java=UTF-8
-encoding//src/GUI/QLGVView.java=UTF-8
-encoding//src/GUI/QLHSView.java=UTF-8
-encoding//src/GUI/QLLOPView.java=UTF-8
-encoding//src/GUI/QLUserView.java=UTF-8
-encoding//src/GUI/QuanLiDiemHocSinh.java=UTF-8
 encoding//src/sql/MyConnection.java=UTF-8
 encoding//src/view/QLHSView.java=UTF-8
 encoding//src/view/TimKiemGiaoVien.java=UTF-8

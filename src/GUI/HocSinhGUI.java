@@ -93,7 +93,7 @@ public class HocSinhGUI extends javax.swing.JFrame {
         JLabel background = new JLabel();
         background.setBounds(0, 0, this.getWidth(), this.getHeight());
         background.setIcon(new ImageIcon(new ImageIcon("src//images//backgroundQLHS.png").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
-        this.add(background);
+        getContentPane().add(background);
         loadDataCBLop();
         loadDataTable();
 
@@ -220,18 +220,25 @@ public class HocSinhGUI extends javax.swing.JFrame {
 
         tbDSHS.setBackground(new java.awt.Color(255, 255, 102));
         tbDSHS.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tbDSHS.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "STT", "MSHS", "HỌ VÀ TÊN", "NGÀY SINH", "GIỚI TÍNH", "LỚP", "QUÊ QUÁN"
-            }
+        tbDSHS.setModel(new DefaultTableModel(
+        	new Object[][] {
+        		{null, null, null, null, null, null, null},
+        		{null, null, null, null, null, null, null},
+        		{null, null, null, null, null, null, null},
+        		{null, null, null, null, null, null, null},
+        		{null, null, null, null, null, null, null},
+        	},
+        	new String[] {
+        		"STT", "MSHS", "HỌ VÀ TÊN", "NGÀY SINH", "GIỚI TÍNH", "LỚP", "QUÊ QUÁN"
+        	}
         ));
+        tbDSHS.getColumnModel().getColumn(0).setPreferredWidth(34);
+        tbDSHS.getColumnModel().getColumn(1).setPreferredWidth(47);
+        tbDSHS.getColumnModel().getColumn(2).setPreferredWidth(183);
+        tbDSHS.getColumnModel().getColumn(3).setPreferredWidth(124);
+        tbDSHS.getColumnModel().getColumn(4).setPreferredWidth(82);
+        tbDSHS.getColumnModel().getColumn(5).setPreferredWidth(90);
+        tbDSHS.getColumnModel().getColumn(6).setPreferredWidth(106);
         tbDSHS.setSelectionBackground(new java.awt.Color(0, 0, 153));
         tbDSHS.setSelectionForeground(new java.awt.Color(255, 255, 51));
         tbDSHS.addMouseListener(new java.awt.event.MouseAdapter() {
