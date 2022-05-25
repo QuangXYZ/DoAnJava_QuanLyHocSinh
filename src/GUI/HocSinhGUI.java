@@ -220,18 +220,24 @@ public class HocSinhGUI extends javax.swing.JFrame {
 
         tbDSHS.setBackground(new java.awt.Color(255, 255, 102));
         tbDSHS.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tbDSHS.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "STT", "MSHS", "HỌ VÀ TÊN", "NGÀY SINH", "GIỚI TÍNH", "LỚP", "QUÊ QUÁN"
-            }
+        tbDSHS.setModel(new DefaultTableModel(
+        	new Object[][] {
+        		{null, null, null, null, null, null, null},
+        		{null, null, null, null, null, null, null},
+        		{null, null, null, null, null, null, null},
+        		{null, null, null, null, null, null, null},
+        		{null, null, null, null, null, null, null},
+        	},
+        	new String[] {
+        		"STT", "MSHS", "H\u1ECC V\u00C0 T\u00CAN", "NG\u00C0Y SINH", "GI\u1EDAI T\u00CDNH", "L\u1EDAP", "QU\u00CA QU\u00C1N"
+        	}
         ));
+        tbDSHS.getColumnModel().getColumn(0).setPreferredWidth(42);
+        tbDSHS.getColumnModel().getColumn(1).setPreferredWidth(51);
+        tbDSHS.getColumnModel().getColumn(2).setPreferredWidth(185);
+        tbDSHS.getColumnModel().getColumn(3).setPreferredWidth(94);
+        tbDSHS.getColumnModel().getColumn(5).setPreferredWidth(88);
+        tbDSHS.getColumnModel().getColumn(6).setPreferredWidth(96);
         tbDSHS.setSelectionBackground(new java.awt.Color(0, 0, 153));
         tbDSHS.setSelectionForeground(new java.awt.Color(255, 255, 51));
         tbDSHS.addMouseListener(new java.awt.event.MouseAdapter() {
