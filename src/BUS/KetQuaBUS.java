@@ -48,8 +48,8 @@ public class KetQuaBUS {
             return ketQuaDAO.xoaKetQua(ms);
     }
         
-    public void xuatFileExcel(String maLop){
-             ketQuaDAO.xuatFileExcel(maLop);
+    public int xuatFileExcel(String maLop){
+    	return ketQuaDAO.xuatFileExcel(maLop);
     }
 	
 }
