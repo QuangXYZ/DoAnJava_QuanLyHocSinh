@@ -469,7 +469,7 @@ public class QuanLiDiemHocSinhGUI extends JFrame {
 	
 		private void tableMouseClicked(MouseEvent evt) {
 			DefaultTableModel recordTable = (DefaultTableModel) table.getModel();
-			int i=table.getSelectedRow();
+			int i=table.getSelectedRow();//trả về chỉ số dòng chọn
 			if (i>=0){
 				tfMSHS.setText(recordTable.getValueAt(i, 0).toString());
 				tfToan.setText(recordTable.getValueAt(i, 2).toString());

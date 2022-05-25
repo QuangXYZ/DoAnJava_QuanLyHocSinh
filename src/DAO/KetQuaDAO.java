@@ -300,8 +300,8 @@ public class KetQuaDAO {
         return result;
     }
     
-    public void xuatFileExcel(String maLop)   {
-    	
+    public int xuatFileExcel(String maLop)   {
+    	int result = 0;
     	try {
 			String sql2 = ("SELECT COUNT(*) FROM KETQUA kq, HOCSINH HS WHERE HOCLUC = 'Khá' and HS.LOP = '"+ maLop +"' and HS.MAHS = kq.MAHS;");
 			String sql = ("select HS.MAHS, HS.HOTEN, HS.LOP, KQ.DIEMTB, KQ.HOCLUC from HOCSINH HS, KETQUA KQ where HS.MAHS = KQ.MAHS AND  HS.LOP= '" + maLop +"'");
@@ -380,19 +380,23 @@ public class KetQuaDAO {
 			 wb.write(fileOut);//Thực hiện lưu thông tin với đối tượng fileOut
 			 fileOut.close();
 			 wb.close();
-				JOptionPane.showMessageDialog(null, "Xuất file excel thành công ! ");			 
+				//JOptionPane.showMessageDialog(null, "Xuất file excel thành công ! ");	
+			 	 result =1;
 				 preparedStatement.close();
 				 resultSet.close();
 			 } catch (SQLException ex) {
-				JOptionPane.showMessageDialog(null, "Xuất file excel không thành công ! ");
+				//JOptionPane.showMessageDialog(null, "Xuất file excel không thành công ! ");
+				 result = 0;
 				ex.printStackTrace();
 				
 			 } catch (IOException e) { //bắt ngoại lệ khi đọc ghi file không được
-				JOptionPane.showMessageDialog(null, "Xuất file excel không thành công ! ");
+				 result = 0;
+				//JOptionPane.showMessageDialog(null, "Xuất file excel không thành công ! ");
 				e.printStackTrace();
 				 				 
 			}
     	
+    		return result;
     	//https://www.youtube.com/watch?v=ktwMW13FrQM&ab_channel=Murtaza%27sWorkshop-RoboticsandAI
     }
     
