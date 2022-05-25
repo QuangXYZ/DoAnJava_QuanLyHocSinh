@@ -167,7 +167,7 @@ public class HocSinhGUI extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(46, 224, 65, 17);
 
-        rbNam.setBackground(new java.awt.Color(0, 0, 0, 0));
+        rbNam.setBackground(new java.awt.Color(204, 204, 255));
         buttonGroup1.add(rbNam);
         rbNam.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rbNam.setText("NAM");
@@ -179,7 +179,7 @@ public class HocSinhGUI extends javax.swing.JFrame {
         getContentPane().add(rbNam);
         rbNam.setBounds(163, 220, 55, 25);
 
-        rbNu.setBackground(new java.awt.Color(0, 0, 0, 0));
+        rbNu.setBackground(new java.awt.Color(204, 204, 255));
         buttonGroup1.add(rbNu);
         rbNu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rbNu.setText("NỮ");
@@ -220,25 +220,18 @@ public class HocSinhGUI extends javax.swing.JFrame {
 
         tbDSHS.setBackground(new java.awt.Color(255, 255, 102));
         tbDSHS.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tbDSHS.setModel(new DefaultTableModel(
-        	new Object[][] {
-        		{null, null, null, null, null, null, null},
-        		{null, null, null, null, null, null, null},
-        		{null, null, null, null, null, null, null},
-        		{null, null, null, null, null, null, null},
-        		{null, null, null, null, null, null, null},
-        	},
-        	new String[] {
-        		"STT", "MSHS", "HỌ VÀ TÊN", "NGÀY SINH", "GIỚI TÍNH", "LỚP", "QUÊ QUÁN"
-        	}
+        tbDSHS.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "STT", "MSHS", "HỌ VÀ TÊN", "NGÀY SINH", "GIỚI TÍNH", "LỚP", "QUÊ QUÁN"
+            }
         ));
-        tbDSHS.getColumnModel().getColumn(0).setPreferredWidth(34);
-        tbDSHS.getColumnModel().getColumn(1).setPreferredWidth(47);
-        tbDSHS.getColumnModel().getColumn(2).setPreferredWidth(183);
-        tbDSHS.getColumnModel().getColumn(3).setPreferredWidth(124);
-        tbDSHS.getColumnModel().getColumn(4).setPreferredWidth(82);
-        tbDSHS.getColumnModel().getColumn(5).setPreferredWidth(90);
-        tbDSHS.getColumnModel().getColumn(6).setPreferredWidth(106);
         tbDSHS.setSelectionBackground(new java.awt.Color(0, 0, 153));
         tbDSHS.setSelectionForeground(new java.awt.Color(255, 255, 51));
         tbDSHS.addMouseListener(new java.awt.event.MouseAdapter() {
