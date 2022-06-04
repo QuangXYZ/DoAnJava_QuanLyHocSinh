@@ -260,9 +260,9 @@ public class KetQuaGUI extends JFrame {
 		KetQuaBUS ketQuaBUS = new KetQuaBUS();
 		String maLop = comboBox.getSelectedItem().toString();
 		if(ketQuaBUS.xuatFileExcel(maLop) != 0) {
-			JOptionPane.showMessageDialog(null, "Xuất file excel thành công ! ");
+			JOptionPane.showMessageDialog(this, "Xuất file excel thành công ! ");
 		} else {
-			JOptionPane.showMessageDialog(null, "Xuất file excel không thành công ! ");
+			JOptionPane.showMessageDialog(this, "Xuất file excel không thành công ! ");
 		}
 	}
 }

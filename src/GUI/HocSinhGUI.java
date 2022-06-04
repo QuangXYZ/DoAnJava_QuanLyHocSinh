@@ -155,17 +155,17 @@ public class HocSinhGUI extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("MSHS : ");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(47, 91, 50, 17);
+        jLabel2.setBounds(47, 91, 104, 17);
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Họ và tên : ");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(46, 137, 72, 17);
+        jLabel3.setBounds(46, 137, 105, 17);
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Giới tính : ");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(46, 224, 65, 17);
+        jLabel4.setBounds(46, 224, 105, 17);
 
         rbNam.setBackground(new java.awt.Color(204, 204, 255));
         buttonGroup1.add(rbNam);
@@ -177,14 +177,14 @@ public class HocSinhGUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rbNam);
-        rbNam.setBounds(163, 220, 55, 25);
+        rbNam.setBounds(163, 220, 72, 25);
 
         rbNu.setBackground(new java.awt.Color(204, 204, 255));
         buttonGroup1.add(rbNu);
         rbNu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rbNu.setText("NỮ");
         getContentPane().add(rbNu);
-        rbNu.setBounds(264, 220, 47, 25);
+        rbNu.setBounds(264, 220, 72, 25);
 
         tfMSHS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,7 +253,7 @@ public class HocSinhGUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Lớp");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(47, 311, 25, 17);
+        jLabel6.setBounds(47, 311, 63, 17);
 
         addBtn.setBackground(new java.awt.Color(255, 255, 255));
         addBtn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -313,7 +313,7 @@ public class HocSinhGUI extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("Ngày sinh");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(46, 180, 62, 17);
+        jLabel7.setBounds(46, 180, 105, 17);
 
         tfNgaySinh.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         tfNgaySinh.addActionListener(new java.awt.event.ActionListener() {

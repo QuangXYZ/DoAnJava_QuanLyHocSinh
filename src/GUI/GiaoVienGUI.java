@@ -82,7 +82,7 @@ public class GiaoVienGUI extends javax.swing.JFrame {
         JLabel background = new JLabel();
         background.setBounds(0, 0, this.getWidth(), this.getHeight());
         background.setIcon(new ImageIcon(new ImageIcon("src//images//backgroundQLGV.png").getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH)));
-        this.add(background);
+        getContentPane().add(background);
         loadDataCBLop();
         loadDataTable();
     }
@@ -233,27 +233,27 @@ public class GiaoVienGUI extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("MSGV : ");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(46, 93, 52, 17);
+        jLabel2.setBounds(46, 93, 114, 17);
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Họ và tên : ");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(46, 138, 72, 17);
+        jLabel3.setBounds(46, 138, 114, 17);
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Ngày sinh : ");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(46, 184, 74, 17);
+        jLabel4.setBounds(46, 184, 114, 17);
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Giới tính :");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(46, 236, 61, 17);
+        jLabel5.setBounds(46, 236, 114, 17);
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Lớp :");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(46, 324, 33, 17);
+        jLabel6.setBounds(46, 324, 71, 17);
 
         buttonGroup1.add(rbNam);
         rbNam.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -264,13 +264,13 @@ public class GiaoVienGUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rbNam);
-        rbNam.setBounds(170, 232, 55, 25);
+        rbNam.setBounds(170, 232, 80, 25);
 
         buttonGroup1.add(rbNu);
         rbNu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rbNu.setText("NỮ");
         getContentPane().add(rbNu);
-        rbNu.setBounds(273, 232, 47, 25);
+        rbNu.setBounds(273, 232, 80, 25);
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("Quê quán :");
@@ -315,7 +315,7 @@ public class GiaoVienGUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backBtn);
-        backBtn.setBounds(530, 380, 120, 35);
+        backBtn.setBounds(530, 380, 134, 35);
 
         imgLabel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Image"));
         imgLabel.addMouseListener(new java.awt.event.MouseAdapter() {
